@@ -4,7 +4,7 @@ author: Equipo 1 Profesor Jose Luis Castañeda
 geometry: "left=2cm, right=2cm, top=2cm, bottom=2cm"
 ---
 
-**Proyecto:** Cine++
+**Proyecto:** Cine+
 
 **Ejecutores:**
 
@@ -36,9 +36,12 @@ Si fue necesario para la confección de este documento la consulta de otros, tan
 
 ## Perspectiva del producto
 
+El producto que se debe desarrollar bajo el nombre Cine+, debe ser una aplicación web para gestionar la compra/venta de entradas del Cine+. Por motivo del COVID-19 se deben evitar aglomeraciones de personas, por tanto, es necesario vender las entradas de las sesiones del cine evitando largas colas en la taquilla del mismo. De ahí la necesidad de crear un sistema que permita el acceso a las entradas desde Internet, así como a las facilidades del club Cine+.
+```
 Describe el alcance del mismo, expresando que problema concreto intenta resolver y a los requerimientos de que organización, área o departamento concreto da respuesta 
 
 Por ejemplo si es sobre investigación, sobre necesidades informativas de un jefe de dpto o de un profesor, etc..
+```
 
 ## Funciones del Producto
 
