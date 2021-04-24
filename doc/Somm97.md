@@ -36,20 +36,38 @@ Si fue necesario para la confección de este documento la consulta de otros, tan
 
 ## Perspectiva del producto
 
-El producto que se debe desarrollar bajo el nombre Cine+, debe ser una aplicación web para gestionar la compra/venta de entradas del Cine+. Por motivo del COVID-19 se deben evitar aglomeraciones de personas, por tanto, es necesario vender las entradas de las sesiones del cine evitando largas colas en la taquilla del mismo. De ahí la necesidad de crear un sistema que permita el acceso a las entradas desde Internet, así como a las facilidades del club Cine+.
-```
-Describe el alcance del mismo, expresando que problema concreto intenta resolver y a los requerimientos de que organización, área o departamento concreto da respuesta 
+El producto que se debe desarrollar bajo el nombre Cine+, debe ser una aplicación web para gestionar la compra/venta de entradas del Cine+. 
 
-Por ejemplo si es sobre investigación, sobre necesidades informativas de un jefe de dpto o de un profesor, etc..
-```
+Dada la actual situación epidemiológica provocada por el Covid-19, se deben evitar las aglomeraciones de personas; por tanto, es necesario vender las entradas de las sesiones del cine sin provocar largas colas en las taquillas del mismo. De ahí la necesidad de crear un sistema que permita el acceso del público a una "taquilla virtual" donde se venden dichos tickets. El sistema no es un sustituto de las taquillas física. En su lugar, se necesita un sistema centralizado de venta de tickets, ya sea desde la taquilla clásica o la taquilla virtual.
+
+Además, el sistema debe servir como gestionador del club Cine+, aceptar nuevos miembros y permitir los beneficios del mismo. El sistema que se necesita debe ser un sustituto de la cartelera del cine.
+
+El producto da respuesta a los problemas de aglomeraciones en las taquillas y en los alrededores del cine viendo la cartelera o comprando tickets, además de agilizar el proceso de compra/venta. Además el producto, agiliza el proceso "cuadrar las cajas" en la taquilla. Además de facilitar la gestión de la cartelera.
 
 ## Funciones del Producto
 
-Enumerar brevemente las funciones que debe realizar el producto según los deseos expresados por el cliente 
+El producto "Cine+" debe tener las siguientes funcionalidades expresadas por el cliente:
 
-Por ejemplo, aquí se conocería si está interesado fundamentalmente en consultar información visualmente, en imprimirla también o si además quisiera disponer de alguna herramienta de gestión, para administrar ciertos datos 
+* Permitir la venta de entradas en taquillas físicas, se desea que el taquillero pueda vender las entradas y seleccionar los asientos desde las computadoras de la taquilla.
+* Inscribir nuevos miembros en el club Cine+.
+* Imprimir los tickets para las sesiones en el Cine+.
+* Permitir la venta de tickets por internet directamente al público.
+* Mostrar la cartelera del cine.
+* Cancelar las ventas de tickets.
+* Permitir los pagos online de los tickets.
+* Mostrar las películas sugeridas por el gerente.
+* Facilitar las consultas de las estadísticas de venta, y otras.
 
 ## Características de los usuarios
+
+
+Los usuarios que interactuarán de forma directa con el producto son:
+
+* Los taquilleros
+* Los gerentes
+* El público
+
+
 
 Como veremos más adelante, muchas decisiones posteriores dependen de las características de los usuarios futuros del producto, por lo que es muy importante caracterizar, cuantitativa y cualitativamente a los mismos, según:
 
