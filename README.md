@@ -39,4 +39,4 @@ Para exportar de `.md` a `.pdf` o `.tex` deben tener pandoc, para instalarlo pue
 * Carlos Toledo Silva ([@cts-crypto](https://github.com/cts-crypto))
 * Aylín Álvarez Santos ([@chains99](https://github.com/chains99))
 * Ariel Alfonso Triana Pérez ([@ArielTriana](https://github.com/ArielTriana))
-* Rocio Ortiz Gancedo (---)
+* Rocio Ortiz Gancedo ([@rocioog00](https://github.com/rocioog00))
