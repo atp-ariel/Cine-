@@ -9,7 +9,13 @@ Se tienen dos ramas principales:
 * **stable:** rama donde está el software o una parte del mismo en un estado estable y funcional.
 * **dev:** rama de desarrollo, acá es donde se desarrolla el código, para añadir nuevas funcionalidades añadir ramas a dev, y luego se hacen las mezclas necesarias.
 
+### Clonar el repositorio
 
+Abra una terminal y escriba:
+
+```
+git clone https://github.com/ArielTriana/Cine-.git
+```
 ## Acerca de la documentación
 
 Toda la documentación se va a desarrollar en Markdown.
