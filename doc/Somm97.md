@@ -60,19 +60,19 @@ El producto "Cine+" debe tener las siguientes funcionalidades expresadas por el 
 
 ## Características de los usuarios
 
-
 Los usuarios que interactuarán de forma directa con el producto son:
 
 * Los taquilleros
 * Los gerentes
 * El público
 
+Los gerentes son los encargados del cine, los cuales tienen experiencia con sitios que hacen reportes financieros, así como, en la organización de carteleras. 
 
+Los taquilleros son personas que conocen todos los procedimientos de venta, cancelación, posicionamiento en la sala, descuentos, y trabajos con los asociados al club Cine+. Pero, algunos de los taquilleros son personas mayores que no tienen experiencia interactúando con sistemas informáticos. 
 
-Como veremos más adelante, muchas decisiones posteriores dependen de las características de los usuarios futuros del producto, por lo que es muy importante caracterizar, cuantitativa y cualitativamente a los mismos, según:
+Los grupos anteriores representan un grupo reducido de los usuarios que utilizarán la aplicación web.
 
-* su grado de experiencia en la actividad que el producto asume
-* su identificación con los ambientes y plataformas de hardware y software previstos
+El público representa la mayor parte de los usuarios, es una masa heterogénea, por tanto, difícil de clasificar cualitativamente. El público en su mayor parte utiliza teléfonos móviles para acceder a las aplicaciones de este tipo.
 
 ## Restricciones Generales
 
