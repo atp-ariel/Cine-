@@ -1,0 +1,55 @@
+\documentclass[letter,12pt]{book}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[spanish]{babel}
+\usepackage[margin=2cm]{geometry}
+
+\begin{document}
+
+\author{Carlos Toledo Silva		C-311\\Aylín Álvarez Santos		C-312\\Rocio Ortíz Gancedo		C-311\\Ariel Alfonso Triana Pérez 		C-311}
+\title{Proyecto de desarrollo: Cine+}
+\date{2021}
+
+\makeatletter
+
+% Portada
+\begin{titlepage}
+\centering
+
+\vspace{5cm}
+
+{ \Huge \textbf{\@title}}
+
+\vspace{5cm}
+
+\includegraphics[width=6cm]{./img/logo-matcom.jpg}
+
+\vspace{5cm}
+
+\textbf{Equipo de desarrollo:}
+
+ \@author
+
+\vspace{1cm}
+
+\@date
+\end{titlepage}
+
+% Tabla de contenidos
+\tableofcontents
+
+
+\mainmatter
+\include{./chapters/Introduccion}
+\include{./chapters/Requerimientos_Especificos}
+\include{./chapters/Funcionalidades_del_producto}
+\include{./chapters/Enfoque_Metodologico}
+\include{./chapters/Arquitectura}
+\include{./chapters/Patrones_de_visualizacion_y_de_datos}
+\include{./chapters/Modelo_de_datos}
+\include{./chapters/Anexo1_Manual_de_usuario}
+\backmatter
+
+% bibliography, glossary and index would go here.
+
+\end{document}

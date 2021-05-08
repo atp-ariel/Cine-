@@ -1,0 +1,19 @@
+\chapter{Arquitectura}
+
+Luego del análisis de los requerimientos y las funcionalidades que solicita el cliente en el producto final, se necesita determinar la arquitectura más adecuada para el software a implementar. Se analizaron las siguientes arquitectura para implementarlas en el proyecto:
+
+\begin{enumerate}
+    \item[$\bullet$] Arquitectura en Capas, conocida en inglés como N-Layered, y tiene variantes como Onion Layered o Hexagonal Layered
+    \item[$\bullet$] Arquitectura orientada a Microservicios
+    \item[$\bullet$] Arquitectura orientada a Servicios, o SOA por sus siglas en inglés.
+\end{enumerate}
+
+\section{Arquitectura seleccionada}
+
+Se analizaron las tres arquitecturas antes mencionadas buscando la que mejor se ajuste a los requerimientos del proyecto, y que permita el desacoplamiento, la extensibilidad, la escalabilidad, el mantenimiento y el proceso de testing. 
+
+Al analizar la arquitectura N-Layered con sus variantes, se nota que a pesar de su simplicidad y sus facilidades de implementación en pequeños proyectos, su proceso de testing es muy complicado. Por ejemplo si se introduce un cambio en alguna de las líneas del código, es necesario volver a invertir tiempo en ejecutar todo el Unit Testing. Dada su implementación monolítica, entonces se cumple que su escalabilidad, y mantenimiento son muy complejos. Por tanto, se considera que no es una de las mejores opciones para aplicar en el proyecto.
+
+Al analizar las otras arquitecturas se obtuvieron mejores resultados a pesar de tener puntuaciones más altas en complejidad y en costos de implementación. Por eso se decidió, que dado el corto tiempo para la implementación del software, tampoco serían buenas opciones.
+
+Por tanto, se desarrolló una arquitectura que es el resultado de mezclar la arquitectura en capas y la arquitectura de microservicios, con el fin de obtener la simplicidad de la implementación, mantener costes de implementación relativamente bajos y lograr escalabilidad, mantenimiento, extensibilidad y desacoplamiento.
