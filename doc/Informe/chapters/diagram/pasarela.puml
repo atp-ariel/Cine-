@@ -17,6 +17,6 @@ HaySaldoDisponible -left-> Cobrado : cobrar
 Cobrado -down-> CobroReportado : reportar cobro
 CobroReportado -down-> [*]
 
-NoHaySaldoDisponible -right-> NoSaldoReportado : reportar ausencia de saldo
+NoHaySaldoDisponible -down-> NoSaldoReportado : reportar ausencia de saldo
 NoSaldoReportado -down-> [*]
 @enduml
