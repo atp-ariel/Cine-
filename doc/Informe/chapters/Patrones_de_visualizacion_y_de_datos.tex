@@ -7,15 +7,20 @@ En el presente capítulo se detallan los patrones de visualización de datos en 
 Para la capa de Interfaz de Usuario se propone utilizar el patrón \textit{Modelo-Vista-Controlador} (MVC), el cual propone separar la lógica del negocio de la forma en que se visualizan los datos. Se tienen 3 capas que nada tienen que ver con la arquitectura del software seleccionada en el Capítulo \ref{sec:arch}:
 
 \begin{enumerate}
-    \item \textbf{Modelo:} Incluye todo lo referente a los patrones de acceso de datos detallados la Sección \ref{sec:data}, así como la base de datos, y los servicios de la aplicación.
+    \item \textbf{Modelo:} Incluye todas las capas internas mencionadas en la arquitectura seleccionada en \ref{sec:arch}, o sea, constituye el Modelo de Dominio, la interfaz de repositorio y la capa de Lógica del Negocio.
     \item \textbf{Vista:} Maneja la forma en que se visualiza la información disponible en el Modelo. Hace al modelo independiente de la forma en que se muestra.
-    \item \textbf{Controlador:} Observa las acciones solicitadas por el usuario y decide qué hacer con ellas. El controlador incluye la API la cual se menciona en la arquitecutra.
+    \item \textbf{Controlador:} Observa las acciones solicitadas por el usuario y decide qué hacer con ellas. 
 \end{enumerate}
 
 \section{Patrones de acceso a datos}\label{sec:data}
 
 Para el acceso a datos se propone el uso de la tecnología \textit{Object-Relational-Mapping} (ORM). Como se menciona en el Capítulo \ref{ch:req}, la base de datos ha emplear es SQLite, por tanto se debe emplear el marco de trabajo EntityFramework que da soporte a esta base de datos.
 
-Además, se propone el uso del patrón \textit{Repository} para desacoplar la aplicación de la fuente de los datos. También para facilitar cambios en las tecnologías de forma transparente para los servicios de la aplicación. Se plantea que cada servicio tenga acceso al repositorio de las entidades que interesan para el procesamiento del servicio en cuestión así como acceso al repositorio de los datos comúnes a todos los servicios.
+Además, se propone el uso del patrón \textit{Repository} para desacoplar la aplicación de la fuente de los datos. También para facilitar cambios en las tecnologías de forma transparente para las capas superiores. 
 
-Por otro lado, se propone el empleo del patrón \textit{Lazy Load} para el acceso a los datos solo cuando sean necesarios para el procesamiento de los servicios que lo demanden.
+Para la carga de datos de la base de datos se proponen dos patrones:
+
+\begin{enumerate}
+    \item[$\bullet$] \textbf{Lazy Loading} consiste en retrasar la carga o inicialización de un objeto hasta el mismo momento de su requerimiento. Esto contribuye a la eficiencia de los programas, evitando la precarga de datos que podrían no llegar a utilizarse. Generalmente se utiliza en los repositorios o colecciones. 
+    \item[$\bullet$] \textbf{Eager Loading} consiste en la asociación de modelos relacionados para un determinado conjunto de resultados con solo la ejecución de una consulta, en lugar de tener que ejecutar $n$ consultas, donde $n$ es el número de elementos en el conjunto inicial. Este patrón debe utilizarse cuando las relaciones no son demasiadas, ya que es una buena práctica utilizar Eager Loading para reducir las consultas en el servidor. Cuando se está convencido de que el dato se utiliza en varios lugares junto a la entidad principal.
+\end{enumerate}

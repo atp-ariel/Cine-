@@ -1,0 +1,22 @@
+@startuml
+scale 600 width
+
+[*] -right-> Idle
+state TransacciónRecibida <<sldreceiver>>
+
+Idle -right-> TransacciónRecibida : se recibe transacción 
+
+state Branch <<choice>>
+
+TransacciónRecibida -right-> Branch
+
+Branch -down-> HaySaldoDisponible : sí tiene saldo
+Branch -down-> NoHaySaldoDisponible : no tiene saldo
+
+HaySaldoDisponible -left-> Cobrado : cobrar
+Cobrado -down-> CobroReportado : reportar cobro
+CobroReportado -down-> [*]
+
+NoHaySaldoDisponible -right-> NoSaldoReportado : reportar ausencia de saldo
+NoSaldoReportado -down-> [*]
+@enduml

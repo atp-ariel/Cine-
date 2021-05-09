@@ -1,33 +1,52 @@
 \chapter{Arquitectura}
 
-Luego del análisis de los requerimientos y las funcionalidades que solicita el cliente en el producto final, se necesita determinar la arquitectura más adecuada para el software a implementar. Se analizaron las siguientes arquitectura para implementarlas en el proyecto:
+En el presente capítulo se describe la arquitectura seleccionada para la implementación del proyecto, y además se justifican las razones de su selección, comparando con otras alternativas.
+
+Se analizaron varios tipos de arquitecturas, entre las que se encuentran:
 
 \begin{enumerate}
-    \item[$\bullet$] Arquitectura en Capas, conocida en inglés como N-Layered, y tiene variantes como Onion Layered o Hexagonal Layered
-    \item[$\bullet$] Arquitectura orientada a Microservicios
-    \item[$\bullet$] Arquitectura orientada a Servicios, o SOA por sus siglas en inglés.
+    \item[$\bullet$] Arquitectura de $n$ capas ($n$-Layers)
+    \item[$\bullet$] Arquitectura de cebolla (Onion Layers)
+    \item[$\bullet$] Arquitectura orientada a Servicios (SOA)
+    \item[$\bullet$] Arquitectura orientada a microservicios.
 \end{enumerate}
+
+Las dos últimas alternativas a pesar de ser las que mejores rendimientos en escalabilidad, desacoplamiento y extensibilidad presentan, complicarían la implementación del proyecto influyendo en el atraso de los Sprint. Lo que influye directamente en el plazo de entrega final del proyecto.
+
+En un primer análisis cualquiera de las dos primeras alternativas parece ser idónea para este proyecto, pero se decide utilizar Onion Layers.
 
 \section{Arquitectura seleccionada}\label{sec:arch}
 
-Se analizaron las tres arquitecturas antes mencionadas buscando la que mejor se ajuste a los requerimientos del proyecto, y que permita el desacoplamiento, la extensibilidad, la escalabilidad, el mantenimiento y el proceso de testing. 
+La arquitectura Onion Layers no es más que una arquitectura $n$-Layers que cumple con el Principio de Inversión de Dependencias del conjunto de principios SOLID. Este principio plantea que:
 
-Al analizar la arquitectura N-Layered con sus variantes, se nota que a pesar de su simplicidad y sus facilidades de implementación en pequeños proyectos, su proceso de testing es muy complicado. Por ejemplo si se introduce un cambio en alguna de las líneas del código, es necesario volver a invertir tiempo en ejecutar todo el Unit Testing. Dada su implementación monolítica, entonces se cumple que su escalabilidad, y mantenimiento son muy complejos. Por tanto, se considera que no es una de las mejores opciones para aplicar en el proyecto.
+\begin{enumerate}
+    \item Los módulos de alto nivel no deberían depender de los módulos de bajo nivel. Ambos deberían depender de abstracciones (p.ej., interfaces).
+    \item Las abstracciones no deberían depender de los detalles. Los detalles (implementaciones concretas) deben depender de abstracciones.
+\end{enumerate}
 
-Al analizar las otras arquitecturas se obtuvieron mejores resultados a pesar de tener puntuaciones más altas en complejidad y en costos de implementación.
+En la arquitectura $n$-Layers el Principio de Inversión de Dependencias se viola pues la capa de presentación depende indirectamente de la capa de datos (la capa de presentación no funciona si no está presente la de negocio, y esta no funciona si no está presente la capa de datos), cualquier cambio que ocurra en base de datos tendrá un impacto sobre las capas superiores. Además, la capa de negocio (abstracción) no debe depender de la de datos (detalle). Los detalles deben depender de las abstracciones, como plantea el Principio de Inversión de Dependencias.
+
+La regla principal de Onion Layers es que todo el código debe depender de las capas centrales y no de las externas.
 
 \subsection{Diagrama de la arquitectura}\label{sec:diagrmaArch}
 
-Como se observa en la Fig \ref{fig:arch1}, se tiene una capa de Interfaz de Usuario desde donde los usuarios harán peticiones y consultas como ver las películas sugeridas por la gerencia del cine, comprar boleto, editar el perfil de suscriptor del club Cine+, entre otras. Esta capa es la encargada de mostrar estas informaciones al usuario que utiliza el producto de software en cuestión.
+Se presenta en la Fig \ref{fig:onion} el diagrama de la arquitectura. Al observar los círculos concéntricos en el diagrama es que se entiende el por qué del nombre de arquitectura de cebolla.
 
-\begin{figure}
+\begin{figure}[h!]
     \centering
-    \includegraphics[width=15cm]{./chapters/img/architecture.png}
+    \includegraphics[width=13cm]{./chapters/img/architecture.png}
 
-    \caption{Diagrama de la arquitectura}
-    \label{fig:arch1}
+    \label{fig:onion}
+    \caption{Diagrama de la Arquitectura Onion Layers}
 \end{figure}
 
-Además, se tiene una capa denominada Capa API, la cual consiste en una puerta de comunicación entre las peticiones de los usuarios y los servicios implementados. Esta capa está implementada utilizando el patrón de diseño \textit{Proxy}, se definen. Los usuarios no tendrán acceso directo a los servicios implementados, ni a la base de datos. La comunicación de la capa Interfaz de Usuario con los servicios solo es a través de la API.
+En este caso notan tres capas externas: UI, Test, Infraestructura. La UI no es más que la interfaz de usuario con la cual se comunican con la aplicación. Los test representan las pruebas que se realizan para el aseguramiento de la calidad del software en desarrollo. La infraestructura no es más que aquellos datos que son comunes a todo el sitio, por ejemplo los datos de autenticación, la base de datos y otros servicios web. Estas capas representan los detalles del software por tanto, dependen del Modelo de Dominio y el resto de capas interiores.
 
-Es importante destacar, que cada servicio que se representa en la Fig \ref{fig:arch1} incluye un representación de los datos que necesita de la base de datos. Esta representación se detalla en la Sección \ref{sec:data}, donde se indican los patrones de acceso a datos empleados. De esta forma se evita que de ser necesario algún cambio en algunas de las entidades de la base de datos, haya que re-implementar todos los servicios. En este caso, solo se afectan los servicios que utilizan estas entidades para su funcionamiento.
+La finalidad de este estilo de arquitectura es poder construir aplicaciones que sean fáciles de mantener, probar y sobre todo que se encuentren desacopladas de elementos de infraestructura tales como base de datos o servicios.
+
+\begin{enumerate}
+    \item[$\bullet$] \textbf{Testeable:} Las reglas de negocio pueden ser testeadas sin necesidad de conocer la interfaz de usuario, la base de datos o algún servicio externo.
+    \item[$\bullet$] \textbf{Independiente de la UI}: La interfaz de usuario puede cambiar fácilmente sin tener que afectar al resto del sistema. Un tipo de interfaz de usuario puede ser reemplazada por otra sin cambiar las reglas de negocio.
+    \item[$\bullet$] \textbf{Independiente de la base de datos:} Se puede cambiar de motor de base de datos sin ningún problema. Las reglas de negocio no deben estar amarradas a esta.
+    \item[$\bullet$] \textbf{Independiente de agentes externos:} Las reglas de negocio no deben saber nada que este fuera de su contexto.
+\end{enumerate}

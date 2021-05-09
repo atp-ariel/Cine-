@@ -1,0 +1,41 @@
+@startuml
+left to right direction
+skinparam actorStyle awesome
+actor Gerente
+
+Gerente -> (Gestor de precios y rebajas)
+
+package Sugerencia{
+  Gerente --> (Gestor de Sugerencias)
+  
+  (Gestor de Sugerencias) --> (Crear Criterio)
+  (Gestor de Sugerencias) --> (Eliminar Criterio)
+  (Gestor de Sugerencias) --> (Editar Criterio)
+  
+  (Gestor de Sugerencias) --> (Escoger Criterio)
+}
+
+package Estadísticas{
+  Gerente --> (Gestor de Estadísticas)
+
+  (Gestor de Estadísticas) --> (Ver tabla)
+  (Gestor de Estadísticas) --> (Ver gráfico)
+
+  (Gestor de Estadísticas) --> (Crear tabla)
+  (Gestor de Estadísticas) --> (Editar tabla)
+  (Gestor de Estadísticas) --> (Eliminar tabla)
+  
+  (Gestor de Estadísticas) --> (Crear gráfico)
+  (Gestor de Estadísticas) --> (Editar gráfico)
+  (Gestor de Estadísticas) --> (Eliminar gráfico)
+}
+package Películas{
+  Gerente --> (Gestor de Películas)
+  
+  (Gestor de Películas) --> (Añadir Película)
+  (Gestor de Películas) --> (Eliminar Película)
+  (Gestor de Películas) --> (Editar Película)
+}
+
+Gerente --> (Gestor de Horarios)
+@enduml

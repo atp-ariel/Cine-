@@ -1,0 +1,36 @@
+@startuml
+skinparam actorStyle awesome
+
+actor Taquillero
+actor Cliente
+
+
+package Entradas{
+  Cliente --> (Gestor de Entradas)
+  
+  (Gestor de Entradas) --> (Cancelar Entrada)
+  (Gestor de Entradas) --> (Pagar)
+  
+}
+
+package CompraEntradas{
+  Cliente --> (Comprar Entradas)
+  Taquillero --> (Comprar Entradas)
+  
+  (Comprar Entradas) --> (Escoger Película)
+  (Comprar Entradas) --> (Pagar)
+  (Comprar Entradas) --> (Gestor de precios y rebajas)
+  (Comprar Entradas) --> (Gestor de butacas)
+}
+
+package Club{
+  Cliente --> (Gestor de Perfil del Club)
+  Taquillero --> (Gestor de Perfil del Club)
+  
+  (Gestor de Perfil del Club) --> (Crear Perfil)
+  (Gestor de Perfil del Club) --> (Editar Perfil)
+  (Gestor de Perfil del Club) --> (Eliminar Perfil)
+}
+
+(Pagar) --> (Pasarela de pago)
+@enduml

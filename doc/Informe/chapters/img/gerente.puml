@@ -1,6 +1,0 @@
-@startuml
-skinparam actorStyle awesome
-
-Gerente --> (Gestor de Sugerencias)
-Gerente --> (Gestor de Estadísticas)
-@enduml
