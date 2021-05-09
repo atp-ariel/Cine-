@@ -1,1 +1,43 @@
-\chapter{Requerimientos Específicos}
+\chapter{Requerimientos Específicos}\label{ch:req}
+
+\section{Requerimientos funcionales}
+
+El sitio web debe permitir que cualquier usuario pueda comprar entradas. Para ello debe buscar la película deseada y mostrar los horarios y salas en que estará en pantalla dicha película. Luego de que el usuario escoja la sala y el horario de su preferencia, el sistema le pregunta al usuario el número de entradas y asigna unas butacas autómaticamente, pero da opción a que el usuario las modifique a su gusto, las cuales pasarán a estar reservadas de forma provisional. Si pasado algún un tiempo (por defecto 10 min) el usuario no ha efectuado la compra o éste la cancela las butacas vuelven a estar disponibles.
+
+Para el cálculo del precio de la entrada, se deben tener en cuenta los diferentes descuentos que se ofrecen.
+
+Los usuarios que los deseen puden darse de alta como socios del club Cine+, cumpliendo con las pasos pertinentes. A cada socio, cada vez que compre una entrada, se le sumarán 5 puntos, los cuales podrá cambiar en el futuro por entradas. Para hacer esto el socio deberá contar con la suficiente cantidad de puntos para poder pagar todas las entradas de su compra. El precio de la entrada es de 20 puntos por defecto, aunque este se podrá configurar.
+
+La compra por web se realiza por medio de tarjeta de crédito, utilizándose una pasarela de pago segura. En taquilla se admite sólo pago en efectivo. Además se debe poder imprimir un comprobante de venta de las entradas.
+
+Una compra realizada a través de la web puede ser anulada hasta 2 horas antes del comienzo  de la sesión, restableciéndole al cliente el costo de la compra y dejando sus butacas disponibles. Si el pago fue hecho por un socio utilizando sus puntos, estos serán devueltos a su cuenta.
+
+Los gerentes podrán actualizar el listado de películas y los horarios, los cuales serán mostrados en el sittio. Además estos podrán consultar estadísticas sobre las ventas de entradas.
+
+Se exige mostrar una vista de 10 películas sugeridas para ver, la cual será actualizada periódicamente. Estará lista seguirá un criterio escogido por alguno de los gerentes.
+
+\section{Requerimientos no funcionales}
+
+Dado que esta es una aplicación web para la venta de entradas para un cine, se le debe dar bastante información sobre el tema a la aplicación para que un navegador pueda encontrala más rápidamente.
+
+Los datos referentes a las películas (salas, horarios, etc) serán guardados en una base de datos SQLite. En esta se guardará además la información referente a los socios y a los gerentes del cine.
+
+El acceso de los gerentes y los socios de Cine+ al sistema es a través del nombre de usuario y contraseña. Para el acceso al perfil de usuario es necesario comunicaciones seguras, así como para navegar en la administración para el caso de los gerantes. Las mismas también son necesarias para la realización de los pagos mediante la pasarela. Por lo anterior es necesario contratar un certificado SSL para el sitio. En caso de que se acceda a través de HTTP será imposible ingresar  el nombre y la contraseña, así como recuperar contraseñas.
+
+La interfaz del usuario deberá ser tan familiar como sea posible a los usuarios, lo cual dependerá de la experiencia de los mismos en el uso de otras aplicaciones web. Se solicita además una documentación online para que los clientes y para los gerentes, donde además la dedicada a los clientes contará con información referente sobre cómo convertirse en un socio de Cine+ y los beneficios que trae serlo.
+
+\section{Requerimientos de Entorno}
+
+Aunque los gerentes del cine pueden poseer una variada gama de dispositivos móviles se conece que la administración de Cine+ les proverá de recursos necesarios para la realización de sus funciones. Dicho esto se tiene la seguridad de que cada gerente tiene asignado uno de estos dos dispositivos para el acceso:
+
+\begin{enumerate}
+    \item Laptop ASUS con procesador Intel Core i7 de 4ta generación con navegador Mozilla Firefox 86.0
+    \item Laptop HP con procesador Intel Core i5 de 8va generación con navegador Google Chrome 88.0.4324.104
+\end{enumerate}
+Además en caso de que el gerente no posea un dispositivo móvil de al menos gama media con el que pueda realizar sus funciones, la administración le proverá de un Samsung Galaxy A10 con conexión a Internet y navegadores como Google Chrome 89.0.4389.72 y Safari 14.0.2. 
+
+Los clientes como se conoce son una masa de usuarios heterogéna, como también lo es la masa de dispositivos que ellos tienen disponibles: laptops, móviles, tabletas todos con distintos tipos de sistemas operativos (Windows, Linux, iOS y Android en distintas versiones. Además, en este grupo de usuarios existen distintos tipos de navegadores como Mozilla Firefox, Google Chrome, Opera, Microsoft Edge, Brave, en distintas versiones de los mismos.
+
+En cuanto al hosting, el cliente tiene disponible uno con Windows Server, con 4000 MB de almacenamiento, 1000 MB de base de datos en SQLite, 1 cuenta de acceso para administración, 1000 conexiones concurrentes, 3 cuentas FTP, 1024 Kbps de velocidad de transferencia, soporte para Javascript, para ASP.NET. La aplicación web se desarrollará sobre .NET 5, y C\#.
+
+Para el servidor se tiene un Intel(R) Core(TM) i7-8250U CPU 2.60 GHz, 2.60 GHz, con 16GB RAM. El servidor con arquitectura física de 64 bit.

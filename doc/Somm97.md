@@ -8,194 +8,83 @@ geometry: "left=2cm, right=2cm, top=2cm, bottom=2cm"
 
 **Ejecutores:**
 
-* Carlos Toledo Silva
-* Aylín Álvarez Santos
-* Rocío Ortiz Gancedo
-* Ariel Alfonso Triana Pérez
+* Carlos Toledo Silva C-311 (Líder)
+* Aylín Álvarez Santos C-311
+* Rocío Ortiz Gancedo C-311
+* Ariel Alfonso Triana Pérez C-311
 
 # Introducción
 
-## Propósito del documento
-
-N/A
 
 ## Alcance del producto
 
 N/A
 
-## Definiciones y acrónimos
+## Descripción General
 
-Todo documento técnico escrito, especialmente cuando esta destinado a ser leído por otros, requiere que se definan los conceptos de uso común en el mismo, así como las abreviaturas utilizadas 
-(Es un error muy frecuente asumir que otros entienden lo que uno escribe con facilidad, por ejemplo: “... El sistema deberá confeccionar Ordenes de Trabajo...”, ¿qué es una Orden de Trabajo? o “... Los especialistas de la DICT se encargarán de ...”, ¿qué es la DICT?)
+### Perspectiva del producto
 
-## Referencias
+El producto busca controlar la venta de entradas de un cine denominado Cine+. Para esto el producto debe dar soporte tanto a la venta de entradas por taquillas como a la venta de entradas por internet, garantizandoce la coordinación de las mismas.
 
-Si fue necesario para la confección de este documento la consulta de otros, tanto en papel como en formato electrónico disponibles en sitios accesibles, deben ofrecerse las referencias para ayudar a sus lectores a tener una información similar a la que Ud. tenía para escribirlo
+### Funciones del Producto
 
-# Descripción General
+El producto es una aplicación web multiplataforma que permite la compra de entradas a través de su página web por parte de los clientes y calcula el costo de la entradas atendiendo a diferentes parámetros. Además da soporte a la inscripción de usuarios como socios del club de Cine+, así como los beneficios de los que estos pueden disfrutar. También el producto permite la anulación de las compras de entradas por parte de los usuarios y hace las actualizaciones pertinentes dada la anulación. El producto permite además que los gerentes del cine puedan actualizar el listado de películas y horarios disponibles y que estos sean mostrados en la web. Además estos pueden consultar las estadísticas de venta de entradas por diferentes parámetros. También se posibilita la visualización en una página web de las 10 películas sugeridas por uno de los gerentes del cine.
 
-## Perspectiva del producto
+### Características de los usuarios
 
-El producto que se debe desarrollar bajo el nombre Cine+, debe ser una aplicación web para gestionar la compra/venta de entradas del Cine+. 
+Con el producto interactuarán dos tipos de usuarios: clientes y gerentes. Los gerentes dominan toda la información relacionada con la puesta en escena de las peliculas: horarios, precios, péliculas que se mostrarán, sugerencias, etc. Ambos usuarios están identificados tanto con dispositivos móviles y tabletas como con computadoras.
 
-Dada la actual situación epidemiológica provocada por el Covid-19, se deben evitar las aglomeraciones de personas; por tanto, es necesario vender las entradas de las sesiones del cine sin provocar largas colas en las taquillas del mismo. De ahí la necesidad de crear un sistema que permita el acceso del público a una "taquilla virtual" donde se venden dichos tickets. El sistema no es un sustituto de las taquillas física. En su lugar, se necesita un sistema centralizado de venta de tickets, ya sea desde la taquilla clásica o la taquilla virtual.
+Los gerenetes tienen el conocimiento necesario para operar este tipo de aplicación web. Los clientes conforman un grupo muy heterogéneo, algunos no tienen conocimiento con productos similares, ahí la necesidad de que la interfaz con la que interactúan sea cómoda.
 
-Además, el sistema debe servir como gestionador del club Cine+, aceptar nuevos miembros y permitir los beneficios del mismo. El sistema que se necesita debe ser un sustituto de la cartelera del cine.
+### Restricciones Generales
 
-El producto da respuesta a los problemas de aglomeraciones en las taquillas y en los alrededores del cine viendo la cartelera o comprando tickets, además de agilizar el proceso de compra/venta. Además el producto, agiliza el proceso "cuadrar las cajas" en la taquilla. Además de facilitar la gestión de la cartelera.
+El cliente solicita que el sistema en cuestión sea una aplicación web, con las funcionalidades anteriormente mencionadas. Además informa que ya reservaron el hosting y dominio (www.cine+.com) de la página y la base de datos. El hosting tiene 4000 MB de almacenamiento.
 
-## Funciones del Producto
+El cliente pide que las páginas carguen en el tiempo recomendado por los expertos en posicionamiento SEO, para el posicionamiento en buscadores como Google o Bing. Además que el sitio tenga un flujo de navegación sencillo, y que la navegación no sobrepase el tercer nivel.
 
-El producto "Cine+" debe tener las siguientes funcionalidades expresadas por el cliente:
 
-* Permitir la venta de entradas en taquillas físicas, se desea que el taquillero pueda vender las entradas y seleccionar los asientos desde las computadoras de la taquilla.
-* Inscribir nuevos miembros en el club Cine+.
-* Imprimir los tickets para las sesiones en el Cine+.
-* Permitir la venta de tickets por internet directamente al público.
-* Mostrar la cartelera del cine.
-* Cancelar las ventas de tickets.
-* Permitir los pagos online de los tickets.
-* Mostrar las películas sugeridas por el gerente.
-* Facilitar las consultas de las estadísticas de venta, y otras.
-
-## Características de los usuarios
-
-Los usuarios que interactuarán de forma directa con el producto son:
-
-* Los taquilleros
-* Los gerentes
-* El público
-
-Los gerentes son los encargados del cine, los cuales tienen experiencia con sitios que hacen reportes financieros, así como, en la organización de carteleras. 
-
-Los taquilleros son personas que conocen todos los procedimientos de venta, cancelación, posicionamiento en la sala, descuentos, y trabajos con los asociados al club Cine+. Pero, algunos de los taquilleros son personas mayores que no tienen experiencia interactúando con sistemas informáticos. 
-
-Los grupos anteriores representan un grupo reducido de los usuarios que utilizarán la aplicación web.
-
-El público representa la mayor parte de los usuarios, es una masa heterogénea, por tanto, difícil de clasificar cualitativamente. El público en su mayor parte utiliza teléfonos móviles para acceder a las aplicaciones de este tipo.
-
-## Restricciones Generales
-
-En muchas ocasiones, y este caso que nos ocupa es uno de ellos, los sistemas tienen restricciones “a priori”, derivadas, por ejemplo, de la necesidad de integrarse a entornos existentes (imagen de sitios Web ya utilizado, preferencias visuales, etc). 
-
-En las entrevistas debemos identificar estas restricciones generales, básicamente serán reflejo de las preferencias de los entrevistados, por ejemplo
-“preferiría que se viera como Yahoo España” o “me gustaría que tuviese un look como el de WebOO Live
-
-## Dependencias y suposiciones
-
-Si el producto a desarrollar deberá comunicarse con otro sistema ya existente o en desarrollo para obtener información, deberá investigarse la naturaleza y principales características del mismo, con el objetivo de adecuar las decisiones de diseño acorde a esta dependencia operacional
-
-En este aspecto deberán detallarse, si es posible, características como:
-
-* Plataforma de software (SO, lenguaje,etc)
-* Tipo y Formato de los datos que maneja ese otro sistema
-
-Además, frecuentemente se asumen ciertas restricciones iniciales, muchas veces no derivadas de ningún razonamiento lógico, simplemente como expresión de la voluntad y gustos del cliente
-
-Por ejemplo:
-“ La navegación no debe necesitar más de tres niveles de profundidad...”
-“Los menús fijos deberían estar en el lateral derecho...”
+## Resumen del resto del documento
 
 # Requerimientos específicos
 
 ## Requerimientos funcionales
 
-Enumerar brevemente las funciones que debe realizar el producto según los deseos expresados por el cliente
+El sitio web debe permitir que cualquier usuario pueda comprar entradas. Para ello debe buscar la pelicula deseada y mostrar los horarios y salas en que estará en pantalla dicha pelicula. Luego de que el usuario escoja la sala y el horario de su preferencia, el sistema le pregunta al usuario el número de entradas y asigna unas butacas autómaticamente, pero da opción a que el usuario las modifique a su gusto, las cuales pasarán a estar reservadas de forma provisional. Si pasado algún un tiempo (por defecto 10 min) el usuario no ha efectuado la compra o este la cancela las butacas vuelven a estar disponibles.
 
-En este aspecto es difícil buscar uniformidad, porque cada sistema responde a un dominio de problema diferente con condiciones de entorno muy variables, se debe expresar la funcionalidad en términos simples, derivados de los DESEOS del cliente
+Para el cálculo del precio de la entrada, se deben tener en cuenta los diferentes descuentos que se ofrecen.
 
-Por ejemplo, ahondar un poco en la forma en que quisiera el cliente hacer sus preguntas:
+Los usuarios que los deseen puden darse de alta como socios del club Cine+, cumpliendo con las pasos pertinentes. A cada socio, cada vez que compre una entrada, se le sumarán 5 puntos, los cuales podrá cambiar en el futuro por entradas. Para hacer esto el socio deberá contar con la suficiente cantidad de puntos para poder pagar todas las entradas de su compra. El precio de la entrada es de 20 puntos por defecto, aunque este se podrá configurar.
 
-*  Tipo Google (escribo una frase y ya)
-* Asistente-Avanzadas (rellenando características que filtran los resultados)
-* Consultas tipo “Preguntas frecuentes” parametrizadas, es decir, crear como un repositorio de plantillas de las preguntas mas comunes que haría el cliente
+La compra por web se realiza por medio de tarjeta de crédito, utilizándose una pasarela de pago seguro. En taquilla se admite sólo pago en efectivo. Además se debe poder imprimir un comprobante de venta de las entradas.
 
-Una funcionalidad que dificilmente se les ocurra, pero que se puede tratar de inducir, sería la espacial o territorial. Por ejemplo decirle al entrevistado:
+Una compra realizada a través de la web puede ser anulada hasta 2 horas antes del comienzo  de la sesión, restableciéndole al cliente el costo de la compra y dejando sus butacas disponibles. Si el pago fue hecho por un socio utilizando sus puntos, estos serán devueltos a su cuenta.
 
-“Si dispone de un mapa de La Habana donde se muestra la ubicación de la UH y sus dependencias, ¿Qué consultas se le ocurre que podría hacer para su trabajo?
+Los gerentes podrán actualizar el listado de películas y los horarios, los cuales serán mostrados en el sittio. Además estos podrán consultar estadísticas sobre las ventas de entradas.
+
+Se exige mostrar una vista de 10 películas sugeridas para ver, la cual será actualizada periódicamente. Estará lista seguirá un criterio escogido por alguno de los gerentes.
 
 ## Requerimientos no funcionales
 
-Generalmente se consideran aquí elementos restrictivos generados por el cliente, no directamente relacionados con la funcionalidad del producto
- 
-A continuación enumeramos una serie de preguntas, cuyas respuestas, si son relevantes, podrían constituir ejemplos de este tipo de requerimientos
-(Atención: estas no constituyen las únicas posibles y los entrevistados podrán o no responder dependiendo se su especialidad, experiencia e intereses) 
+Dado que esta es una aplicación web para la venta de entradas para un cine, se le debe dar bastante información sobre el tema a la aplicación para que un navegador pueda encontrala más rápidamente.
 
-¿Cuáles son los requerimientos de seguridad?
-Por ejemplo: 
-*	¿El acceso será controlado con nombres de usuario y contraseñas?
- 
-*	¿Se incluirá un módulo para las tareas administrativas, reservado a administradores? (permisos selectivos según cargo, etc)
- 
-*	Considera necesario en algún caso el uso de comunicaciones seguras? (por ejemplo SSL)
+Los datos referentes a las películas (salas, horarios, etc) serán guardados en una base de datos SQLite. En esta se guardará además la información referente a los socios y a los gerentes del cine.
 
-¿Cuáles son los requerimientos de almacenamiento, importación y exportación de datos? 
-Por ejemplo, 
-*	“El sistema debería almacenar todos los datos en una base de datos PostGres, donde puedan ser accesado por otros programas, porque nos interesa que sea software libre”
-*	O… “se debererá utilizar SQLServer, porque es el que mejor conocemos y para el que tengo gente preparada para el mantenimiento”
-*	Etc…
+El acceso de los gerentes y los socios de Cine+ al sistema es a través del nombre de usuario y contraseña. Para el acceso al perfil de usuario es necesario comunicaciones seguras, así como para navegar en la administración para el caso de los gerantes. Las mismas también son necesarias para la realización de los pagos mediante la pasarela. Por lo anterior es necesario contratar un certificado SSL para el sitio. En caso de que se acceda a través de HTTP será imposible ingresar  el nombre y la contraseña, así como recuperar contraseñas.
 
-¿Cuáles son los requerimientos de usabilidad? 
-La interfaz del usuario deberá ser tan familiar como sea posible a los usuarios, lo cual dependerá de la experiencia de los mismos en el uso de otras aplicaciones web y/o de escritorio del mismo tipo. 
-
-Caso de tener experiencia previa, el entrevistado podrá dar algunas ideas de como preferiría la interacción, por ejemplo, preferencia por el teclado o por el mouse o por una pantalla táctil, etc
-
-¿Qué tipo de documentación y/o ayuda es necesaria, de acuerdo a la experiencia de los posibles usuarios?
-
-Por ejemplo, el cliente puede decir:
-*	“Prefiero tener una buena ayuda en línea, consultable desde el propio sistema”
-y/o
-*	“Prefiero un buen manual impreso, para leerlo off-line”
-
-¿Cuáles son los requerimientos de mantenimiento y evolución? 
-La capacidad de mantenimiento es nuestra habilidad para realizar cambios al producto en el tiempo. 
-
-De acuerdo a la opinión del cliente
-*	¿Algunas de las características del sistema, como sus fuentes de datos o su funcionalidad podría variar en el futuro cercano?
-*	¿de alguna manera es posible anticipar estos posibles cambios en las mismas para prepararnos desde ahora?
- 
-
-¿Cuáles son los requerimientos de actualización? 
-Muy relacionado con el anterior está la posibilidad de mantener actualizado el producto es la capacidad para completar y entregar funcionando nuevas versiones del producto cuando sea necesario. 
-Este aspecto afecta tanto al software, como a los datos, por ejemplo, si una corrección provoca que el formato de los datos cambie (algún campo se adiciona o se divide, etc), la actualización incluirá el proceso de transformación de los viejos datos al nuevo formato..
-
-¿Cuáles son los requerimientos de soporte técnico? 
-Debemos analizar nuestra habilidad de proveer soporte técnico eficiente y a bajo costo. En muchas ocasiones los sistemas fracasan, porque el cliente no puede mantenerlo funcionando sin la actuación directa de los desarrolladores, pero esto no es siempre posible!
-
-Consultar al entrevistado sobre experiencias anteriores de este tipo
-
+La interfaz del usuario deberá ser tan familiar como sea posible a los usuarios, lo cual dependerá de la experiencia de los mismos en el uso de otras aplicaciones web. Se solicita además una documentación online para que los clientes y para los gerentes, donde además la dedicada a los clientes contará con información refernte sobre como convertirse en un socio de Cine+ y los beneficios que trae serlo.
 
 ## Requerimientos de Entorno
 
-¿Cuáles son los requerimientos de hardware del sistema? 
-Básicamente, NO se trata de decir que hardware CREEMOS que debe tener el sistema para su correcto funcionamiento, sino que hardware TIENE disponible para la operación del mismo el cliente y así condicionar otras decisiones de diseño a estas restricciones, aunque no esta negada la posibilidad de proponer cambios y mejoras en la plataforma actual, bien fundamentadas
+Aunque los gerentes del cine pueden poseer una variada gama de dispositivos móviles se conece que la administración de Cine+ les proverá de recursos necesarios para la realización de sus funciones. Dicho esto se tiene la seguridad de que cada gerente tiene asignado uno de estos dos dispositivos para el acceso:
 
-¿Cuáles son los requerimientos de software del sistema? 
-Por ejemplo, proponer, de acuerdo con el cliente y sus condiciones de entorno
-*	 Sistema Operativo
-*	 Marco de trabajo (por ejemplo .NET o J2EE)
-*	 Lenguaje de programación
+1.	Laptop ASUS con procesador Intel Core i7 de 4ta generación con navegador Mozilla Firefox 86.0
 
-(las respuestas dependerán de la experticidad del cliente y podrían estar condicionadas por la experticidad del personal del cliente para asumir en el futuro la actualización y mantenimiento del sistema)
- 
-En este caso es MUY IMPORTANTE tener en cuenta las posibilidades reales de explotación del producto por parte del cliente y sus preferencias
+2.	Laptop HP con procesador Intel Core i5 de 8va generación con navegador Google Chrome 88.0.4324.104
 
- Por ejemplo, no podemos proponer simplemente un software basado en servicios Web programados en ASP.NET si el cliente no cuenta con servidores Windows y experiencia en la administración de este tipo de servidores, a no ser que se incluya una propuesta preliminar de solución a esta limitación 
-“... servicio Web basado en ASP.NET soportado sobre el framework de .NET desarrollado por el proyecto Mono y publicado a través de un Web Server Apache con su plugin para ASP.NET)
+Además en caso de que el gerente no posea un dispositivo móvil de al menos gama media con el que pueda realizar sus funciones, la administración le proverá de un Samsung Galaxy A10 con conexión a Internet y navegadores como Google Chrome 89.0.4389.72 y Safari 14.0.2. 
 
-# Anexos
+Los clientes como se conoce son una masa de usuarios heterogéna, como también lo es la masa de dispositivos que ellos tienen disponibles: laptops, móviles, tabletas todos con distintos tipos de sistemas operativos (Windows, Linux, iOS y Android en distintas versiones. Además, en este grupo de usuarios existen distintos tipos de navegadores como Mozilla Firefox, Google Chrome, Opera, Microsoft Edge, Brave, en distintas versiones de los mismos.
 
-*	 Nombre y cargo u ocupación de las personas entrevistadas
-*	 Cantidad de tiempo dedicado al o a los encuentros sostenidos por el equipo para producir las especificaciones (sin “globos”, que lo solicito con fines estadísticos, no evaluativos!)
-*	 Posibles formatos ejemplo de documentos, interfaces y otros similares, que facilite el cliente para ayudar a comprender sus ideas y necesidades (muchas veces un vicedecano o jefe de dpto tiene unos modelos fijos que debe llenar y entregar sistemáticamente)
+En cuanto al hosting, el cliente tiene disponible uno con Windows Server, con 4000 MB de almacenamiento, 1000 MB de base de datos en SQLite, 1 cuenta de acceso para administración, 1000 conexiones concurrentes, 3 cuentas FTP, 1024 Kbps de velocidad de transferencia, soporte para Javascript, para ASP.NET. La aplicación web se desarrollará sobre .NET 5, y C#.
 
-Estas entrevistas se deberán efectuar en lo que queda de esta semana y la siguiente y deben enviarnos un documento a mas tardar el lunes 17 con las respuestas recibidas y sus propuestas, opiniones o comentarios sobre la calidad del proceso, interés demostrado por el entrevistado y cualquier otro elemento que se les ocurra importante
-
-
-
-
-
-
-
-
-
+Para el servidor se tiene un Intel(R) Core(TM) i7-8250U CPU 2.60 GHz, 2.60 GHz, con 16GB RAM. El servidor con arquitectura física de 64 bit.
