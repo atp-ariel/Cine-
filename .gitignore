@@ -4,6 +4,7 @@ doc/Informe/*.aux
 doc/Informe/*.log
 doc/Informe/*.pdf
 doc/Informe/*.toc
+doc/Informe/*.out
 
 ## Ignore plantilla
 Informe plantilla.docx

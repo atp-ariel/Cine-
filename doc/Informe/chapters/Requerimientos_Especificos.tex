@@ -20,23 +20,24 @@ Se exige mostrar una vista de 10 películas sugeridas para ver, la cual será ac
 
 Dado que esta es una aplicación web para la venta de entradas para un cine, se le debe dar bastante información sobre el tema a la aplicación para que un navegador pueda encontrala más rápidamente.
 
-Los datos referentes a las películas (salas, horarios, etc) serán guardados en una base de datos SQLite. En esta se guardará además la información referente a los socios y a los gerentes del cine.
+Los datos referentes a las películas (salas, horarios, etc) serán guardados en una base de datos SQLite. En esta se guardará además la información referente a los socios, taquilleros y a los gerentes del cine.
 
-El acceso de los gerentes y los socios de Cine+ al sistema es a través del nombre de usuario y contraseña. Para el acceso al perfil de usuario es necesario comunicaciones seguras, así como para navegar en la administración para el caso de los gerantes. Las mismas también son necesarias para la realización de los pagos mediante la pasarela. Por lo anterior es necesario contratar un certificado SSL para el sitio. En caso de que se acceda a través de HTTP será imposible ingresar  el nombre y la contraseña, así como recuperar contraseñas.
+El acceso de los gerentes, los taquilleros y los socios de Cine+ al sistema es a través del nombre de usuario y contraseña. Para el acceso al perfil de usuario es necesario comunicaciones seguras, así como para navegar en la administración para el caso de los gerantes y gestionar las ventas para el caso de los taquilleros. Las mismas también son necesarias para la realización de los pagos mediante la pasarela. Por lo anterior es necesario contratar un certificado SSL para el sitio. En caso de que se acceda a través de HTTP será imposible ingresar  el nombre y la contraseña, así como recuperar contraseñas.
 
-La interfaz del usuario deberá ser tan familiar como sea posible a los usuarios, lo cual dependerá de la experiencia de los mismos en el uso de otras aplicaciones web. Se solicita además una documentación online para que los clientes y para los gerentes, donde además la dedicada a los clientes contará con información referente sobre cómo convertirse en un socio de Cine+ y los beneficios que trae serlo.
+La interfaz del usuario deberá ser tan familiar como sea posible a los usuarios, lo cual dependerá de la experiencia de los mismos en el uso de otras aplicaciones web. Se agregará además una documentación online para los clientes, para los taquilleros y  para los gerentes; donde además la dedicada a los clientes contará con información referente sobre cómo convertirse en un socio de Cine+ y los beneficios que trae serlo.
 
 \section{Requerimientos de Entorno}
 
-Aunque los gerentes del cine pueden poseer una variada gama de dispositivos móviles se conece que la administración de Cine+ les proverá de recursos necesarios para la realización de sus funciones. Dicho esto se tiene la seguridad de que cada gerente tiene asignado uno de estos dos dispositivos para el acceso:
+Aunque los gerentes y taquilleros del cine pueden poseer una variada gama de dispositivos electrónicos se conece que la administración de Cine+ les proverá de recursos necesarios para la realización de sus funciones. Dicho esto se tiene la seguridad de que cada gerente o taquillero tiene asignado uno de estos dos dispositivos para el acceso:
 
 \begin{enumerate}
     \item Laptop ASUS con procesador Intel Core i7 de 4ta generación con navegador Mozilla Firefox 86.0
     \item Laptop HP con procesador Intel Core i5 de 8va generación con navegador Google Chrome 88.0.4324.104
 \end{enumerate}
+
 Además en caso de que el gerente no posea un dispositivo móvil de al menos gama media con el que pueda realizar sus funciones, la administración le proverá de un Samsung Galaxy A10 con conexión a Internet y navegadores como Google Chrome 89.0.4389.72 y Safari 14.0.2. 
 
-Los clientes como se conoce son una masa de usuarios heterogéna, como también lo es la masa de dispositivos que ellos tienen disponibles: laptops, móviles, tabletas todos con distintos tipos de sistemas operativos (Windows, Linux, iOS y Android en distintas versiones. Además, en este grupo de usuarios existen distintos tipos de navegadores como Mozilla Firefox, Google Chrome, Opera, Microsoft Edge, Brave, en distintas versiones de los mismos.
+Los clientes como se conoce son una masa de usuarios heterogénea, como también lo es la masa de dispositivos que ellos tienen disponibles: laptops, móviles, tabletas todos con distintos tipos de sistemas operativos (Windows, Linux, iOS y Android en distintas versiones). Además, en este grupo de usuarios existen distintos tipos de navegadores como Mozilla Firefox, Google Chrome, Opera, Microsoft Edge, Brave, en distintas versiones de los mismos.
 
 En cuanto al hosting, el cliente tiene disponible uno con Windows Server, con 4000 MB de almacenamiento, 1000 MB de base de datos en SQLite, 1 cuenta de acceso para administración, 1000 conexiones concurrentes, 3 cuentas FTP, 1024 Kbps de velocidad de transferencia, soporte para Javascript, para ASP.NET. La aplicación web se desarrollará sobre .NET 5, y C\#.
 
