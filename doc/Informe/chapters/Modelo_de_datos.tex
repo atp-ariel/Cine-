@@ -7,3 +7,95 @@
 
     \caption{MERX de la modelación conceptual de la base de datos.}
 \end{figure}
+
+A partir de esta modelación se obtiene la siguiente descomposición que se cumple la Propiedad de Preservación de las Dependencias Funcionales (PPDF) y la Propiedad del Join sin Pérdida de información  y cada uno de sus esquemas relacionales se encuentra en 3ra Forma Normal.\\
+	
+	$U_{Pelicula}=\{IDPe,NombrePe\}$
+	
+	$F_{Pelicula}=\{IDPe\rightarrow NombrePe\}$\\
+	
+	$U_{Pais}=\{IDPe,NombrePe\}$
+	
+	$F_{Pais}=\{IDPa\rightarrow NombrePa\}$\\
+	
+	$U_{G\acute{e}nero}=\{IDG, NombreG\}$
+	
+	$F_{G\acute{e}nero}=\{IDG\rightarrow NombreG\}$\\
+	
+	$U_{Actor}=\{IDA, NombreA\}$
+		
+	$F_{Actor}=\{IDA\rightarrow NombreA\}$\\
+	
+	$U_{Horario}=\{Inicio, Fin\}$
+		
+	$F_{Horario}=\emptyset$\\
+	
+	$U_{Sala}={IDS}$
+	
+	$F_{Sala}=\emptyset$\\
+	
+	$U_{Tanda}={IDS,Inicio,Fin}$
+		
+	$F_{Tanda}=\emptyset$\\
+	
+	$U_{Butaca}={IDS,IDB}$
+		
+	$F_{Butaca}=\emptyset$\\
+	
+	$U_{Proyecta}=\{IDS,Inicio,Fin,IDPe\}$
+	
+	$F_{Proyecta}=\{IDS,Inicio,Fin\rightarrow IDPe\}$\\
+	
+	$U_{Descuento}=\{IDD,NombreD,DineroDescontado\}$
+		
+	$F_{Descuento}=\{IDD\rightarrow NombreD,Dinero~Descontado\}$\\
+	
+	$U_{Lista~de~Descuentos}=\{IDL,Total~Descontado\}$
+		
+	$F_{Lista~de~Descuentos}=\{IDL\rightarrow Total~Descontado\}$\\
+	
+	$U_{Compra~de~Entrada}=\{IDS,Inicio,Fin,IDB,IDL,Precio\}$
+		
+	$F_{Compra~de~Entrada}=\{IDS,Inicio,Fin,IDB\rightarrow IDL,Precio\}$\\
+	
+	$U_{Socio}=\{C\acute{o}digo,Datos~Personales,Cuenta(puntos)\}$
+		
+	$F_{Socio}=\{C\acute{o}digo\rightarrow Datos~Personales,Cuenta(puntos)\}$\\
+	
+	$U_{Realizar~Compra}=\{IDS,Inicio,Fin,IDB,C\acute{o}digo,Puntos~Gastados\}$
+		
+	$F_{Realizar~Compra}=\{IDS,Inicio,Fin,IDB\rightarrow C\acute{o}digo,Puntos~Gastados\}$\\
+	
+	$U_{C.E~Fisica}=\{IDS,Inicio,Fin,IDB\}$
+		
+	$F_{C.E. Fisica}=\emptyset$\\
+	
+	$U_{C.E~Web}=\{IDS,Inicio,Fin,IDB,IDCEWeb,Tarjeta~de~Cr\acute{e}dito\}$
+		
+	$F_{Realizar~Compra}=\{IDS,Inicio,Fin,IDB\rightarrow IDCEWeb,Tarjeta~de~Cr\acute{e}dito\}$\\
+		
+	$U_{Producida}=\{IDPe,IDPa\}$
+		
+	$F_{Producida}=\emptyset$\\
+	
+	$U_{Participa}=\{IDPe,IDA\}$
+		
+	$F_{Participa}=\emptyset$\\
+	
+	$U_{Forma~Parte}=\{IDL,IDD\}$
+		
+	$F_{Forma~Parte}=\emptyset$\\
+	
+	$U_{Producida}=\{IDPe,IDPa\}$
+		
+	$F_{Producida}=\emptyset$\\
+	
+	$U_{Pertence}=\{IDPe,IDPa\}$
+		
+	$F_{Pertenece}=\emptyset$\\
+		
+	$\rho=(Pelicula,Pais,G\acute{e}nero,Actor,Horario,Sala,Tanda,Butaca,Proyecto,Descuento,$
+	
+	$Lista~de~Descuentos,Compra~de~Entrada,Socio,Realizar~Compra,C.E.Fisica,C.E.Web,Producida,$
+	
+	$Participa,Forma~Parte,Pertenece)$	
