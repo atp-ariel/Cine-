@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2021-05-12" view-index="0" gantt-divider-location="585" resource-divider-location="300" version="3.0.3000" locale="es_ES">
+    <description/>
+    <view zooming-state="default:3" id="gantt-chart">
+        <field id="tpd3" name="Nombre" width="315" order="0"/>
+        <field id="tpd4" name="Fecha de inicio" width="108" order="1"/>
+        <field id="tpd5" name="Fecha de fin" width="158" order="2"/>
+        <timeline>
+            <![CDATA[13,8]]>
+        </timeline>
+        <option id="color.recent">
+            <![CDATA[#6600cc]]>
+        </option>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nombre" width="210" order="0"/>
+        <field id="1" name="Función" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="6" name="Planificar Sprint 1" color="#8cb6ce" meeting="false" start="2021-04-28" duration="2" complete="0" thirdDate="2021-04-28" thirdDate-constraint="0" expand="true">
+            <depend id="8" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="8" name="Especificacion de Requerimientos" color="#8cb6ce" meeting="false" start="2021-04-30" duration="4" complete="0" thirdDate="2021-04-30" thirdDate-constraint="0" expand="true">
+            <depend id="10" type="2" difference="0" hardness="Strong"/>
+            <depend id="13" type="2" difference="0" hardness="Strong"/>
+            <depend id="20" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="10" name="Implementar Requerimientos con UML" color="#8cb6ce" meeting="false" start="2021-05-06" duration="2" complete="0" thirdDate="2021-05-06" thirdDate-constraint="0" expand="true"/>
+        <task id="13" name="Enfoque Metodologico" color="#8cb6ce" meeting="false" start="2021-05-06" duration="2" complete="0" thirdDate="2021-05-06" thirdDate-constraint="0" expand="true">
+            <depend id="22" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="53" name="Autorización de Usuarios" color="#8cb6ce" meeting="false" start="2021-05-17" duration="4" complete="0" thirdDate="2021-05-17" thirdDate-constraint="0" expand="true">
+            <depend id="56" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="20" name="Arquitectura" color="#8cb6ce" meeting="false" start="2021-05-06" duration="2" complete="0" thirdDate="2021-05-06" thirdDate-constraint="0" expand="true">
+            <depend id="25" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="22" name="Modelo de los datos" color="#8cb6ce" meeting="false" start="2021-05-10" duration="5" complete="0" thirdDate="2021-05-10" thirdDate-constraint="0" expand="true">
+            <notes>
+                <![CDATA[Incluye la modelacion conceptual del modelo de la base de datos, asi como la implementacion de la capa de acceso a datos.]]>
+            </notes>
+            <depend id="45" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="25" name="Implementacion del Servicio de la pasarela" color="#8cb6ce" meeting="false" start="2021-05-10" duration="4" complete="0" thirdDate="2021-05-10" thirdDate-constraint="0" expand="true"/>
+        <task id="44" name="Redaccion del informe del Hito" color="#8cb6ce" meeting="false" start="2021-05-14" duration="1" complete="0" thirdDate="2021-05-14" thirdDate-constraint="0" expand="true"/>
+        <task id="45" name="Persistencia de Datos" color="#8cb6ce" meeting="false" start="2021-05-17" duration="4" complete="0" thirdDate="2021-05-17" thirdDate-constraint="0" expand="true">
+            <notes>
+                <![CDATA[- ORM
+- Lazy Load
+- Eager Load
+- y demás
+
+Todo lo referente a la capa de acceso a datos]]>
+            </notes>
+            <depend id="56" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="56" name="Refactorizacion de Codigo" color="#8cb6ce" meeting="false" start="2021-05-21" duration="1" complete="0" thirdDate="2021-05-21" thirdDate-constraint="0" expand="true"/>
+        <task id="58" name="Modulo de Gerencia" color="#8cb6ce" meeting="false" start="2021-05-24" duration="5" complete="0" thirdDate="2021-05-14" thirdDate-constraint="0" expand="true">
+            <notes>
+                <![CDATA[- Graficos
+- Tablas
+- Sugerencia de peliculas]]>
+            </notes>
+        </task>
+        <task id="65" name="Modulo de Compra de entradas" color="#8cb6ce" meeting="false" start="2021-05-24" duration="5" complete="0" thirdDate="2021-05-12" thirdDate-constraint="0" expand="true">
+            <notes>
+                <![CDATA[-Compra de Entradas fisico y online
+-Seleccion de butacas
+-Rebajas]]>
+            </notes>
+        </task>
+    </tasks>
+    <resources>
+        <resource id="0" name="Ariel Alfonso Triana Pérez" function="Default:0" contacts="ariel.triana@estudiantes.matcom.uh.cu" phone="54289607"/>
+        <resource id="1" name="Carlos Toledo Silva" function="Default:1" contacts="carlos.toledo@estudiantes.matcom.uh.cu" phone="54267260"/>
+        <resource id="2" name="Aylin Alvarez Santos" function="Default:0" contacts="aylinalvarezsantos@gmail.com" phone="54630917"/>
+        <resource id="3" name="Rocio Ortiz Gancedo" function="Default:0" contacts="rocio.ortiz@estudiantes.matcom.uh.cu" phone="58269147"/>
+    </resources>
+    <allocations>
+        <allocation task-id="8" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="20" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="25" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="53" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="56" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="65" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="6" resource-id="1" function="Default:1" responsible="false" load="100.0"/>
+        <allocation task-id="8" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="22" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="45" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="65" resource-id="1" function="Default:1" responsible="false" load="100.0"/>
+        <allocation task-id="8" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="22" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="13" resource-id="2" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="45" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="58" resource-id="2" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="8" resource-id="3" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="10" resource-id="3" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="44" resource-id="3" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="53" resource-id="3" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="56" resource-id="3" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="58" resource-id="3" function="Default:0" responsible="false" load="100.0"/>
+    </allocations>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+</project>
