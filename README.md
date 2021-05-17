@@ -35,7 +35,7 @@ Esto devuelve un `json` con los siguientes campos:
 * `status`: estado de la transferencia. `101`, y `102`.
 * `resultMessage`: Mensaje resultante de la transferencia.
 
-La pasarela está implementada como un Bernoulli con parámetro $p = 0.95$.
+La pasarela está implementada como un Bernoulli con parámetro $p = 0.9$.
 
 
 # Desarrolladores

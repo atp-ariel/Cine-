@@ -13,9 +13,7 @@ namespace APIBank.Models{
         
         public IResponse Consult(Dictionary<string, object> dataConsult)
         {
-            //IAction _transfer = new Consult(dataConsult);
-            //_transfer.Do();
-            //return _transfer.Response;
+
             return null;
         }
     }
