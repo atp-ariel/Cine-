@@ -18,32 +18,25 @@ git clone https://github.com/ArielTriana/Cine-.git
 ```
 ## Acerca de la documentación
 
-Toda la documentación se va a desarrollar en Markdown, excepto el informe final.
+Toda la documentación se va a desarrollar en Latex.
 
-No se incluyen en el repositorio los `.pdf` de la documentación ni la orden del proyecto para contribuir al ahorro de MB. 
+No se incluyen en el repositorio los `.pdf` de la documentación ni la orden del proyecto para contribuir al ahorro de MB. Solamente se incluye la plantilla
 
-Para generar los `.pdf`, se debe tener **pandoc**, y ejecutar el script `export.sh` incluido en `/doc/`. Deben introducir como parámetro, el fichero `.md` y el nombre final del `.pdf`. Ejemplo:
+Para generar los `.pdf`, se debe ejecutar el script `build.sh` incluido en `/doc/Informe`. . Ejemplo:
 
-```
-./export.sh Somm97.md "Especificación de Requerimientos.pdf"
-```
+El informe final se desarrolló utilizando el Latex Template **Book**, los capítulos están en la carpeta `/doc/Informe/chapters/` en un `.tex` aparte.
 
-Esto genera una carpeta `doc/paper` con el `.pdf` en su interior.
+## Acerca de la pasarela
 
-### Requerimientos
+La pasarela de pagos hasta el momento es una api que tiene un solo Controlador, se debe acceder a través de `api/transfer_money/{number of origin card}/{pin}/{number of final card}/{amount}`.
 
-Las extensiones de VS Code para trabajar  con `.md` son:
+Esto devuelve un `json` con los siguientes campos:
 
-* Markdown All in One
-* Markdown Preview Enhanced
-* Office Viewer (con esta pueden abrir cualquier archivo de Microsoft Office desde el code, y tiene soporte para `.md`)
-* Markdownlint
+* `status`: estado de la transferencia. `101`, y `102`.
+* `resultMessage`: Mensaje resultante de la transferencia.
 
-Todas las anteriores son buenas, escojan cuál usar.
+La pasarela está implementada como un Bernoulli con parámetro $p = 0.95$.
 
-Para exportar de `.md` a `.pdf` o `.tex` deben tener pandoc, para su instalación debe descargarlo de acá:
-
-* [Instalador de pandoc para Windows (20 MB)](https://github.com/jgm/pandoc/releases/download/2.13/pandoc-2.13-windows-x86_64.msi)
 
 # Desarrolladores
 
