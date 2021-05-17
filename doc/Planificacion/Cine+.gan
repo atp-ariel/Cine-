@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2021-05-12" view-index="0" gantt-divider-location="585" resource-divider-location="300" version="3.0.3000" locale="es_ES">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2021-05-12" view-index="0" gantt-divider-location="306" resource-divider-location="300" version="3.0.3000" locale="es_ES">
     <description/>
     <view zooming-state="default:3" id="gantt-chart">
-        <field id="tpd3" name="Nombre" width="315" order="0"/>
-        <field id="tpd4" name="Fecha de inicio" width="108" order="1"/>
-        <field id="tpd5" name="Fecha de fin" width="158" order="2"/>
+        <field id="tpd3" name="Nombre" width="159" order="0"/>
+        <field id="tpd4" name="Fecha de inicio" width="60" order="1"/>
+        <field id="tpd5" name="Fecha de fin" width="83" order="2"/>
         <timeline>
             <![CDATA[13,8]]>
         </timeline>

@@ -2,7 +2,6 @@
 doc/Informe/chapters/*.aux
 doc/Informe/*.aux
 doc/Informe/*.log
-doc/Informe/*.pdf
 doc/Informe/*.toc
 doc/Informe/*.out
 
