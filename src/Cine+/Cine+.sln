@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.6.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CineWeb", "CineWeb\CineWeb.csproj", "{329BD107-2B69-4867-97B8-76177CF68355}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CineWeb", "CineWeb\CineWeb.csproj", "{329BD107-2B69-4867-97B8-76177CF68355}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainLayer", "DomainLayer\DomainLayer.csproj", "{3C4844D6-B2EE-4889-B811-5452E7206B5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainLayer", "DomainLayer\DomainLayer.csproj", "{3C4844D6-B2EE-4889-B811-5452E7206B5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryLayer", "RepositoryLayer\RepositoryLayer.csproj", "{F7C5D214-E19D-4508-A8C0-0DD86C4427EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryLayer", "RepositoryLayer\RepositoryLayer.csproj", "{F7C5D214-E19D-4508-A8C0-0DD86C4427EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLayer", "ServiceLayer\ServiceLayer.csproj", "{2D2F7B00-2119-406B-AA2D-F6FD94B20008}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceLayer", "ServiceLayer\ServiceLayer.csproj", "{2D2F7B00-2119-406B-AA2D-F6FD94B20008}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIBank", "APIBank\APIBank.csproj", "{15E8A5FA-A650-43C4-87EE-1A47ECD511B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIBank", "APIBank\APIBank.csproj", "{15E8A5FA-A650-43C4-87EE-1A47ECD511B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UILayer", "UILayer\UILayer.csproj", "{85015908-8A80-4858-A05F-45DCC48212CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{329BD107-2B69-4867-97B8-76177CF68355}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -86,5 +85,23 @@ Global
 		{15E8A5FA-A650-43C4-87EE-1A47ECD511B6}.Release|x64.Build.0 = Release|Any CPU
 		{15E8A5FA-A650-43C4-87EE-1A47ECD511B6}.Release|x86.ActiveCfg = Release|Any CPU
 		{15E8A5FA-A650-43C4-87EE-1A47ECD511B6}.Release|x86.Build.0 = Release|Any CPU
+		{85015908-8A80-4858-A05F-45DCC48212CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85015908-8A80-4858-A05F-45DCC48212CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85015908-8A80-4858-A05F-45DCC48212CC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{85015908-8A80-4858-A05F-45DCC48212CC}.Debug|x64.Build.0 = Debug|Any CPU
+		{85015908-8A80-4858-A05F-45DCC48212CC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{85015908-8A80-4858-A05F-45DCC48212CC}.Debug|x86.Build.0 = Debug|Any CPU
+		{85015908-8A80-4858-A05F-45DCC48212CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85015908-8A80-4858-A05F-45DCC48212CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85015908-8A80-4858-A05F-45DCC48212CC}.Release|x64.ActiveCfg = Release|Any CPU
+		{85015908-8A80-4858-A05F-45DCC48212CC}.Release|x64.Build.0 = Release|Any CPU
+		{85015908-8A80-4858-A05F-45DCC48212CC}.Release|x86.ActiveCfg = Release|Any CPU
+		{85015908-8A80-4858-A05F-45DCC48212CC}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C2162D98-A6E2-4A3D-823D-5F59B79A02EF}
 	EndGlobalSection
 EndGlobal
