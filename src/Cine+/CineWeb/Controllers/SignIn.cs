@@ -17,7 +17,7 @@ namespace CineWeb.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                     return Redirect("Index");
-                else ModelState.AddModelError("Login", "No puede ingresar");
+                else ModelState.AddModelError("Login", "Acceso denegado.");
             }
             return View(model);
         }

@@ -5,24 +5,48 @@
 <div class="row mt-5">
     <div class="col-md-3 col-sm-2"></div>
     <div class="col-md-6 col-sm-8">
-        <h1>Registro de Usuarios</h1>
+        <div class="wrap rounded p-5 pb-3">
+            <h1 class="text-center pb-2">Registro de Usuarios</h1>
 
-        <form asp-controller="Identity" asp-action="SignUp" method="post">
-            @Html.ValidationSummary()
-
-            <div class="form-group">
-                <label asp-for="Email">Correo Electrónico</label>
-                <input type="email" name="Email" asp-for="Email" required class="form-control rounded-pill"/>
+            <form asp-controller="Identity" asp-action="SignUp" method="post">
+                @Html.ValidationSummary()
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group mb-3">
+                            <input type="text" name="Username" asp-for="Username" placeholder="Nombre de Usuario" required class="form-control rounded-pill"/>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mb-3">
+                            <input type="email" name="Email" asp-for="Email" placeholder="Correo Electrónico" required class="form-control rounded-pill"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group mb-3">
+                            <input type="password" name="Password" asp-for="Password" placeholder="Contraseña" required class="form-control rounded-pill"/>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mb-3">
+                            <input type="password" name="ConfirmedPassword" asp-for="ConfirmedPassword" placeholder="Confirmar contraseña" required class="form-control rounded-pill"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <button type="submit" class="form-control btn btn-primary rounded-pill">Registrar</button>
+                </div>
+            </form>
+            <hr class="hr-grad"/>
+            <div class="d-flex pt-3">
+                <p class="text-center mr-2"> Si tienes una cuenta</p> 
+                <a class="text-center" asp-action="SignIn">Ingresa</a>
             </div>
-            <div class="form-group">
-                <label asp-for="Password">Contraseña</label>
-                <input type="password" name="Password" asp-for="Password" required class="form-control rounded-pill"/>
-            </div>
-
-            <div class="form-group">
-                <button type="submit" class="form-control btn btn-primary rounded-pill">Registrarme</button>
-            </div>
-        </form>
+            
+        </div>
     </div>
+
     <div class="col-md-3 scol-sm-2"></div>
+
 </div>

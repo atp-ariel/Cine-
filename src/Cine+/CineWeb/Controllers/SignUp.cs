@@ -16,10 +16,14 @@ namespace CineWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> SignUp(SignUpModel model){
             if(ModelState.IsValid){
-                if((await _userManager.FindByEmailAsync(model.Email)) != null){
+                if((await _userManager.FindByNameAsync(model.Username)) == null){
+                    if(!model.MatchPasswords()){
+                        ModelState.AddModelError("SignUp", "Las contraseñas no coinciden");
+                        return View(model);
+                    }
                     IdentityUser user = new IdentityUser{
                         Email = model.Email,
-                        UserName = model.Email
+                        UserName = model.Username
                     };
                     var result = await _userManager.CreateAsync(user, model.Password);
                     if(result.Succeeded)
@@ -28,6 +32,7 @@ namespace CineWeb.Controllers
                     ModelState.AddModelError("SignUp", string.Join(string.Empty, result.Errors.Select(error => error.Description)));
                     return View(model);
                 }
+                else ModelState.AddModelError("SignUp", "El nombre de usuario ya está en uso.");
             }
             return View(model);
         }
