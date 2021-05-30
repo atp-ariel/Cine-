@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RepositoryLayer
+namespace UILayer
 {
     public class Class1
     {
