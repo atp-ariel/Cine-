@@ -2,10 +2,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace RepositoryLayer
+namespace RepositoryLayer.Identity
 {
     public class AppIdentityContext : IdentityDbContext<IdentityUser>
     {
-        public AppIdentityDbContext(DbContextOption<AppIdentityContext> option) : base(option){ }
+        public AppIdentityContext(DbContextOptions<AppIdentityContext> option) : base(option){ }
+
     }
 }
