@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2021-05-12" view-index="0" gantt-divider-location="306" resource-divider-location="300" version="3.0.3000" locale="es_ES">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2021-06-04" view-index="0" gantt-divider-location="306" resource-divider-location="300" version="3.0.3000" locale="es_ES">
     <description/>
     <view zooming-state="default:3" id="gantt-chart">
         <field id="tpd3" name="Nombre" width="159" order="0"/>
         <field id="tpd4" name="Fecha de inicio" width="60" order="1"/>
         <field id="tpd5" name="Fecha de fin" width="83" order="2"/>
         <timeline>
-            <![CDATA[13,8]]>
+            <![CDATA[8,13]]>
         </timeline>
         <option id="color.recent">
             <![CDATA[#6600cc]]>
@@ -76,6 +76,15 @@ Todo lo referente a la capa de acceso a datos]]>
             </notes>
             <depend id="56" type="2" difference="0" hardness="Strong"/>
         </task>
+        <task id="66" name="Persistencia de Datos" color="#8cb6ce" meeting="false" start="2021-05-31" duration="2" complete="0" thirdDate="2021-05-31" thirdDate-constraint="0" expand="true">
+            <notes>
+                <![CDATA[Lazy Load
+Eager Load
+..
+.
+]]>
+            </notes>
+        </task>
         <task id="56" name="Refactorizacion de Codigo" color="#8cb6ce" meeting="false" start="2021-05-21" duration="1" complete="0" thirdDate="2021-05-21" thirdDate-constraint="0" expand="true"/>
         <task id="58" name="Modulo de Gerencia" color="#8cb6ce" meeting="false" start="2021-05-24" duration="5" complete="0" thirdDate="2021-05-14" thirdDate-constraint="0" expand="true">
             <notes>
@@ -84,6 +93,7 @@ Todo lo referente a la capa de acceso a datos]]>
 - Sugerencia de peliculas]]>
             </notes>
         </task>
+        <task id="69" name="Módulo de Compra de Entradas" color="#8cb6ce" meeting="false" start="2021-05-31" duration="5" complete="0" thirdDate="2021-05-31" thirdDate-constraint="0" expand="true"/>
         <task id="65" name="Modulo de Compra de entradas" color="#8cb6ce" meeting="false" start="2021-05-24" duration="5" complete="0" thirdDate="2021-05-12" thirdDate-constraint="0" expand="true">
             <notes>
                 <![CDATA[-Compra de Entradas fisico y online
@@ -91,6 +101,10 @@ Todo lo referente a la capa de acceso a datos]]>
 -Rebajas]]>
             </notes>
         </task>
+        <task id="71" name="Módulo de Compra de Gerencia y  Estadísticas" color="#8cb6ce" meeting="false" start="2021-05-31" duration="5" complete="0" thirdDate="2021-05-31" thirdDate-constraint="0" expand="true"/>
+        <task id="74" name="Test Modulo de Gerencia" color="#8cb6ce" meeting="false" start="2021-06-07" duration="2" complete="0" thirdDate="2021-06-07" thirdDate-constraint="0" expand="true"/>
+        <task id="76" name="Test Modulo de Compra" color="#8cb6ce" meeting="false" start="2021-06-07" duration="2" complete="0" thirdDate="2021-06-07" thirdDate-constraint="0" expand="true"/>
+        <task id="78" name="Escribir Documentacion" color="#8cb6ce" meeting="false" start="2021-06-09" duration="3" complete="0" thirdDate="2021-06-09" thirdDate-constraint="0" expand="true"/>
     </tasks>
     <resources>
         <resource id="0" name="Ariel Alfonso Triana Pérez" function="Default:0" contacts="ariel.triana@estudiantes.matcom.uh.cu" phone="54289607"/>
@@ -105,22 +119,34 @@ Todo lo referente a la capa de acceso a datos]]>
         <allocation task-id="53" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="56" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="65" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="69" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="78" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="6" resource-id="1" function="Default:1" responsible="false" load="100.0"/>
         <allocation task-id="8" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="22" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="45" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="65" resource-id="1" function="Default:1" responsible="false" load="100.0"/>
+        <allocation task-id="66" resource-id="1" function="Default:1" responsible="false" load="100.0"/>
+        <allocation task-id="69" resource-id="1" function="Default:1" responsible="false" load="100.0"/>
+        <allocation task-id="74" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="78" resource-id="1" function="Default:1" responsible="false" load="100.0"/>
         <allocation task-id="8" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
         <allocation task-id="22" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
         <allocation task-id="13" resource-id="2" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="45" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
         <allocation task-id="58" resource-id="2" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="66" resource-id="2" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="71" resource-id="2" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="78" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
         <allocation task-id="8" resource-id="3" function="Default:0" responsible="false" load="100.0"/>
         <allocation task-id="10" resource-id="3" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="44" resource-id="3" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="53" resource-id="3" function="Default:0" responsible="false" load="100.0"/>
         <allocation task-id="56" resource-id="3" function="Default:0" responsible="false" load="100.0"/>
         <allocation task-id="58" resource-id="3" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="71" resource-id="3" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="76" resource-id="3" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="78" resource-id="3" function="Default:0" responsible="false" load="100.0"/>
     </allocations>
     <vacations/>
     <previous/>
