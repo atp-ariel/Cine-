@@ -1,0 +1,50 @@
+@using DomainLayer.Identity
+@model SignInModel
+
+@{
+    ViewData["Title"] = "Ingresar";
+}
+
+<div class="row mt-5">
+    <div class="col-lg-4 col-md-2"></div>
+    <div class="col-lg-4 col-md-8">
+        <div class="wrap rounded p-4 pb-3">
+            <h1 class='text-center'>Ingresar</h1>
+
+            <form asp-action="SignIn" class="form" method="post">
+                @Html.ValidationSummary()
+
+                <div class="form-group mb-3">
+                    <input type="text" asp-for="Username" name="Username" placeholder="Nombre de usuario" class="form-control rounded-pill"/>
+                </div>
+                <div class="form-group mb-3">
+                    <input type="password" name="Password" asp-for="Password" placeholder="Contraseña" class="form-control rounded-pill"/>
+                </div>
+                <div class="form-group form-check mb-3">
+                    <input type="checkbox" id="remember_Me" onclick="toggle_validator" name="RememberMe" asp-for="RememberMe" class="form-check-input" checked value="true"/>
+                    <label asp-for="RememberMe" class="form-check-label">Recuérdame</label>
+                </div>
+                <div class="form-group mb-3">
+                    <button type="submit" class="form-control rounded-pill btn btn-primary">Ingresar</button>
+                </div>
+            </form>
+            <hr class="hr-grad"/>
+            <div class="d-flex pt-3">
+                <p class="text-center mr-2"> Si no tienes una cuenta</p> 
+                <a class="text-center" asp-action="SignUp">Crear cuenta</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-2"></div>
+</div>
+
+<script>
+function toggle_validator(e){
+    if($("#remember_Me").val() == "off") {
+        $("#remember_Me").val(false);
+    }
+    else{
+        $("#remeber_Me").val(true);
+    }
+}
+</script>

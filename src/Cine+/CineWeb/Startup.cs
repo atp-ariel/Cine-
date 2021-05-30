@@ -2,28 +2,30 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RepositoryLayer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
-
+using RepositoryLayer.Identity;
+using RepositoryLayer.Seed;
 namespace CineWeb
 {
     public class Startup
     {
+        private IConfiguration Configuration { get; set; }
+        // This method gets called by the runtime. Use this method to add services to the container.
+        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-        public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("CinePlus")));
 
             services.AddControllersWithViews();
+
+            //* Configure all about identity
+            ConfigureIdentity.DoConfiguration(services, Configuration);
+            
         }
 
 
@@ -35,15 +37,20 @@ namespace CineWeb
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseRouting();
-
             // * To load static files
             app.UseStaticFiles();
 
+            app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+             
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
             });
+
+            IdentitySeedData.EnsurePopulated(app);
         }
     }
 }
