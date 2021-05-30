@@ -2,6 +2,12 @@
 
 Proyecto final de Ingeniería de Software, [la orientación](https://evea.uh.cu/mod/resource/view.php?id=11766) del proyecto se encuentra en el EVEA.
 
+## Para ver formularios de Login y Crear cuenta
+
+* `Identity/SignIn` -> ver login
+* `Identity/SignUp` -> ver Crear cuenta
+
+
 ## Acerca del desarrollo y control de versiones
 
 Se tienen dos ramas principales:
