@@ -14,6 +14,7 @@ namespace DomainLayer
         public virtual ICollection<Genre> Genres { get; set; }
         public virtual ICollection<Country> Countries { get; set; }
         public virtual ICollection<Batch> Batches { get; set; }
+
     }
      
 }

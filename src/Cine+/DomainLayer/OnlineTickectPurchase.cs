@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DomainLayer
 {
-    public class TickectPurchaseWeb:TicketPurchase
+    public class OnlineTickectPurchase:TicketPurchase
     {
 
         [Required]

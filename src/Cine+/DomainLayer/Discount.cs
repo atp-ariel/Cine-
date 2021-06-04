@@ -5,20 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace DomainLayer
 {
-    public class Seat
+    public class Discount
     {
         public int Id { get; set; }
-
-        [StringLength(50, ErrorMessage = "Maximum 50 characters allowed")]
         [Required]
-
-        public string Ubication { get; set; }
-
-        public int CinemaId { get; set; }
-        public virtual Cinema Cinema { get; set; }
-        
+        public string Name { get; set; }
+        [Required]
+        public float DiscountedMoney { get; set; }
+        public ICollection<DiscountList> DiscountLists { get; set; }
     }
 }

@@ -25,8 +25,6 @@ namespace DomainLayer
         public string Adress { get; set; }
         [Required]
         public long Points { get; set; }
-
-        public virtual ICollection<TicketPurchase> TicketsPurchase { get; set; }
         
     }
 }
