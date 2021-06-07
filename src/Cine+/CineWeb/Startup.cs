@@ -5,6 +5,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using RepositoryLayer.Identity;
 using RepositoryLayer.Seed;
+using RepositoryLayer;
+using Microsoft.EntityFrameworkCore;
+
 namespace CineWeb
 {
     public class Startup
@@ -25,7 +28,9 @@ namespace CineWeb
 
             //* Configure all about identity
             ConfigureIdentity.DoConfiguration(services, Configuration);
-            
+            services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlite(Configuration.GetConnectionString("CinePlus")));
+
         }
 
 

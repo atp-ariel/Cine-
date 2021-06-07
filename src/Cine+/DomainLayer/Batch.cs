@@ -10,19 +10,12 @@ namespace DomainLayer
 {
     public class Batch
     {
-        public int Id { get; set; }
-
-        [StringLength(50, ErrorMessage = "Maximum 50 characters allowed")]
-        [Required]
-        public string Title { get; set; }
-        public Movie Movie { get; set; }
         public int MovieId { get; set; }
-        [Required]
-        [NotMapped]
+        public virtual Movie Movie { get; set; }
+        public int ScheduleId { get; set; }
         public Schedule Schedule { get; set; }
-
-        public virtual ICollection<Genre> Genres { get; set; }
-        public virtual ICollection<Country> Countries { get; set; }
+        public int CinemaId { get; set; }
+        public virtual Cinema Cinema { get ; set;}
 
     }
 }

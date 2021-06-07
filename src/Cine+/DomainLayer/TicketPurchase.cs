@@ -14,7 +14,8 @@ namespace DomainLayer
         public virtual Seat Seat { get; set; }
         public int CinemaId { get; set; }
         public virtual Cinema Cinema { get; set; }
-        [NotMapped]
+        public int ScheduleId { get; set; }
         public virtual Schedule Schedule { get; set; }
+
     }
 }
