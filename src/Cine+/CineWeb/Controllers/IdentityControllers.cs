@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using ServiceLayer.Identity;
 
 namespace CineWeb.Controllers{
     public partial class IdentityController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private CineUserManager _cineUserManager;
+
         public IdentityController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
-            this._userManager = userManager;
-            this._signInManager = signInManager;
+            this._cineUserManager = new CineUserManager(userManager, signInManager);
         }
     }
 }

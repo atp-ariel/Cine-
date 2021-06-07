@@ -14,7 +14,7 @@ namespace CineWeb.Controllers
         public async Task<IActionResult> SignIn(SignInModel model)
         {
             if(ModelState.IsValid){
-                var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);
+                var result = await _cineUserManager.Login(model);
                 if (result.Succeeded)
                     return Redirect("Index");
                 else ModelState.AddModelError("Login", "Acceso denegado.");

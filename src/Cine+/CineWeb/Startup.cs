@@ -29,7 +29,7 @@ namespace CineWeb
             //* Configure all about identity
             ConfigureIdentity.DoConfiguration(services, Configuration);
             services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlite(Configuration.GetConnectionString("CinePlus")));
+                options.UseSqlite(Configuration.GetConnectionString("CinePlus")));
 
         }
 

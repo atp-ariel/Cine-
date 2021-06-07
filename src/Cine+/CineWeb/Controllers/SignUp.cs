@@ -15,17 +15,19 @@ namespace CineWeb.Controllers
 
         [HttpPost]
         public async Task<IActionResult> SignUp(SignUpModel model){
+            // if there are no errors in the model from the view, then the user is created
             if(ModelState.IsValid){
-                if((await _userManager.FindByNameAsync(model.Username)) == null){
+                //if there is no user with that username then the same one is created
+                if((await _cineUserManager.FindByUsername(model.Username)) == null){
+                    // verify that the passwords match, if they don't match then the error is reported
                     if(!model.MatchPasswords()){
                         ModelState.AddModelError("SignUp", "Las contraseñas no coinciden");
                         return View(model);
                     }
-                    IdentityUser user = new IdentityUser{
-                        Email = model.Email,
-                        UserName = model.Username
-                    };
-                    var result = await _userManager.CreateAsync(user, model.Password);
+                    
+                    // create user
+                    IdentityResult result = await _cineUserManager.CreateUserAsync(model);
+                    
                     if(result.Succeeded)
                         return RedirectToAction("Index");
                     
