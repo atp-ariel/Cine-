@@ -29,7 +29,7 @@ namespace CineWeb.Controllers
                     IdentityResult result = await _cineUserManager.CreateUserAsync(model);
                     
                     if(result.Succeeded)
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index", "Home", null);
                     
                     ModelState.AddModelError("SignUp", string.Join(string.Empty, result.Errors.Select(error => error.Description)));
                     return View(model);

@@ -20,6 +20,12 @@ namespace DomainLayer.Identity
         [DataType(DataType.Password)]
         public string ConfirmedPassword {get; set;}
 
+        [DataType(DataType.PhoneNumber)]
+        public string Phone {get; set;}
+
+        [DataType(DataType.Text)]
+        public string Address {get; set;}
+        
         public bool MatchPasswords(){
             return Password == ConfirmedPassword;
         }

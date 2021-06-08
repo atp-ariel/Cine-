@@ -1,19 +1,21 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using DomainLayer.Identity;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ServiceLayer.Identity
 {
     public partial class CineUserManager
     {
 
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
 
-        internal UserManager<IdentityUser> UserManager => _userManager;
-        internal SignInManager<IdentityUser> SignInManager => _signInManager;
+        internal UserManager<AppUser> UserManager => _userManager;
+        internal SignInManager<AppUser> SignInManager => _signInManager;
         
-        public CineUserManager(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public CineUserManager(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             this._userManager = userManager;
             this._signInManager = signInManager;
@@ -24,7 +26,7 @@ namespace ServiceLayer.Identity
         /// </summary>
         /// <param name="username">The username given</param>
         /// <returns></returns>
-        public async Task<IdentityUser> FindByUsername(string username)
+        public async Task<AppUser> FindByUsername(string username)
         {
             // * Search on UserManager by username
             return await UserManager.FindByNameAsync(username);
@@ -32,9 +34,11 @@ namespace ServiceLayer.Identity
 
         public async Task<IdentityResult> CreateUserAsync(SignUpModel model){
             // * Create an user instance
-            IdentityUser user = new IdentityUser{
+            AppUser user = new AppUser{
                         Email = model.Email,
-                        UserName = model.Username
+                        UserName = model.Username,
+                        PhoneNumber = model.Phone,
+                        Address = model.Address
                     };
             // * Save on user manager
             return await UserManager.CreateAsync(user, model.Password);
@@ -43,6 +47,10 @@ namespace ServiceLayer.Identity
         public async Task<SignInResult> Login(SignInModel model)
         {
             return await SignInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);
+        }
+
+        public  IEnumerable<AppUser> GetUsers(){
+            return  _userManager.Users;
         }
     }
 }

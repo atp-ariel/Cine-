@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Socios del Club";
+}
+@using DomainLayer.Identity
+@model IEnumerable<AppUser>
+
+<div class="row mt-5">
+    <div class="col-1"></div>
+    <div class="col-10">
+        <h2>Socios del Club Cine+</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre de Usuario</th>
+                        <th>Correo Electrónico</th>
+                        <th>Teléfono</th>
+                        <th>Dirección</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var user in Model){
+                        <tr>
+                            <td>@user.UserName</td>
+                            <td>@user.Email</td>
+                            <td>@user.PhoneNumber</td>
+                            <td>@user.Address</td>
+                            <td>
+                                <a href="#" class="btn btn-primary rounded-pill">Eliminar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-1"></div>
+</div>
