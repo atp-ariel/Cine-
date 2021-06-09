@@ -1,5 +1,5 @@
 body {
-    background-color: #fbe8c6;
+    background-color: #f3f3f3;
 }
 .wrap{
     background-color: #fff;
@@ -8,15 +8,65 @@ body {
     -moz-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.274);
 }
 
-.btn-primary{
+.shadow-down {
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.274);
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.274);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.274);
+}
+
+.prepended-input > .input-group-prepend > span {
+    border-top-left-radius: 50rem !important;
+    border-bottom-left-radius: 50rem !important;
+    color: white;
+    background-color: #64aeff;
+    border-color: #64aeff;
+}
+.prepended-input > input[type="text"],
+.prepended-input > input[type="password"] {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-left-color: transparent;
+}
+
+.prepended-input > #password-input {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-right-color: transparent;
+}
+.prepended-input > .input-group-append > span {
+        border-top-right-radius: 50rem !important;
+        border-bottom-right-radius: 50rem !important;
+        background-color: transparent;
+        color: #64aeff;
+        border-color: #64aeff;
+        border-left-color: transparent;
+    }
+
+.prepended-input > .form-control:focus{
+    box-shadow: none;
+}
+.btn-outline-primary {
+    border-color: #64aeff;
+}
+
+.nav-item {
+    margin-left: 1%;
+}
+
+.btn-primary {
     background-color: #5147ff;
     border-color: #5147ff;
 }
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active,
 .btn-primary:hover,
 .btn-primary:focus,
-.btn-primary:active{
+.btn-primary:active {
     background-color: #64aeff;
     border-color: #64aeff;
+    color: white !important;
 }
 
 .form-control 
@@ -34,4 +84,8 @@ body {
 .validation-summary-errors > ul > li{
     display: inline;
     color: hsl(0, 96%, 32%);
+}
+
+.rounded-125 {
+    border-radius: 1.25rem !important;
 }

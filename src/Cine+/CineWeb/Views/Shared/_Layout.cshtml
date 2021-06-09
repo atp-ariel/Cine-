@@ -1,20 +1,39 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width" />
-        <title>@ViewData["Title"] - Cine+</title>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"] - Cine+</title>
 
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/css/style.css">
 
-    </head>
-    <body>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
 
-        <div class="container">
-            @RenderBody()
-        </div>
 
-        <script href="/js/bootstrap.min.js"></script>
-    </body>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light rounded mb-1 shadow-down ">
+            <div class="container-fluid">
+                <h1><a class="navbar-brand h1 mb-0" asp-controller="Home" asp-action="Index">Cine+ Web</a></h1>
+                <button class="btn btn-primary d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbar-content-menu" aria-controls="navbar-content-menu" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-align-justify"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbar-content-menu">
+                    <partial name="_Header" />
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <partial name="_js" />
+</body>
 </html>

@@ -8,9 +8,9 @@ namespace CineWeb.Controllers{
     {
         private CineUserManager _cineUserManager;
 
-        public IdentityController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public IdentityController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
-            this._cineUserManager = new CineUserManager(userManager, signInManager);
+            this._cineUserManager = new CineUserManager(userManager, signInManager, roleManager);
         }
     }
 }

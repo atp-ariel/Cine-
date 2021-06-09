@@ -26,7 +26,7 @@ namespace CineWeb.Controllers
                     }
                     
                     // create user
-                    IdentityResult result = await _cineUserManager.CreateUserAsync(model);
+                    IdentityResult result = await _cineUserManager.SignUp(model);
                     
                     if(result.Succeeded)
                         return RedirectToAction("Index", "Home", null);
