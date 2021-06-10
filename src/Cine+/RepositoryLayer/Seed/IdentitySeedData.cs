@@ -82,7 +82,7 @@ namespace RepositoryLayer.Seed
                     await userManager.AddToRoleAsync(user.Item1, user.Item3);
         }
 
-        public static async void EnsurePopulated(IApplicationBuilder app)
+        public static  void EnsurePopulated(IApplicationBuilder app)
         {
             AppIdentityContext context = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<AppIdentityContext>();
             if (context.Database.GetPendingMigrations().Any())

@@ -48,7 +48,7 @@ namespace ServiceLayer.Identity
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<IdentityResult> SignUp(SignUpModel model){
+        public async Task<IdentityResult> SignUp(SignUpModel model, string role){
             // * Create an user instance
             AppUser user = new AppUser{
                         Email = model.Email,
@@ -57,7 +57,9 @@ namespace ServiceLayer.Identity
                         Address = model.Address
                     };
             // * Save on user manager
-            return await UserManager.CreateAsync(user, model.Password);
+            await UserManager.CreateAsync(user, model.Password);
+
+            return await UserManager.AddToRoleAsync(user, role);
         }
 
         /// <summary>
@@ -82,8 +84,8 @@ namespace ServiceLayer.Identity
         /// Get all users
         /// </summary>
         /// <returns></returns>
-        public  IEnumerable<AppUser> GetUsers(){
-            return  _userManager.Users;
+        public async Task<IEnumerable<AppUser>> GetUsers(string role){
+            return await UserManager.GetUsersInRoleAsync(role); 
         }
         #endregion
     }

@@ -4,10 +4,12 @@
 @using DomainLayer.Identity
 @model IEnumerable<AppUser>
 
+
+<!-- All members of Cine+ Club -->
 <div class="row mt-5">
     <div class="col-1"></div>
     <div class="col-10">
-        <h2>Socios del Club Cine+</h2>
+        <h2 class="my-2">Socios del Club Cine+</h2>
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -16,7 +18,6 @@
                         <th>Correo Electrónico</th>
                         <th>Teléfono</th>
                         <th>Dirección</th>
-                        <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,14 +27,20 @@
                             <td>@user.Email</td>
                             <td>@user.PhoneNumber</td>
                             <td>@user.Address</td>
-                            <td>
-                                <a href="#" class="btn btn-primary rounded-pill">Eliminar</a>
-                            </td>
                         </tr>
                     }
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="col-1"></div>
+</div>
+
+<!-- Statistic of members -->
+<div class="row my-5">
+    <div class="col-1"></div>
+    <div class="col-10">
+        <p class="mb-2 font-weight-bold">Cantidad de socios del club: @Model.Count() socios</p>
     </div>
     <div class="col-1"></div>
 </div>

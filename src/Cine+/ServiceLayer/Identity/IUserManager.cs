@@ -9,7 +9,7 @@ namespace ServiceLayer.Identity
 {
     interface IUserManager
     {
-        IEnumerable<AppUser> GetUsers();
+        Task<IEnumerable<AppUser>> GetUsers(string role);
         Task<AppUser> FindByUsername(string username);
     }
 }

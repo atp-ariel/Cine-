@@ -1,20 +1,23 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using DomainLayer.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 using System.Linq;
 
 namespace CineWeb.Controllers
 {
-    public partial class IdentityController : Controller
+    public partial class ClubCinePlusController : Controller
     {
-        public IActionResult SignUp(){
-            SignUpModel model = new SignUpModel();
-            return View(model);
+        [Authorize(Roles = "BoxOfficer, Manager")]
+        public IActionResult AddMembersClub(){
+            return View(new SignUpModel());
         }
 
+
         [HttpPost]
-        public async Task<IActionResult> SignUp(SignUpModel model){
+        [Authorize(Roles = "BoxOfficer, Manager")]
+        public async Task<IActionResult> AddMembersClub(SignUpModel model){
             // if there are no errors in the model from the view, then the user is created
             if(ModelState.IsValid){
                 //if there is no user with that username then the same one is created

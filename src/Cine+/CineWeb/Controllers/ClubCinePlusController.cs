@@ -1,12 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using ServiceLayer.Identity;
 using DomainLayer.Identity;
-using Microsoft.AspNetCore.Authorization;
+using ServiceLayer.Identity;
 
 namespace CineWeb.Controllers
 {
-    public class ClubCinePlusController : Controller
+    public partial class ClubCinePlusController : Controller
     {
         private CineUserManager _cineUserManager;
 
@@ -15,9 +14,5 @@ namespace CineWeb.Controllers
             this._cineUserManager = new CineUserManager(userManager, signInManager, roleManager);
         }
 
-        [Authorize(Roles = "BoxOfficer, Manager")]
-        public IActionResult GetMembersClub(){
-            return View(_cineUserManager.GetUsers());
-        }
     }
 }

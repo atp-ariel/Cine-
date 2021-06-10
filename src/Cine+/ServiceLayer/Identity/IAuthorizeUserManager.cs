@@ -10,7 +10,7 @@ namespace ServiceLayer.Identity
 {
     interface IAuthorizeUserManager
     {
-        Task<IdentityResult> SignUp(SignUpModel model);
+        Task<IdentityResult> SignUp(SignUpModel model, string role);
         Task<SignInResult> Login(SignInModel model);
         void Logout();
     }
