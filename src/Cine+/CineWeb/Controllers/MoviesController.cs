@@ -1,0 +1,175 @@
+﻿using DomainLayer;
+using Microsoft.AspNetCore.Mvc;
+using RepositoryLayer;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+
+namespace CineWeb.Controllers
+{                                                           
+    public class MoviesController : Controller
+    {
+        private readonly ApplicationDbContext _context;
+
+        public MoviesController(ApplicationDbContext context)
+        {
+            _context = context;
+        }   
+
+        public IActionResult Index()
+        {
+            IEnumerable<Movie> listMovies = _context.Movie.Include(m => m.Genres).Include(m => m.Countries).Include(m => m.Actors).ToList();
+            return View(listMovies);
+        }
+
+        public IActionResult Create() 
+        {
+            ViewBags();
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Movie movie,int[] countries=null,int[] genres=null,int[] actors=null)
+        {
+            if (ModelState.IsValid) 
+            {
+
+                movie = Save(movie, countries, genres, actors);
+
+                _context.Movie.Add(movie);
+                _context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            IEnumerable<Movie> listMovies = _context.Movie.Include(m => m.Genres).Include(m => m.Countries).Include(m => m.Actors).ToList();
+
+            var movie = _context.Movie.Find(id);
+
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
+            ViewBags();
+
+            return View(movie);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Movie movie, int[] countries = null, int[] genres = null, int[] actors = null)
+        {
+
+            if (ModelState.IsValid)
+            {
+                _context.Movie.Remove(movie);
+                _context.SaveChanges();
+
+                movie = Save(movie, countries, genres, actors);
+
+                _context.Movie.Add(movie);
+                _context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            var movie = _context.Movie.Find(id);
+
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Genres = _context.Genre;
+            ViewBag.Actors = _context.Actor;
+            ViewBag.Countries = _context.Country;
+
+            return View(movie);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteMovie(int? id)
+        {
+            var movie = _context.Movie.Find(id);
+
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
+            _context.Movie.Remove(movie);
+            _context.SaveChanges();
+            TempData["message"] = "Se ha eliminado película correctamente";
+            return RedirectToAction("Index");
+        }
+
+
+        public Movie Save(Movie movie, int[] countries = null, int[] genres = null, int[] actors = null)
+        {
+            if (countries != null)
+            {
+                foreach (var item in countries)
+                {
+                    Country country = _context.Country.Find(item);
+                    movie.Countries.Add(country);
+                    country.Movies.Add(movie);
+                }
+
+            }
+
+            if (genres != null)
+            {
+                foreach (var item in genres)
+                {
+                    Genre genre = _context.Genre.Find(item);
+                    movie.Genres.Add(genre);
+                    genre.Movies.Add(movie);
+                }
+            }
+
+            if (actors != null)
+            {
+                foreach (var item in actors)
+                {
+                    Actor actor = _context.Actor.Find(item);
+                    movie.Actors.Add(actor);
+                    actor.Movies.Add(movie);
+                }
+            }
+
+            return movie;
+        }
+
+        public void ViewBags() 
+        {
+            ViewBag.Genres = _context.Genre;
+            ViewBag.Actors = _context.Actor;
+            ViewBag.Countries = _context.Country;
+        }
+    }
+}

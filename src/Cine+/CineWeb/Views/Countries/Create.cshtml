@@ -1,0 +1,35 @@
+﻿@model DomainLayer.Country
+@{
+    ViewData["Title"] = "Crear país";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Países</h1>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Agregar país</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-10">
+            <form method="post" asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-form="Name" class="text-danger">@Html.ValidationMessage("Name")</span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Agregar país" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
