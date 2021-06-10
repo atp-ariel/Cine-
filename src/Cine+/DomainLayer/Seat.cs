@@ -10,15 +10,8 @@ namespace DomainLayer
 {
     public class Seat
     {
-        public int Id { get; set; }
-
-        [StringLength(50, ErrorMessage = "Maximum 50 characters allowed")]
-        [Required]
-
-        public string Ubication { get; set; }
-
         public int CinemaId { get; set; }
-        public virtual Cinema Cinema { get; set; }
-        
+        public int Id { get; set; }
+        public virtual Cinema Cinema { get; set; } 
     }
 }

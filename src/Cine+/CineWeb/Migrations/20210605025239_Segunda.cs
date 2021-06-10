@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CineWeb.Migrations
 {
-    public partial class Init : Migration
+    public partial class Segunda : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

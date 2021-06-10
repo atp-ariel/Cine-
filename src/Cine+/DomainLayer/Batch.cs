@@ -10,12 +10,12 @@ namespace DomainLayer
 {
     public class Batch
     {
-        public int MovieId { get; set; }
-        public virtual Movie Movie { get; set; }
-        public int ScheduleId { get; set; }
-        public Schedule Schedule { get; set; }
+        public DateTime ScheduleStartTime { get; set; }
+        public DateTime ScheduleEndTime { get; set; }
+        public virtual Schedule Schedule { get; set; }
         public int CinemaId { get; set; }
         public virtual Cinema Cinema { get ; set;}
-
+        public int MovieId { get; set; }
+        public virtual Movie Movie { get; set; }
     }
 }

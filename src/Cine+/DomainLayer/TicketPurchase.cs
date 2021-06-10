@@ -10,11 +10,11 @@ namespace DomainLayer
 {
     public class TicketPurchase
     {
+        public int SeatCinemaId { get; set; }
         public int SeatId { get; set; }
         public virtual Seat Seat { get; set; }
-        public int CinemaId { get; set; }
-        public virtual Cinema Cinema { get; set; }
-        public int ScheduleId { get; set; }
+        public DateTime ScheduleStartTime { get; set; }
+        public DateTime ScheduleEndTime { get; set; }
         public virtual Schedule Schedule { get; set; }
 
     }

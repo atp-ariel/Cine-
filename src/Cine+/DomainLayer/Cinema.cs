@@ -10,6 +10,9 @@ namespace DomainLayer
     public class Cinema
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "Este campo es obligatorio")]
+        [Display(Name = "Capacidad")]
+        public int Capacity { get; set; }
         public virtual ICollection<Seat> Seats { get; set; }
 
     }

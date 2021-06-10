@@ -1,0 +1,89 @@
+﻿@model IEnumerable<DomainLayer.Movie>
+
+@{
+    ViewData["Title"] = "Lista de películas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Películas</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Lista de películas</h3>
+        </div>
+        <div class="col-sm-6">
+            <a class="btn btn-success d-block" asp-action="Create" asp-controller="Movies">Agregar película</a>
+        </div>
+    </div>
+    <div class="row">
+        @if (Model.Count()>0)
+        {
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <td>@Html.DisplayNameFor(m => m.Id)</td>
+                        <td>@Html.DisplayNameFor(m => m.Title)</td>
+                        <td>@Html.DisplayNameFor(m => m.Genres)</td>
+                        <td>@Html.DisplayNameFor(m => m.Countries)</td>
+                        <td>@Html.DisplayNameFor(m => m.Actors)</td>
+                        <td>Opciones</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Title</td>
+
+                        <td>
+                            @if (item.Genres!=null)
+                            {
+                                @foreach (var genre in item.Genres)
+                                {
+                                    @String.Concat(genre.Name, ",");
+                                }
+                            }
+
+                        </td>
+
+                        <td>
+                            @if (item.Countries != null)
+                            {
+                                @foreach (var country in item.Countries)
+                                {
+                                    @String.Concat(country.Name, ",");
+                                }
+                            }
+
+                        </td>
+
+                        <td>
+                            @if (item.Actors!=null)
+                            {
+                                @foreach (var actor in item.Actors)
+                                {
+                                    @String.Concat(actor.Name, ",");
+                                }
+                            }
+
+                        </td>
+
+                        <td>
+                            <a asp-controller="Movies" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
+                    
+                            <a asp-controller="Movies" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table> 
+        }
+        else 
+        {
+            <p>No existen registros</p>
+        }
+    </div>
+
+</div>
