@@ -1,0 +1,63 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var isAuth = User.Identity.IsAuthenticated;
+    string username = User.Identity.Name;
+    var roleMember = User.IsInRole("Member");
+    var roleBoxOfficer = User.IsInRole("BoxOfficer");
+    var roleManager = User.IsInRole("Manager");
+}
+
+<!-- Navigation menu -->
+<ul class="nav navbar-nav w-100 justify-content-end">
+
+    <!-- Home option -->
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Home" asp-action="Index">Inicio</a>
+    </li>
+    <!-- End of home option -->
+
+    <!-- Authorized users options -->
+    @if (isAuth)
+    {
+        @if (roleManager || roleBoxOfficer)
+        {
+            <li class="btn-group nav-item dropdown">
+                <button class="btn btn-link nav-link dropdown-toggle" id="btn-club-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Club Cine+
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btn-club-options">
+                    <a class="nav-link dropdown-item" asp-controller="ClubCinePlus" asp-action="AddMembersClub">Añadir Socio</a>
+                    <a class="nav-link dropdown-item" asp-controller="ClubCinePlus" asp-action="GetMembersClub">Ver Socios</a>
+                </div>
+            </li>
+        }
+        <li class="btn-group nav-item dropdown">
+            <button class="btn btn-link nav-link dropdown-toggle" id="btn-profile-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-user-circle"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btn-profile-options">
+                <p class="dropdown-item-text">Hola @username</p>
+                @if (roleMember)
+                {
+                    <a class="nav-link dropdown-item" asp-controller="Identity" asp-action="EditInfo">Editar Información</a>
+                }
+                <hr class="dropdown-divider" />
+                <a class="nav-link dropdown-item" asp-controller="Identity" asp-action="LogOut">Cerrar Sesión</a>
+            </div>
+        </li>
+    }
+    // if not authorized
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link btn btn-outline-primary" asp-controller="Identity" asp-action="SignIn">Ingresar</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link btn btn-outline-primary" asp-controller="Identity" asp-action="SignUp">Crear cuenta</a>
+        </li>
+    }
+    <!-- End of authorized user options -->
+</ul>
+<!-- End of navigation menu-->

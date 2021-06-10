@@ -1,12 +1,12 @@
 @using DomainLayer.Identity
 @model SignUpModel
-@{ViewData["Title"] = "Registro de Usuarios";}
+@{ViewData["Title"] = "Registro de Socio";}
 
 <div class="row mt-5">
     <div class="col-md-3 col-sm-2"></div>
     <div class="col-md-6 col-sm-8">
         <div class="wrap rounded p-5 pb-3">
-            <h1 class="text-center pb-2">Registro de Usuarios</h1>
+            <h1 class="text-center pb-2">Registro de Socios en Cine+</h1>
 
             <form asp-controller="Identity" asp-action="SignUp" method="post">
                 @Html.ValidationSummary()
@@ -47,8 +47,7 @@
             </form>
             <hr class="hr-grad"/>
             <div class="d-flex pt-3">
-                <p class="text-center mr-2"> Si tienes una cuenta</p> 
-                <a class="text-center" asp-action="SignIn">Ingresa</a>
+                <a class="text-center" asp-controller="ClubCinePlus" asp-action="GetMembersClub">Ver Socios del Club</a>
             </div>
             
         </div>

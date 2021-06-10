@@ -14,13 +14,34 @@
                 @Html.ValidationSummary()
 
                 <div class="form-group mb-3">
-                    <input type="text" asp-for="Username" name="Username" placeholder="Nombre de usuario" class="form-control rounded-pill"/>
+                    <div class="input-group prepended-input">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="ico-username">
+                                <i class="fa fa-at"></i>
+                            </span>
+                        </div>
+                        <input type="text" asp-for="Username" name="Username" placeholder="Nombre de usuario" class="form-control rounded-pill" aria-describedby="ico-username"/>
+                    </div>
                 </div>
                 <div class="form-group mb-3">
-                    <input type="password" name="Password" asp-for="Password" placeholder="Contraseña" class="form-control rounded-pill"/>
+                    <div class="input-group prepended-input">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="ico-password">
+                                <i class="fa fa-key"></i>
+                            </span>
+                        </div>
+                        <input type="password" name="Password" id="password-input" autocomplete="on" asp-for="Password" placeholder="Contraseña" class="form-control rounded-pill" aria-describedby="ico-password"/>
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <a href="#" id="show-password">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group form-check mb-3">
-                    <input type="checkbox" id="remember_Me" onclick="toggle_validator" name="RememberMe" asp-for="RememberMe" class="form-check-input" checked value="true"/>
+                    <input type="checkbox" id="remember_Me" onclick="toggle_validator" name="RememberMe" asp-for="RememberMe" class="form-check-input" checked value="true" />
                     <label asp-for="RememberMe" class="form-check-label">Recuérdame</label>
                 </div>
                 <div class="form-group mb-3">
@@ -37,13 +58,3 @@
     <div class="col-lg-4 col-md-2"></div>
 </div>
 
-<script>
-function toggle_validator(e){
-    if($("#remember_Me").val() == "off") {
-        $("#remember_Me").val(false);
-    }
-    else{
-        $("#remeber_Me").val(true);
-    }
-}
-</script>
