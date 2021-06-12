@@ -11,5 +11,9 @@ namespace DomainLayer
         public int Id { get; set; }
         public float TotalDiscounted { get; set; }
         public ICollection<Discount> Discounts { get; set; }
+        public DiscountList()
+        {
+            Discounts = new List<Discount>();
+        }
     }
 }

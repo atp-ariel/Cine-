@@ -1,0 +1,93 @@
+﻿@model DomainLayer.Batch
+@{
+    ViewData["Title"] = "Eliminar función";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Funciones</h1>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Eliminar función</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-10">
+            <form method="post" asp-action="DeleteBatch">
+
+                <input type="hidden" asp-for="ScheduleStartTime" />
+                <input type="hidden" asp-for="ScheduleEndTime" />
+                <input type="hidden" asp-for="CinemaId" />
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="ScheduleStartTime" class="control-label"></label>
+                    <input asp-for="ScheduleStartTime" class="form-control" disabled />
+                    <span asp-validation-form="ScheduleStartTime" class="text-danger">@Html.ValidationMessage("ScheduleStartTime")</span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ScheduleEndTime" class="control-label"></label>
+                    <input asp-for="ScheduleEndTime" class="form-control" disabled />
+                    <span asp-validation-form="ScheduleEndTime" class="text-danger">@Html.ValidationMessage("ScheduleEndTime")</span>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel heading">Salas</div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            @foreach (var cinema in ViewBag.Cinemas)
+                            {
+                                <li class="list-group-item">
+                                    @if (cinema.Id == Model.CinemaId)
+                                    {
+                                        <label><input type="radio" name="cinemaId" checked="checked" value="@cinema.Id" disabled />Sala @cinema.Id</label>
+                                    }
+                                    else
+                                    {
+                                        <label><input type="radio" name="cinemaId" value="@cinema.Id" disabled />Sala @cinema.Id</label>
+                                    }
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel heading">Péliculas</div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            @foreach (var movie in ViewBag.Movies)
+                            {
+                                <li class="list-group-item">
+                                    @if (movie.Id == Model.MovieId)
+                                    {
+                                        <label><input type="radio" name="movieId" checked="checked" value="@movie.Id" disabled />@movie.Title</label>
+                                    }
+                                    else
+                                    {
+                                        <label><input type="radio" name="movieId" value="@movie.Id" disabled />@movie.Title</label>
+                                    }
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="TicketPrice" class="control-label"></label>
+                    <input asp-for="TicketPrice" class="form-control" disabled />
+                    <span asp-validation-form="TicketPrice" class="text-danger">@Html.ValidationMessage("TicketPrice")</span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Eliminar función" class="btn btn-primary" />
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

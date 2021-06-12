@@ -37,14 +37,17 @@ namespace CineWeb.Controllers
             if (ModelState.IsValid) 
             {
 
-                movie = Save(movie, countries, genres, actors);
+                Save(movie, countries, genres, actors);
 
                 _context.Movie.Add(movie);
                 _context.SaveChanges();
 
+                TempData["message"] = "Se ha creado película correctamente";
+
                 return RedirectToAction("Index");
             }
 
+            ViewBags();
             return View();
         }
 
@@ -73,19 +76,34 @@ namespace CineWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Movie movie, int[] countries = null, int[] genres = null, int[] actors = null)
         {
+            IEnumerable<Movie> listMovies = _context.Movie.Include(m => m.Genres).Include(m => m.Countries).Include(m => m.Actors).Include(m => m.Batches).ToList();
+
+            movie = _context.Movie.Find(movie.Id);
 
             if (ModelState.IsValid)
             {
                 _context.Movie.Remove(movie);
                 _context.SaveChanges();
 
-                movie = Save(movie, countries, genres, actors);
+                movie.Countries.Clear();
+                movie.Genres.Clear();
+                movie.Actors.Clear();
+
+                Save(movie, countries, genres, actors);
+
+                foreach (var item in movie.Batches)
+                {
+                    _context.Batch.Add(item);
+                }
 
                 _context.Movie.Add(movie);
                 _context.SaveChanges();
 
+                TempData["message"] = "Se ha editado película correctamente";
                 return RedirectToAction("Index");
             }
+
+            ViewBags();
 
             return View();
         }
@@ -97,6 +115,8 @@ namespace CineWeb.Controllers
                 return NotFound();
             }
 
+            IEnumerable<Movie> listMovies = _context.Movie.Include(m => m.Genres).Include(m => m.Countries).Include(m => m.Actors).ToList();
+
             var movie = _context.Movie.Find(id);
 
             if (movie == null)
@@ -104,9 +124,7 @@ namespace CineWeb.Controllers
                 return NotFound();
             }
 
-            ViewBag.Genres = _context.Genre;
-            ViewBag.Actors = _context.Actor;
-            ViewBag.Countries = _context.Country;
+            ViewBags();
 
             return View(movie);
         }
@@ -129,7 +147,7 @@ namespace CineWeb.Controllers
         }
 
 
-        public Movie Save(Movie movie, int[] countries = null, int[] genres = null, int[] actors = null)
+        public void Save(Movie movie, int[] countries = null, int[] genres = null, int[] actors = null)
         {
             if (countries != null)
             {
@@ -161,8 +179,6 @@ namespace CineWeb.Controllers
                     actor.Movies.Add(movie);
                 }
             }
-
-            return movie;
         }
 
         public void ViewBags() 

@@ -1,70 +1,82 @@
 ﻿using DomainLayer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RepositoryLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace CineWeb.Controllers
 {
-    public class BatchesController : Controller
+    public class TicketPurchasesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public BatchesController(ApplicationDbContext context)
+        public TicketPurchasesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index() 
         {
-            IEnumerable<Batch> listBatches = _context.Batch.Include(m => m.Schedule).Include(m => m.Cinema).Include(m => m.Movie).ToList();
+            IEnumerable<Batch> listBatches = _context.Batch.Include(m => m.Schedule).Include(m => m.Cinema).Include(m => m.Movie).Where(m=>m.ScheduleStartTime>DateTime.Now).ToList();
             return View(listBatches);
         }
 
-        public IActionResult Create()
+        public IActionResult PhysicalTicketPurchaseCreate(DateTime start,DateTime end,int cinema)
         {
-            ViewBags();
+            ViewBag.Batch = _context.Batch.Find(cinema, start, end);
+            ViewBag.Seats = _context.Seat.Where(x => x.CinemaId == cinema);
+            ViewBag.Discounts = _context.Discount;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Batch batch)
+        public IActionResult PhysicalTicketPurchaseCreate(PhysicalTicketPurchase physicalTicketPurchase,int[] discounts)
         {
             if (ModelState.IsValid)
             {
-                Schedule schedule = new Schedule { StartTime = batch.ScheduleStartTime, EndTime = batch.ScheduleEndTime };
-                _context.Schedule.Add(schedule);
-                _context.Batch.Add(batch);
+                var discountList = new DiscountList();
+                foreach (var item in discounts)
+                {
+                    var discount = _context.Discount.Find(item);
+                    discountList.Discounts.Add(discount);
+                    discountList.TotalDiscounted += discount.DiscountedMoney;
+                }
+                _context.DiscountList.Add(discountList);
+
+                physicalTicketPurchase.DiscountListId = discountList.Id;
+                physicalTicketPurchase.DiscountList = discountList;
+
+                _context.PhysicalTicketPurchase.Add(physicalTicketPurchase);
                 _context.SaveChanges();
-                TempData["message"] = "Se ha creado función correctamente";
+                TempData["message"] = "Compra realizada exitosamente";
                 return RedirectToAction("Index");
             }
 
-            ViewBags();
+            ViewBag.Seats = _context.Seat.Where(x => x.CinemaId == physicalTicketPurchase.CinemaId);
+            ViewBag.Discounts = _context.Discount;
+
             return View();
         }
 
-        public IActionResult Edit(DateTime? start,DateTime? end, int? cinema)
+        public IActionResult Edit(DateTime? start, DateTime? end, int? cinema)
         {
-            if (cinema == null || cinema == 0|| start==null || end==null)
+            if (cinema == null || cinema == 0 || start == null || end == null)
             {
                 return NotFound();
             }
 
             IEnumerable<Batch> listBatches = _context.Batch.Include(m => m.Schedule).Include(m => m.Cinema).Include(m => m.Movie).ToList();
 
-            var batch = _context.Batch.Find(cinema,start, end);
+            var batch = _context.Batch.Find(cinema, start, end);
 
             if (batch == null)
             {
                 return NotFound();
             }
-
-            ViewBags();
 
             return View(batch);
         }
@@ -82,8 +94,6 @@ namespace CineWeb.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBags();
-
             return View();
         }
 
@@ -96,14 +106,12 @@ namespace CineWeb.Controllers
 
             IEnumerable<Batch> listBatches = _context.Batch.Include(m => m.Schedule).Include(m => m.Cinema).Include(m => m.Movie).ToList();
 
-            var batch = _context.Batch.Find(cinema,start, end);
+            var batch = _context.Batch.Find(cinema, start, end);
 
             if (batch == null)
             {
                 return NotFound();
             }
-
-            ViewBags();
 
             return View(batch);
         }
@@ -112,7 +120,7 @@ namespace CineWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteBatch(Batch batch)
         {
-            
+
             if (batch == null)
             {
                 return NotFound();
@@ -124,10 +132,5 @@ namespace CineWeb.Controllers
             return RedirectToAction("Index");
         }
 
-        public void ViewBags()
-        {
-            ViewBag.Cinemas = _context.Cinema;
-            ViewBag.Movies = _context.Movie;
-        }
     }
 }

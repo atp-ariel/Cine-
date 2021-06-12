@@ -9,7 +9,7 @@ namespace DomainLayer
 {
     public class OnlineTickectPurchase:TicketPurchase
     {
-
+        [Display(Name ="Tarjeta de Crédito")]
         [Required]
         public string CreditCard { get; set; }
     }
