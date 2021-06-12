@@ -9,6 +9,7 @@ namespace DomainLayer
 {
     public class Cinema
     {
+        [Display(Name = "Sala")]
         public int Id { get; set; }
         [Required(ErrorMessage = "Este campo es obligatorio")]
         [Display(Name = "Capacidad")]

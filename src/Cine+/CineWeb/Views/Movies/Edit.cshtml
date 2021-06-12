@@ -34,8 +34,22 @@
                         <ul class="list-group">
                             @foreach (var country in ViewBag.Countries)
                             {
+                                bool find = false;
                                 <li class="list-group-item">
-                                    <label><input type="checkbox" name="countries" value="@country.Id" disabled/>@country.Name</label>
+                                    @foreach (var c in Model.Countries)
+                                    {
+                                        @if (country.Id == c.Id)
+                                        {
+                                            find = true;
+                                            <label><input type="checkbox" name="countries" checked="checked" value="@country.Id" />@country.Name</label>
+                                            break;
+                                        }
+                                    }
+                                    @if (!find)
+                                    {
+                                        <label><input type="checkbox" name="countries" value="@country.Id"  />@country.Name</label>
+                                    }
+
                                 </li>
                             }
                         </ul>
@@ -48,8 +62,22 @@
                         <ul class="list-group">
                             @foreach (var genre in ViewBag.Genres)
                             {
+                                bool find = false;
                                 <li class="list-group-item">
-                                    <label><input type="checkbox" name="genres" value="@genre.Id" disabled/>@genre.Name</label>
+                                    @foreach (var g in Model.Genres)
+                                    {
+                                        @if (genre.Id == g.Id)
+                                        {
+                                            find = true;
+                                            <label><input type="checkbox" name="genres" checked="checked" value="@genre.Id" />@genre.Name</label>
+                                            break;
+                                        }
+                                    }
+                                    @if (!find)
+                                    {
+                                        <label><input type="checkbox" name="genres" value="@genre.Id" />@genre.Name</label>
+                                    }
+
                                 </li>
                             }
                         </ul>
@@ -62,8 +90,22 @@
                         <ul class="list-group">
                             @foreach (var actor in ViewBag.Actors)
                             {
+                                bool find = false;
                                 <li class="list-group-item">
-                                    <label><input type="checkbox" name="actors" value="@actor.Id" disabled/>@actor.Name</label>
+                                    @foreach (var a in Model.Actors)
+                                    {
+                                        @if (actor.Id == a.Id)
+                                        {
+                                            find = true;
+                                            <label><input type="checkbox" name="actors" checked="checked" value="@actor.Id" />@actor.Name</label>
+                                            break;
+                                        }
+                                    }
+                                    @if (!find)
+                                    {
+                                        <label><input type="checkbox" name="actors" value="@actor.Id" />@actor.Name</label>
+                                    }
+
                                 </li>
                             }
                         </ul>

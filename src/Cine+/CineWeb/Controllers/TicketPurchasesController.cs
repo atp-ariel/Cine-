@@ -1,32 +1,27 @@
 ﻿using DomainLayer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RepositoryLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace CineWeb.Controllers
 {
-    public class BatchesController : Controller
+    public class TicketPurchasesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public BatchesController(ApplicationDbContext context)
+        public TicketPurchasesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult PhysicalTicketPurchaseCreate(Batch batch)
         {
-            IEnumerable<Batch> listBatches = _context.Batch.Include(m => m.Schedule).Include(m => m.Cinema).Include(m => m.Movie).ToList();
-            return View(listBatches);
-        }
-
-        public IActionResult Create()
-        {
-            ViewBags();
+            ViewBag.Seats = _context.Seat.Where(x => x.CinemaId == batch.CinemaId);
+            ViewBag.Discounts = _context.Discount;
             return View();
         }
 
@@ -44,27 +39,24 @@ namespace CineWeb.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBags();
             return View();
         }
 
-        public IActionResult Edit(DateTime? start,DateTime? end, int? cinema)
+        public IActionResult Edit(DateTime? start, DateTime? end, int? cinema)
         {
-            if (cinema == null || cinema == 0|| start==null || end==null)
+            if (cinema == null || cinema == 0 || start == null || end == null)
             {
                 return NotFound();
             }
 
             IEnumerable<Batch> listBatches = _context.Batch.Include(m => m.Schedule).Include(m => m.Cinema).Include(m => m.Movie).ToList();
 
-            var batch = _context.Batch.Find(cinema,start, end);
+            var batch = _context.Batch.Find(cinema, start, end);
 
             if (batch == null)
             {
                 return NotFound();
             }
-
-            ViewBags();
 
             return View(batch);
         }
@@ -82,8 +74,6 @@ namespace CineWeb.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBags();
-
             return View();
         }
 
@@ -96,14 +86,12 @@ namespace CineWeb.Controllers
 
             IEnumerable<Batch> listBatches = _context.Batch.Include(m => m.Schedule).Include(m => m.Cinema).Include(m => m.Movie).ToList();
 
-            var batch = _context.Batch.Find(cinema,start, end);
+            var batch = _context.Batch.Find(cinema, start, end);
 
             if (batch == null)
             {
                 return NotFound();
             }
-
-            ViewBags();
 
             return View(batch);
         }
@@ -112,7 +100,7 @@ namespace CineWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteBatch(Batch batch)
         {
-            
+
             if (batch == null)
             {
                 return NotFound();
@@ -124,10 +112,5 @@ namespace CineWeb.Controllers
             return RedirectToAction("Index");
         }
 
-        public void ViewBags()
-        {
-            ViewBag.Cinemas = _context.Cinema;
-            ViewBag.Movies = _context.Movie;
-        }
     }
 }
