@@ -8,7 +8,7 @@ namespace CineWeb.Controllers
     {
         [Authorize(Roles = "BoxOfficer, Manager")]
         public async Task<IActionResult> GetMembersClub(){
-            var members = await _cineUserManager.GetUsers("Member");
+            var members = await _cineUserManager.GetAllUsersBy("Member");
             return View(members);
         }
     }

@@ -10,7 +10,7 @@
 
     @if (TempData["message"] != null)
     {
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
             @TempData["message"]
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -23,42 +23,43 @@
             <h3>Lista de géneros</h3>
         </div>
         <div class="col-sm-6">
-            <a class="btn btn-success d-block" asp-action="Create" asp-controller="Genres">Agregar género</a>
+            <a class="btn btn-primary rounded-pill d-block" asp-action="Create" asp-controller="Genres">
+                <i class="fa fa-plus"></i>    Agregar género
+            </a>
         </div>
     </div>
     <div class="row">
-        @if (Model.Count() > 0)
-        {
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <td>@Html.DisplayNameFor(m => m.Id)</td>
-                        <td>@Html.DisplayNameFor(m => m.Name)</td>
-                        <td>Opciones</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
+        <div class="col-12">
+            @if (Model.Count() > 0)
+            {
+                <table class="table table-bordered table-striped">
+                    <thead>
                         <tr>
-                            <td>@item.Id</td>
-                            <td>@item.Name</td>
-
-                            <td>
-                                <a asp-controller="Genres" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
-
-                                <a asp-controller="Genres" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
-                            </td>
+                            <th>@Html.DisplayNameFor(m => m.Id)</th>
+                            <th>@Html.DisplayNameFor(m => m.Name)</th>
+                            <th>Opciones</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-        }
-        else
-        {
-            <p>No existen registros</p>
-        }
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Name</td>
+                                <td>
+                                    <a asp-controller="Genres" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary option rounded"><i class="fa fa-pencil"></i></a>
+                                    <a asp-controller="Genres" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary option rounded"><i class="fa fa-trash-o"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p class="font-italic">No existen géneros registrados</p>
+            }
+        </div>
     </div>
-
 </div>
 

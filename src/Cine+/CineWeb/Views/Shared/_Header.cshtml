@@ -17,20 +17,107 @@
         <a class="nav-link" asp-controller="Home" asp-action="Index">Inicio</a>
     </li>
     <!-- End of home option -->
-
     <!-- Authorized users options -->
     @if (isAuth)
     {
+        @if (roleManager)
+        {
+            <!-- Staff menu -->
+            <li class="btn-group nav-item dropdown">
+                <button class="btn btn-link nav-link dropdown-toggle" id="btn-staff-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Trabajadores
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btn-staff-options">
+                    <a class="nav-link dropdown-item" asp-controller="Staff" asp-action="GetBoxOfficers">Taquilleros</a>
+                    <a class="nav-link dropdown-item" asp-controller="Staff" asp-action="GetManagersUsers">Gerentes</a>
+                </div>
+            </li>
+            <!-- End staff menu -->
+
+            <!-- Batch Menu -->
+            <li class="nav-item dropdown">
+                <a id="dropdownMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-link nav-link dropdown-toggle">
+                    Tandas
+                </a>
+                <ul aria-labelledby="dropdownMenu1" class="dropdown-menu dropdown-menu-right border-0 shadow">
+                    <!-- Movies menu -->
+                    <li class="dropdown-submenu">
+                        <a id="dropdownMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">
+                            Películas
+                        </a>
+                        <ul aria-labelledby="dropdownMenu2" class="dropdown-menu dropdown-menu-right border-0 shadow">
+                            <li>
+                                <a tabindex="-1" asp-controller="Movies" asp-action="Create" class="dropdown-item"><i class="fa fa-plus"></i> Añadir</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Movies" asp-action="Index" class="dropdown-item"><i class="fa fa-list"></i> Ver todas</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- End Movies menu-->
+                    <!--  Genres menu -->
+                    <li class="dropdown-submenu">
+                        <a id="dropdownMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">
+                            Géneros
+                        </a>
+                        <ul aria-labelledby="dropdownMenu3" class="dropdown-menu dropdown-menu-right border-0 shadow">
+                            <li>
+                                <a tabindex="-1" asp-controller="Genres" asp-action="Create" class="dropdown-item"><i class="fa fa-plus"></i> Añadir</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Genres" asp-action="Index" class="dropdown-item"><i class="fa fa-list"></i> Ver todos</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- End Genres menu -->
+                    <!--  Country menu -->
+                    <li class="dropdown-submenu">
+                        <a id="dropdownMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">
+                            Países
+                        </a>
+                        <ul aria-labelledby="dropdownMenu4" class="dropdown-menu dropdown-menu-right border-0 shadow">
+                            <li>
+                                <a tabindex="-1" asp-controller="Countries" asp-action="Create" class="dropdown-item"><i class="fa fa-plus"></i> Añadir</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Countries" asp-action="Index" class="dropdown-item"><i class="fa fa-list"></i> Ver todos</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- End Country menu -->
+
+                    <!--  Actor menu -->
+                    <li class="dropdown-submenu">
+                        <a id="dropdownMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">
+                            Actores
+                        </a>
+                        <ul aria-labelledby="dropdownMenu4" class="dropdown-menu dropdown-menu-right border-0 shadow">
+                            <li>
+                                <a tabindex="-1" asp-controller="Actors" asp-action="Create" class="dropdown-item"><i class="fa fa-plus"></i> Añadir</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Actors" asp-action="Index" class="dropdown-item"><i class="fa fa-list"></i> Ver todos</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- End Actor menu -->
+                </ul>
+            </li>
+            
+                    
+            <!-- End Batch Menu -->
+
+        }
         @if (roleManager || roleBoxOfficer)
         {
             <li class="btn-group nav-item dropdown">
                 <button class="btn btn-link nav-link dropdown-toggle" id="btn-club-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Club Cine+
                 </button>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btn-club-options">
-                    <a class="nav-link dropdown-item" asp-controller="ClubCinePlus" asp-action="AddMembersClub">Añadir Socio</a>
-                    <a class="nav-link dropdown-item" asp-controller="ClubCinePlus" asp-action="GetMembersClub">Ver Socios</a>
-                </div>
+                <ul class="dropdown-menu dropdown-menu-right  border-0 shadow" aria-labelledby="btn-club-options">
+                    <li><a class="nav-link dropdown-item" asp-controller="ClubCinePlus" asp-action="AddMembersClub">Añadir Socio</a></li>
+                    <li><a class="nav-link dropdown-item" asp-controller="ClubCinePlus" asp-action="GetMembersClub">Ver Socios</a></li>
+                </ul>
             </li>
         }
         <li class="btn-group nav-item dropdown">

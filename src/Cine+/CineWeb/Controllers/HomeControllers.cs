@@ -12,5 +12,15 @@ namespace CineWeb.Controllers{
         {
             return View();
         }
+
+        public IActionResult Error404()
+        {
+            return View();
+        }
+
+        public IActionResult Error501()
+        {
+            return View();
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace CineWeb.Controllers
             // if there are no errors in the model from the view, then the user is created
             if(ModelState.IsValid){
                 //if there is no user with that username then the same one is created
-                if((await _cineUserManager.FindByUsername(model.Username)) == null){
+                if((await _cineUserManager.FindUserByUserName(model.Username)) == null){
                     // verify that the passwords match, if they don't match then the error is reported
                     if(!model.MatchPasswords()){
                         ModelState.AddModelError("SignUp", "Las contraseñas no coinciden");
@@ -29,7 +29,7 @@ namespace CineWeb.Controllers
                     }
                     
                     // create user
-                    IdentityResult result = await _cineUserManager.SignUp(model, "Member");
+                    IdentityResult result = await _cineUserManager.SignUpUser(model, "Member");
                     
                     if(result.Succeeded)
                         return RedirectToAction("Index", "Home", null);

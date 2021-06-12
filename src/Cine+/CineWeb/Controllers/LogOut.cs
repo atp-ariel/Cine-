@@ -8,7 +8,7 @@ namespace CineWeb.Controllers
         [Authorize]
         public IActionResult LogOut()
         {
-            _cineUserManager.Logout();
+            _cineUserManager.LogOut();
             return RedirectToAction("SignIn", "Identity", null);
         }
     }

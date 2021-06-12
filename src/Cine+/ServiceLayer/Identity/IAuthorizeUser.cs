@@ -8,9 +8,10 @@ using DomainLayer.Identity;
 
 namespace ServiceLayer.Identity
 {
-    interface IAuthorizeUserManager
+    public interface IAuthorizeUser
     {
-        Task<IdentityResult> SignUp(SignUpModel model, string role);
+        SignInManager<AppUser> SignInManager { get; }
+
         Task<SignInResult> Login(SignInModel model);
         void Logout();
     }

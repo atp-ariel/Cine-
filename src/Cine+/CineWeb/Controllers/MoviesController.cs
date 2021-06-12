@@ -1,14 +1,14 @@
 ﻿using DomainLayer;
 using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CineWeb.Controllers
-{                                                           
+{
+    [Authorize(Roles = "Manager")]
     public class MoviesController : Controller
     {
         private readonly ApplicationDbContext _context;

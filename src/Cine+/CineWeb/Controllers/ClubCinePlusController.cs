@@ -7,11 +7,11 @@ namespace CineWeb.Controllers
 {
     public partial class ClubCinePlusController : Controller
     {
-        private CineUserManager _cineUserManager;
+        private CinemaUserFacade _cineUserManager;
 
-        public ClubCinePlusController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public ClubCinePlusController(IAuthorizeUser authorizeUser, IUserStore userStore)
         {
-            this._cineUserManager = new CineUserManager(userManager, signInManager, roleManager);
+            this._cineUserManager = new CinemaUserFacade(authorizeUser, userStore);
         }
 
     }

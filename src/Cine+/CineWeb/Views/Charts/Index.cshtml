@@ -1,0 +1,56 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout";
+}
+
+<div>
+    <canvas  id="myChart"></canvas>
+</div>
+
+<script src="~/js/chart.js"></script>
+<script src="~/js/jquery-3.6.0.min.js"></script>
+<script>
+    $.ajax({
+        type: "POST",
+        url: "Charts/NewChart",
+        contentType: "application/json; charset=utf-8",
+        dataType: "text",
+        success: function (response) {
+            var data = jQuery.parseJSON(response);
+            var ctx = $("#myChart");
+            alert(response);
+            alert(data.labels);
+            var myChart = new Chart(ctx, { type: 'line', data, options: {} });
+        },
+        failure: function (response) {
+            alert('There was an error.');
+        }
+    });
+   /* const labels = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+    ];
+    const data = {
+        labels: labels,
+        datasets: [{
+            data: [0, 10, 5, 2, 20, 30, 45],
+        }]
+    };
+
+    const config = {
+        type: 'line',
+        data,
+        options: {}
+    };
+
+    var myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );*/
+</script>

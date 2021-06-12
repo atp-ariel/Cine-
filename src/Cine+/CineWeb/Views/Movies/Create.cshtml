@@ -8,76 +8,65 @@
 <h1>Películas</h1>
 
 <div class="container">
-
-    <div class="row">
-        <div class="col-sm-6">
-            <h3>Agregar Película</h3>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-10">
-            <form method="post" asp-action="Create">
-
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Title" class="control-label"></label>
-                    <input asp-for="Title" class="form-control" />
-                    <span asp-validation-form="Name" class="text-danger">@Html.ValidationMessage("Title")</span>
+    <div class="row justify-content-center text-center">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class=" wrap p-5">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h3>Añadir Película</h3>
+                    </div>
                 </div>
+                <form method="post" asp-action="Create">
 
-                <div class="panel panel-default">
-                    <div class="panel heading">Países</div>
-                    <div class="panel-body">
-                        <ul class="list-group">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input asp-for="Title" class="form-control roundede-pill" required/>
+                        <span asp-validation-form="Name" class="text-danger">@Html.ValidationMessage("Title")</span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="control-label">Países</label>
+                        <select multiple="multiple" data-name="countries" data-field="país(es)" class="list-group form-control ms">
+
                             @foreach (var country in ViewBag.Countries)
                             {
-                                <li class="list-group-item">
-                                    <label><input type="checkbox" name="countries" value="@country.Id" />@country.Name</label>
-                                </li>
+                                <option value="@country.Id">@country.Name</option>
                             }
-                        </ul>
+                        </select>
                     </div>
-                </div>
 
-                <div class="panel panel-default">
-                    <div class="panel heading">Géneros</div>
-                    <div class="panel-body">
-                        <ul class="list-group">
+
+                    <div class="form-group mb-3">
+                        <label class="control-label">Géneros</label>
+                        <select multiple="multiple" data-name="genres" data-field="género(s)" class="list-group form-control ms">
                             @foreach (var genre in ViewBag.Genres)
                             {
-                                <li class="list-group-item">
-                                    <label><input type="checkbox" name="genres" value="@genre.Id" />@genre.Name</label>
-                                </li>
+                                <option value="@genre.Id">@genre.Name</option>
                             }
-                        </ul>
+                        </select>
                     </div>
-                </div>
 
-                <div class="panel panel-default">
-                    <div class="panel heading">Actores</div>
-                    <div class="panel-body">
-                        <ul class="list-group">
+                    <div class="form-group mb-3">
+                        <label class="control-label">Actores</label>
+                        <select multiple="multiple" data-name="actors" data-field="actor(es)" class="list-group form-control ms">
+
                             @foreach (var actor in ViewBag.Actors)
                             {
-                                <li class="list-group-item">
-                                    <label><input type="checkbox" name="actors" value="@actor.Id" />@actor.Name</label>
-                                </li>
+                                <option value="@actor.Id">@actor.Name</option>
                             }
-                        </ul>
+                        </select>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <input type="submit" value="Agregar película" class="btn btn-primary" />
-                </div>
-
-            </form>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary rounded-pill">
+                            <i class="fa fa-plus"></i> Añadir
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
+        <div class="col-sm-2"></div>
     </div>
-
-
-
 </div>
-
-

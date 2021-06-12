@@ -6,11 +6,11 @@ using DomainLayer.Identity;
 namespace CineWeb.Controllers{
     public partial class IdentityController : Controller
     {
-        private CineUserManager _cineUserManager;
+        private CinemaUserFacade _cineUserManager;
 
-        public IdentityController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public IdentityController(IAuthorizeUser auth, IUserStore userStore)
         {
-            this._cineUserManager = new CineUserManager(userManager, signInManager, roleManager);
+            this._cineUserManager = new CinemaUserFacade(auth, userStore);
         }
     }
 }

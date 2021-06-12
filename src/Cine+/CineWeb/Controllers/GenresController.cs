@@ -1,13 +1,13 @@
 ﻿using DomainLayer;
 using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace CineWeb.Controllers
 {
+    [Authorize(Roles = "Manager")]
     public class GenresController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -73,6 +73,8 @@ namespace CineWeb.Controllers
             }
             return View();
         }
+
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
