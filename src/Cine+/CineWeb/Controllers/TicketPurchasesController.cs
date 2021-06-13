@@ -18,26 +18,46 @@ namespace CineWeb.Controllers
             _context = context;
         }
 
-        public IActionResult PhysicalTicketPurchaseCreate(Batch batch)
+        public IActionResult Index() 
         {
-            ViewBag.Seats = _context.Seat.Where(x => x.CinemaId == batch.CinemaId);
+            IEnumerable<Batch> listBatches = _context.Batch.Include(m => m.Schedule).Include(m => m.Cinema).Include(m => m.Movie).Where(m=>m.ScheduleStartTime>DateTime.Now).ToList();
+            return View(listBatches);
+        }
+
+        public IActionResult PhysicalTicketPurchaseCreate(DateTime start,DateTime end,int cinema)
+        {
+            ViewBag.Batch = _context.Batch.Find(cinema, start, end);
+            ViewBag.Seats = _context.Seat.Where(x => x.CinemaId == cinema);
             ViewBag.Discounts = _context.Discount;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Batch batch)
+        public IActionResult PhysicalTicketPurchaseCreate(PhysicalTicketPurchase physicalTicketPurchase,int[] discounts)
         {
             if (ModelState.IsValid)
             {
-                Schedule schedule = new Schedule { StartTime = batch.ScheduleStartTime, EndTime = batch.ScheduleEndTime };
-                _context.Schedule.Add(schedule);
-                _context.Batch.Add(batch);
+                var discountList = new DiscountList();
+                foreach (var item in discounts)
+                {
+                    var discount = _context.Discount.Find(item);
+                    discountList.Discounts.Add(discount);
+                    discountList.TotalDiscounted += discount.DiscountedMoney;
+                }
+                _context.DiscountList.Add(discountList);
+
+                physicalTicketPurchase.DiscountListId = discountList.Id;
+                physicalTicketPurchase.DiscountList = discountList;
+
+                _context.PhysicalTicketPurchase.Add(physicalTicketPurchase);
                 _context.SaveChanges();
-                TempData["message"] = "Se ha creado función correctamente";
+                TempData["message"] = "Compra realizada exitosamente";
                 return RedirectToAction("Index");
             }
+
+            ViewBag.Seats = _context.Seat.Where(x => x.CinemaId == physicalTicketPurchase.CinemaId);
+            ViewBag.Discounts = _context.Discount;
 
             return View();
         }

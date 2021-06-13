@@ -9,8 +9,8 @@ using RepositoryLayer;
 namespace RepositoryLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210611024917_Tercera")]
-    partial class Tercera
+    [Migration("20210612235443_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -76,39 +76,6 @@ namespace RepositoryLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Actor");
-                });
-
-            modelBuilder.Entity("DomainLayer.Apply", b =>
-                {
-                    b.Property<int>("TicketPurchaseId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("DiscountListId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<float>("Price")
-                        .HasColumnType("REAL");
-
-                    b.Property<DateTime>("TicketPurchaseScheduleEndTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("TicketPurchaseScheduleStartTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("TicketPurchaseSeatCinemaId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("TicketPurchaseSeatId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("TicketPurchaseId");
-
-                    b.HasIndex("DiscountListId");
-
-                    b.HasIndex("TicketPurchaseSeatCinemaId", "TicketPurchaseSeatId", "TicketPurchaseScheduleStartTime", "TicketPurchaseScheduleEndTime");
-
-                    b.ToTable("Apply");
                 });
 
             modelBuilder.Entity("DomainLayer.Batch", b =>
@@ -263,39 +230,6 @@ namespace RepositoryLayer.Migrations
                     b.ToTable("Partner");
                 });
 
-            modelBuilder.Entity("DomainLayer.Purchase", b =>
-                {
-                    b.Property<int>("TicketPurchaseId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("PartnerCode")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("PointsSpent")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("TicketPurchaseScheduleEndTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("TicketPurchaseScheduleStartTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("TicketPurchaseSeatCinemaId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("TicketPurchaseSeatId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("TicketPurchaseId");
-
-                    b.HasIndex("PartnerCode");
-
-                    b.HasIndex("TicketPurchaseSeatCinemaId", "TicketPurchaseSeatId", "TicketPurchaseScheduleStartTime", "TicketPurchaseScheduleEndTime");
-
-                    b.ToTable("Purchase");
-                });
-
             modelBuilder.Entity("DomainLayer.Schedule", b =>
                 {
                     b.Property<DateTime>("StartTime")
@@ -324,25 +258,41 @@ namespace RepositoryLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.TicketPurchase", b =>
                 {
-                    b.Property<int>("SeatCinemaId")
+                    b.Property<int>("CinemaId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("BatchScheduleStartTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("BatchScheduleEndTime")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("SeatId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("ScheduleStartTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("ScheduleEndTime")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("DiscountListId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("SeatCinemaId", "SeatId", "ScheduleStartTime", "ScheduleEndTime");
+                    b.Property<int>("PartnerCode")
+                        .HasColumnType("INTEGER");
 
-                    b.HasIndex("ScheduleStartTime", "ScheduleEndTime");
+                    b.Property<int>("PointsSpent")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<float>("Price")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("CinemaId", "BatchScheduleStartTime", "BatchScheduleEndTime", "SeatId");
+
+                    b.HasIndex("DiscountListId");
+
+                    b.HasIndex("PartnerCode");
+
+                    b.HasIndex("CinemaId", "SeatId");
 
                     b.ToTable("TicketPurchase");
 
@@ -373,6 +323,13 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasDiscriminator().HasValue("OnlineTickectPurchase");
+                });
+
+            modelBuilder.Entity("DomainLayer.PhysicalTicketPurchase", b =>
+                {
+                    b.HasBaseType("DomainLayer.TicketPurchase");
+
+                    b.HasDiscriminator().HasValue("PhysicalTicketPurchase");
                 });
 
             modelBuilder.Entity("ActorMovie", b =>
@@ -420,25 +377,6 @@ namespace RepositoryLayer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DomainLayer.Apply", b =>
-                {
-                    b.HasOne("DomainLayer.DiscountList", "DiscountList")
-                        .WithMany()
-                        .HasForeignKey("DiscountListId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DomainLayer.TicketPurchase", "TicketPurchase")
-                        .WithMany()
-                        .HasForeignKey("TicketPurchaseSeatCinemaId", "TicketPurchaseSeatId", "TicketPurchaseScheduleStartTime", "TicketPurchaseScheduleEndTime")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DiscountList");
-
-                    b.Navigation("TicketPurchase");
-                });
-
             modelBuilder.Entity("DomainLayer.Batch", b =>
                 {
                     b.HasOne("DomainLayer.Cinema", "Cinema")
@@ -466,25 +404,6 @@ namespace RepositoryLayer.Migrations
                     b.Navigation("Schedule");
                 });
 
-            modelBuilder.Entity("DomainLayer.Purchase", b =>
-                {
-                    b.HasOne("DomainLayer.Partner", "Partner")
-                        .WithMany()
-                        .HasForeignKey("PartnerCode")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DomainLayer.TicketPurchase", "TicketPurchase")
-                        .WithMany()
-                        .HasForeignKey("TicketPurchaseSeatCinemaId", "TicketPurchaseSeatId", "TicketPurchaseScheduleStartTime", "TicketPurchaseScheduleEndTime")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Partner");
-
-                    b.Navigation("TicketPurchase");
-                });
-
             modelBuilder.Entity("DomainLayer.Seat", b =>
                 {
                     b.HasOne("DomainLayer.Cinema", "Cinema")
@@ -498,19 +417,35 @@ namespace RepositoryLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.TicketPurchase", b =>
                 {
-                    b.HasOne("DomainLayer.Schedule", "Schedule")
+                    b.HasOne("DomainLayer.DiscountList", "DiscountList")
                         .WithMany()
-                        .HasForeignKey("ScheduleStartTime", "ScheduleEndTime")
+                        .HasForeignKey("DiscountListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DomainLayer.Partner", "Partner")
+                        .WithMany()
+                        .HasForeignKey("PartnerCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DomainLayer.Seat", "Seat")
                         .WithMany()
-                        .HasForeignKey("SeatCinemaId", "SeatId")
+                        .HasForeignKey("CinemaId", "SeatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Schedule");
+                    b.HasOne("DomainLayer.Batch", "Batch")
+                        .WithMany()
+                        .HasForeignKey("CinemaId", "BatchScheduleStartTime", "BatchScheduleEndTime")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Batch");
+
+                    b.Navigation("DiscountList");
+
+                    b.Navigation("Partner");
 
                     b.Navigation("Seat");
                 });

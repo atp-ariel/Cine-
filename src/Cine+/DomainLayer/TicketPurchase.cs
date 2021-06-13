@@ -10,23 +10,24 @@ namespace DomainLayer
 {
     public class TicketPurchase
     {
+        
         [Display(Name = "Sala")]
-        [Required]
-        public int SeatCinemaId { get; set; }
-
-        [Display(Name = "Silla")]
-        [Required]
-        public int SeatId { get; set; }
-        public virtual Seat Seat { get; set; }
+        public int CinemaId { get; set; }
 
         [Display(Name ="Inicio función")]
-        [Required]
-        public DateTime ScheduleStartTime { get; set; }
+        public DateTime BatchScheduleStartTime { get; set; }
 
         [Display(Name = "Final función")]
-        [Required]
-        public DateTime ScheduleEndTime { get; set; }
-        public virtual Schedule Schedule { get; set; }
+        public DateTime BatchScheduleEndTime { get; set; }
+
+        [ForeignKey("CinemaId, BatchScheduleStartTime, BatchScheduleEndTime")]
+        public Batch Batch { get; set; }
+
+        [Display(Name = "Silla")]
+        public int SeatId { get; set; }
+
+        [ForeignKey("CinemaId, SeatId")]
+        public Seat Seat { get; set; }
 
         public int DiscountListId { get; set; }
         public virtual DiscountList DiscountList { get; set; }

@@ -256,17 +256,17 @@ namespace RepositoryLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.TicketPurchase", b =>
                 {
-                    b.Property<int>("SeatCinemaId")
+                    b.Property<int>("CinemaId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("BatchScheduleStartTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("BatchScheduleEndTime")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("SeatId")
                         .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("ScheduleStartTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("ScheduleEndTime")
-                        .HasColumnType("TEXT");
 
                     b.Property<int>("DiscountListId")
                         .HasColumnType("INTEGER");
@@ -284,13 +284,13 @@ namespace RepositoryLayer.Migrations
                     b.Property<float>("Price")
                         .HasColumnType("REAL");
 
-                    b.HasKey("SeatCinemaId", "SeatId", "ScheduleStartTime", "ScheduleEndTime");
+                    b.HasKey("CinemaId", "BatchScheduleStartTime", "BatchScheduleEndTime", "SeatId");
 
                     b.HasIndex("DiscountListId");
 
                     b.HasIndex("PartnerCode");
 
-                    b.HasIndex("ScheduleStartTime", "ScheduleEndTime");
+                    b.HasIndex("CinemaId", "SeatId");
 
                     b.ToTable("TicketPurchase");
 
@@ -427,23 +427,23 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Schedule", "Schedule")
+                    b.HasOne("DomainLayer.Seat", "Seat")
                         .WithMany()
-                        .HasForeignKey("ScheduleStartTime", "ScheduleEndTime")
+                        .HasForeignKey("CinemaId", "SeatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Seat", "Seat")
+                    b.HasOne("DomainLayer.Batch", "Batch")
                         .WithMany()
-                        .HasForeignKey("SeatCinemaId", "SeatId")
+                        .HasForeignKey("CinemaId", "BatchScheduleStartTime", "BatchScheduleEndTime")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Batch");
 
                     b.Navigation("DiscountList");
 
                     b.Navigation("Partner");
-
-                    b.Navigation("Schedule");
 
                     b.Navigation("Seat");
                 });

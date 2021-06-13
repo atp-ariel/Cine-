@@ -24,14 +24,15 @@ namespace RepositoryLayer
             modelBuilder.Entity<Batch>()
                 .HasKey(c => new { c.CinemaId,c.ScheduleStartTime,c.ScheduleEndTime});
             modelBuilder.Entity<TicketPurchase>()
-                .HasKey(c => new { c.SeatCinemaId, c.SeatId,c.ScheduleStartTime,c.ScheduleEndTime});
+                .HasKey(c => new { c.CinemaId,c.BatchScheduleStartTime,c.BatchScheduleEndTime, c.SeatId });
             modelBuilder.Entity<Seat>()
                 .HasKey(c => new { c.CinemaId, c.Id});
 
         }
         public DbSet<Movie> Movie { get; set; }
-        public DbSet<PhysicalTicketPurchase> TicketPurchase { get; set; }
-        public DbSet<OnlineTickectPurchase> TickectPurchaseWeb { get; set; }
+        public DbSet<TicketPurchase> TicketPurchase { get; set; }
+        public DbSet<PhysicalTicketPurchase> PhysicalTicketPurchase { get; set; }
+        public DbSet<OnlineTickectPurchase> OnlineTickectPurchase { get; set; }
         public DbSet<DiscountList> DiscountList { get; set; }
         public DbSet<Actor> Actor { get; set; }
         public DbSet<Genre> Genre { get; set; }
