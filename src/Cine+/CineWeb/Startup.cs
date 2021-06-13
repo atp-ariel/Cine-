@@ -65,7 +65,7 @@ namespace CineWeb
 
 
             // * Seeds
-            IdentitySeedData.EnsurePopulated(app);
+            Sower.SowSeeds(app);
         }
     }
 }

@@ -9,45 +9,44 @@ using System.Linq;
 
 namespace RepositoryLayer.Seed
 {
-    public static class IdentitySeedData {
+    public class IdentitySeedData: ISeed {
 
         #region Datas
-
-        private static Tuple<AppUser, string, string>[] users = new Tuple<AppUser, string, string>[]{
-                Tuple.Create(
-                    new AppUser(){
+        private (AppUser, string, string)[] users = new (AppUser, string, string)[]{
+                (
+                    instance: new AppUser(){
                         UserName = "Admin",
                         Email = "admin@example.com",
                         PhoneNumber = "5-555-1234",
                         Address = "Concepcion 177",
                     },
-                    "Secret123$",
-                    "Manager"
+                    password: "Secret123$",
+                    role: "Manager"
                 ),
-                Tuple.Create(
-                    new AppUser(){
+                (
+                    instance: new AppUser(){
                         UserName = "Susy",
                         Email = "susannyvegacintra@gmail.com",
                         PhoneNumber = "5-510-9955",
                         Address = "Vista Alegre 110",
                     },
-                    "1997.Hola.",
-                    "BoxOfficer"
+                    password: "1997.Hola.",
+                    role: "BoxOfficer"
                 ),
-                Tuple.Create(
-                    new AppUser()
+                (
+                    instance: new AppUser()
                     {
                         UserName = "Ariel",
                         Email = "usich37@gmail.com",
                         PhoneNumber = "5-428-96-07",
                         Address = "San Lazaro 20",
                     },
-                    "Happy.1199",
-                    "Member"
+                    password: "Happy.1199",
+                    role:"Member"
                 )
             };
 
-        public static IdentityRole[] roles = new[]
+        private IdentityRole[] roles = new[]
             {
                 new IdentityRole{Name="Member"},
                 new IdentityRole{Name="BoxOfficer"},
@@ -56,7 +55,7 @@ namespace RepositoryLayer.Seed
         #endregion
 
         #region Seeds Methods
-        private static async void EnsurePopulatedUsers(UserManager<AppUser> userManager) {
+        private async void EnsurePopulatedUsers(UserManager<AppUser> userManager) {
             
             foreach (var user in users)
             {
@@ -64,25 +63,23 @@ namespace RepositoryLayer.Seed
                 IdentityResult result;
                 if (tempUser == null)
                     result = await userManager.CreateAsync(user.Item1, user.Item2);
-
             }
         }
         
-        private static async void EnsurePopulatedRoles(RoleManager<IdentityRole> roleManager)
+        private async void EnsurePopulatedRoles(RoleManager<IdentityRole> roleManager)
         {
-
             foreach (var role in roles)
                 await roleManager.CreateAsync(role);
         }
 
-        private static async void EnsurePopulatedUserRoles(UserManager<AppUser> userManager)
+        private async void EnsurePopulatedUserRoles(UserManager<AppUser> userManager)
         {
             foreach (var user in users)
                 if ((await userManager.FindByNameAsync(user.Item1.UserName)) != null)
                     await userManager.AddToRoleAsync(user.Item1, user.Item3);
         }
 
-        public static  void EnsurePopulated(IApplicationBuilder app)
+        public void EnsurePopulated(IApplicationBuilder app)
         {
             AppIdentityContext context = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<AppIdentityContext>();
             if (context.Database.GetPendingMigrations().Any())
