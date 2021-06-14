@@ -8,7 +8,7 @@ using DomainLayer;
 
 namespace ServiceLayer.Statistics
 {
-     public class TicketSalesStatisticsMovieGenre
+    public class TicketSalesStatisticsMovieGenre
     {
         private readonly ApplicationDbContext context;
         private int ticketsSold;
@@ -18,25 +18,25 @@ namespace ServiceLayer.Statistics
         }
         public int TicketsSold { get { return ticketsSold; } private set { ticketsSold = value; } }
 
-        public void Filter(DateTime month)
+        public void Filter(string genre)
         {
-            Dictionary<string, int> ticketsSoldDict = new Dictionary<string, int>();
-            DateTime start = month;
-            DateTime end = month.AddDays(1);
-            ticketsSold = 0;
-
-            List<TicketPurchase> tickets = context.TicketPurchase.ToList();
-            int count = context.TicketPurchase.Count(x => (x.BatchScheduleStartTime.CompareTo(start) >= 0 && x.BatchScheduleEndTime.CompareTo(end) <= 0));
-            ticketsSoldDict.Add(start.Day + "-" + end.Day, count);
-
-            for (int i = 1; i <= DateTime.DaysInMonth(start.Year,start.Month) - 1; i ++)
+            Genre genre_ = context.Genre.First(x => x.Name == genre);
+            List<Movie> movies = genre_.Movies.ToList();
+            int count = 0;
+            foreach (var movie in movies)
             {
-                end = end.AddDays(1);
-                start = start.AddDays(1);
-                int count_ = context.TicketPurchase.Count(x => (x.BatchScheduleStartTime.CompareTo(start) >= 0 && x.BatchScheduleEndTime.CompareTo(end) < 0));
-                ticketsSoldDict.Add(start.Hour + "-" + end.Hour, count);
+                List<Batch> batches = movie.Batches.ToList();
+                foreach (var batch in batches)
+                {
+                    int cinemaId = batch.CinemaId;
+                    DateTime startTime = batch.ScheduleStartTime;
+                    DateTime endTime = batch.ScheduleEndTime;
 
+                     count += context.TicketPurchase.Count(x => (x.SeatId == cinemaId && x.BatchScheduleStartTime.CompareTo(startTime) == 0 &&
+                    x.BatchScheduleEndTime.CompareTo(endTime) == 0));
+                }
             }
-            
+
         }
+    }
 }

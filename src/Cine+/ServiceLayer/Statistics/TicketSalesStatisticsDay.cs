@@ -13,33 +13,37 @@ namespace ServiceLayer.Statistics
         private readonly ApplicationDbContext context;
 
         private int ticketsSold;
-        private int[] days;
+        private string[] hours;
         private int[] ticketsSoldMonth;
 
         public TicketSalesStatisticsDay(ApplicationDbContext context)
         {
             this.context = context;
         }
-       
-        public Dictionary<string, int> Filter(DateTime day, int n)
+        public int TicketsSold { get { return ticketsSold; } private set { ticketsSold = value; } }
+        public int[] TicketsSoldMonth { get { return ticketsSoldMonth; } private set { ticketsSoldMonth = value; } }
+        public string[] Hours { get { return hours; } private set { hours = value; } }
+
+        public void Filter(DateTime day, int n)
         {
-            Dictionary<string, int> ticketsSold = new Dictionary<string, int>();
+            Dictionary<string, int> ticketsSoldDict = new Dictionary<string, int>();
             DateTime start = day;
             DateTime end = day.AddHours(n);
             
             List<TicketPurchase> tickets = context.TicketPurchase.ToList();
             int count = context.TicketPurchase.Count(x => (x.BatchScheduleStartTime.CompareTo(start) >= 0 && x.BatchScheduleEndTime.CompareTo(end) <= 0));
-            ticketsSold.Add(start.Hour+"-"+end.Hour, count);
+            ticketsSoldDict.Add(start.Hour.ToString() + "-"+end.Hour.ToString(), count);
 
             for (int i = n; i <=24-n; i+=n)
             {
                 end = end.AddHours(n);
                 start=start.AddHours(n);
                 int count_ = context.TicketPurchase.Count(x => (x.BatchScheduleStartTime.CompareTo(start) > 0 && x.BatchScheduleEndTime.CompareTo(end) <= 0));
-                ticketsSold.Add(start.Hour + "-" + end.Hour, count_);
+                ticketsSoldDict.Add(start.Hour.ToString() + "-" + end.Hour.ToString(), count_);
 
             }
-            return ticketsSold;
+            hours = ticketsSoldDict.Keys.ToArray();
+            ticketsSoldMonth = ticketsSoldDict.Values.ToArray();
         }
     }
 }
