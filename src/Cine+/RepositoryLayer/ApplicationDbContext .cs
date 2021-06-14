@@ -35,7 +35,7 @@ namespace RepositoryLayer
         public DbSet<Movie> Movie { get; set; }
         public DbSet<TicketPurchase> TicketPurchase { get; set; }
         public DbSet<PhysicalTicketPurchase> PhysicalTicketPurchase { get; set; }
-        public DbSet<OnlineTickectPurchase> OnlineTickectPurchase { get; set; }
+        public DbSet<OnlineTicketPurchase> OnlineTicketPurchase { get; set; }
         public DbSet<DiscountList> DiscountList { get; set; }
         public DbSet<Actor> Actor { get; set; }
         public DbSet<Genre> Genre { get; set; }

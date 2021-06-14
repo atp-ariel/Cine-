@@ -30,12 +30,12 @@
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <td>@Html.DisplayNameFor(m => m.CinemaId)</td>
-                        <td>@Html.DisplayNameFor(m => m.ScheduleStartTime)</td>
-                        <td>@Html.DisplayNameFor(m => m.ScheduleEndTime)</td>
-                        <td>Película</td>
-                        <td>@Html.DisplayNameFor(m => m.TicketPrice)</td>
-                        <td>Opciones</td>
+                        <th>@Html.DisplayNameFor(m => m.CinemaId)</th>
+                        <th>@Html.DisplayNameFor(m => m.ScheduleStartTime)</th>
+                        <th>@Html.DisplayNameFor(m => m.ScheduleEndTime)</th>
+                        <th>Película</th>
+                        <th>@Html.DisplayNameFor(m => m.TicketPrice)</th>
+                        <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,8 +50,8 @@
 
 
                             <td>
-                                @Html.ActionLink("Comprar entrada física", "PhysicalTicketPurchaseCreate", new { start = item.ScheduleStartTime, end = item.ScheduleEndTime, cinema = item.CinemaId })
-                                @Html.ActionLink("Comprar entrada online", "OnlineTicketPurchaseCreate", new { start = item.ScheduleStartTime, end = item.ScheduleEndTime, cinema = item.CinemaId })
+                                @Html.ActionLink("Comprar entrada física", "TicketPurchaseCreate", new { start = item.ScheduleStartTime, end = item.ScheduleEndTime, cinema = item.CinemaId })
+                                @Html.ActionLink("Comprar entrada online", "TicketPurchaseCreate", new { start = item.ScheduleStartTime, end = item.ScheduleEndTime, cinema = item.CinemaId })
                                 @Html.ActionLink("Cancelar compra online", "OnlineTicketPurchaseDelete", new { start = item.ScheduleStartTime, end = item.ScheduleEndTime, cinema = item.CinemaId })
                             </td>
                         </tr>
