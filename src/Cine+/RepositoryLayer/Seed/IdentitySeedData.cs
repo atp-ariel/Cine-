@@ -12,37 +12,48 @@ namespace RepositoryLayer.Seed
     public class IdentitySeedData: ISeed {
 
         #region Datas
-        private (AppUser, string, string)[] users = new (AppUser, string, string)[]{
-                (
-                    instance: new AppUser(){
+        private Tuple<AppUser, string, string>[] users = new Tuple<AppUser, string, string>[]{
+                Tuple.Create(
+                    new AppUser(){
                         UserName = "Admin",
                         Email = "admin@example.com",
                         PhoneNumber = "5-555-1234",
                         Address = "Concepcion 177",
                     },
-                    password: "Secret123$",
-                    role: "Manager"
+                    "Secret123$",
+                    "Manager"
                 ),
-                (
-                    instance: new AppUser(){
+                Tuple.Create(
+                    new AppUser(){
                         UserName = "Susy",
                         Email = "susannyvegacintra@gmail.com",
                         PhoneNumber = "5-510-9955",
                         Address = "Vista Alegre 110",
                     },
-                    password: "1997.Hola.",
-                    role: "BoxOfficer"
+                    "1997.Hola.",
+                    "BoxOfficer"
                 ),
-                (
-                    instance: new AppUser()
+                Tuple.Create(
+                    new AppUser()
                     {
                         UserName = "Ariel",
                         Email = "usich37@gmail.com",
                         PhoneNumber = "5-428-96-07",
                         Address = "San Lazaro 20",
                     },
-                    password: "Happy.1199",
-                    role:"Member"
+                    "Happy.1199",
+                    "Member"
+                ),
+                Tuple.Create(
+                    new AppUser()
+                    {
+                        UserName = "Steve",
+                        Email = "steve@gmail.com",
+                        PhoneNumber = "5-215-10-45",
+                        Address = "Julio Trigo 120",
+                    },
+                    "St3v3.1234",
+                    "Member"
                 )
             };
 

@@ -17,8 +17,18 @@ namespace RepositoryLayer.Seed
             new Movie(){
                 Id=1, 
                 Title="War",
-                Countries = new[] {new Country() { Id = 9, Name = "India" } }
-            }   
+                Countries = new[] {new Country() { Id = 9, Name = "India" } },
+                Actors = new []{ new Actor() { Id = 1, Name = "Hrithik Roshan" } },
+                Genres = new [] { new Genre() { Id = 1, Name = "Acción" } }
+            },
+            new Movie()
+            {
+                Id=2,
+                Title="Parasite",
+                Countries = new[] { new Country() { Id = 7, Name = "Corea del Sur" } },
+                Actors = new[] { new Actor() { Id = 4, Name = "Cho Yeo-jeong" } },
+                Genres = new [] { new Genre() { Id = 3, Name = "Comedia" } , new Genre() { Id = 10, Name = "Terror" } }
+            }
         };
         public void EnsurePopulated(IApplicationBuilder app)
         {

@@ -15,16 +15,13 @@ namespace RepositoryLayer.Seed
         #region Datas
         private Genre[] _genres = new[]
         {
-            new Genre(){Id=1, Name="Acción"},
             new Genre(){Id=2, Name="Ciencia Ficción"},
-            new Genre(){Id=3, Name="Comedia"},
             new Genre(){Id=4, Name="Drama"},
             new Genre(){Id=5, Name="Fantasía"},
             new Genre(){Id=6, Name="Melodrama"},
             new Genre(){Id=7, Name="Musical"},
             new Genre(){Id=8, Name="Romance"},
             new Genre(){Id=9, Name="Suspenso"},
-            new Genre(){Id=10, Name="Terror"},
             new Genre(){Id=11, Name="Documental"},
             new Genre(){Id=12, Name="Cine bélico"},
             new Genre(){Id=13, Name="Cine biográfico"},

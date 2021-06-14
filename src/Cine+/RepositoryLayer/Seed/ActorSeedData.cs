@@ -15,10 +15,8 @@ namespace RepositoryLayer.Seed
         #region Datas
         private Actor[] _actors = new[]
         {
-            new Actor(){Id=1, Name="Hrithik Roshan"},
             new Actor(){Id=2, Name="Adam Sandler"},
             new Actor(){Id=3, Name="Julia Fox"},
-            new Actor(){Id=4, Name="Cho Yeo-jeong"},
             new Actor(){Id=5, Name="Leonardo DiCaprio"},
             new Actor(){Id=6, Name="Kate Winslet"}
         };

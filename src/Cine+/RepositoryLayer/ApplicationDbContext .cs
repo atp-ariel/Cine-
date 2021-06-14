@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DomainLayer;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace RepositoryLayer
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext   
     {
-        public ApplicationDbContext() : base() { }
+        public ApplicationDbContext() : base() 
+        { 
+        }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
            
