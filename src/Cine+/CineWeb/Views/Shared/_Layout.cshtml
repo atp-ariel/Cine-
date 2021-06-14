@@ -1,21 +1,45 @@
 ﻿<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width" />
-        <title>@ViewData["Title"] - Cine+</title>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/css/style.css">
+    <title>@ViewData["Title"] - Cine+</title>
 
-    </head>
-    <body>
 
-        <div class="container">
-            @RenderBody()
+    <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon"/>
+
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/bootstrap-multiselect.css" />
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/font-awesome.min.css"/>
+
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light mb-1 shadow-down" id="main-nav" data-scroll="50">
+        <div class="container-fluid">
+            <a class="navbar-brand mb-0" asp-controller="Home" asp-action="Index"><img class="img img-responsive img-navbar-brand" src="~/img/logo.png" /></a>
+            <button class="btn btn-primary d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbar-content-menu" aria-controls="navbar-content-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-align-justify"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbar-content-menu">
+                <partial name="_Header" />
+            </div>
         </div>
+    </nav>
 
-        <script href="/js/bootstrap.min.js"></script>
-        @await RenderSectionAsync("Scripts", required: false)
-    </body>
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    <!-- Back to top button -->
+    <a id="to-top"><i class="fa fa-arrow-up text-white"></i></a>
+
+    <partial name="_Footer" />
+
+    <partial name="_js" />
+</body>
 </html>

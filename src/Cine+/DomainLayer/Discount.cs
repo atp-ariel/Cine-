@@ -19,5 +19,11 @@ namespace DomainLayer
         [Required(ErrorMessage = "Este campo es obligatorio")]
         public float DiscountedMoney { get; set; }
         public ICollection<DiscountList> DiscountLists { get; set; }
+
+        public Discount()
+        {
+            DiscountLists = new List<DiscountList>();
+        }
+
     }
 }

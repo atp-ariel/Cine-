@@ -24,9 +24,13 @@ namespace CineWeb.Controllers
             return View(listBatches);
         }
 
-        public IActionResult PhysicalTicketPurchaseCreate(DateTime start,DateTime end,int cinema)
+        public IActionResult TicketPurchaseCreate(DateTime start,DateTime end,int cinema,float price)
         {
-            ViewBag.Batch = _context.Batch.Find(cinema, start, end);
+            TempData["start"] = start;
+            TempData["end"] = end;
+            TempData["cinema"] = cinema;
+            TempData["price"] = price;
+
             ViewBag.Seats = _context.Seat.Where(x => x.CinemaId == cinema);
             ViewBag.Discounts = _context.Discount;
             return View();
@@ -38,17 +42,47 @@ namespace CineWeb.Controllers
         {
             if (ModelState.IsValid)
             {
+                physicalTicketPurchase.BatchScheduleStartTime = (DateTime) TempData["start"];
+                physicalTicketPurchase.BatchScheduleEndTime = (DateTime) TempData["end"];
+                physicalTicketPurchase.CinemaId = (int)TempData["cinema"];
+                physicalTicketPurchase.Price = (float)TempData["price"];
+
+                IEnumerable<DiscountList> listDiscountList = _context.DiscountList.Include(m=>m.Discounts).ToList();
                 var discountList = new DiscountList();
-                foreach (var item in discounts)
+                bool find = false;
+
+                foreach (var item in listDiscountList)
                 {
-                    var discount = _context.Discount.Find(item);
-                    discountList.Discounts.Add(discount);
-                    discountList.TotalDiscounted += discount.DiscountedMoney;
+                    if (item.Discounts.Count != discounts.Length)
+                        continue;
+                    else
+                    {
+                        if (SameDiscounts(item, discounts)) 
+                        {
+                            discountList = item;
+                            find = true;
+                            break;
+                        }
+                    }
                 }
-                _context.DiscountList.Add(discountList);
+
+                if (discountList.Discounts.Count == 0) 
+                {
+                    foreach (var item in discounts)
+                    {
+                        var discount = _context.Discount.Find(item);
+                        discount.DiscountLists.Add(discountList);
+                        discountList.Discounts.Add(discount);
+                    }
+                }
+
+                if (!find)
+                {
+                    _context.DiscountList.Add(discountList);
+                    _context.SaveChanges();
+                }
 
                 physicalTicketPurchase.DiscountListId = discountList.Id;
-                physicalTicketPurchase.DiscountList = discountList;
 
                 _context.PhysicalTicketPurchase.Add(physicalTicketPurchase);
                 _context.SaveChanges();
@@ -56,33 +90,74 @@ namespace CineWeb.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Seats = _context.Seat.Where(x => x.CinemaId == physicalTicketPurchase.CinemaId);
+            ViewBag.Seats = _context.Seat.Where(x => x.CinemaId == (int)TempData["cinema"]);
             ViewBag.Discounts = _context.Discount;
 
             return View();
         }
 
-        public IActionResult Edit(DateTime? start, DateTime? end, int? cinema)
-        {
-            if (cinema == null || cinema == 0 || start == null || end == null)
-            {
-                return NotFound();
-            }
 
-            IEnumerable<Batch> listBatches = _context.Batch.Include(m => m.Schedule).Include(m => m.Cinema).Include(m => m.Movie).ToList();
-
-            var batch = _context.Batch.Find(cinema, start, end);
-
-            if (batch == null)
-            {
-                return NotFound();
-            }
-
-            return View(batch);
-        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public IActionResult OnlineTicketPurchaseCreate(OnlineTicketPurchase onlineTicketPurchase, int[] discounts)
+        {
+            if (ModelState.IsValid)
+            {
+                onlineTicketPurchase.BatchScheduleStartTime = (DateTime)TempData["start"];
+                onlineTicketPurchase.BatchScheduleEndTime = (DateTime)TempData["end"];
+                onlineTicketPurchase.CinemaId = (int)TempData["cinema"];
+                onlineTicketPurchase.Price = (float)TempData["price"];
+
+                IEnumerable<DiscountList> listDiscountList = _context.DiscountList.Include(m => m.Discounts).ToList();
+                var discountList = new DiscountList();
+                bool find = false;
+
+                foreach (var item in listDiscountList)
+                {
+                    if (item.Discounts.Count != discounts.Length)
+                        continue;
+                    else
+                    {
+                        if (SameDiscounts(item, discounts))
+                        {
+                            discountList = item;
+                            find = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (discountList.Discounts.Count == 0)
+                {
+                    foreach (var item in discounts)
+                    {
+                        var discount = _context.Discount.Find(item);
+                        discount.DiscountLists.Add(discountList);
+                        discountList.Discounts.Add(discount);
+                    }
+                }
+
+                if (!find)
+                {
+                    _context.DiscountList.Add(discountList);
+                    _context.SaveChanges();
+                }
+
+                onlineTicketPurchase.DiscountListId = discountList.Id;
+
+                _context.OnlineTicketPurchase.Add(onlineTicketPurchase);
+                _context.SaveChanges();
+                TempData["message"] = "Compra realizada exitosamente";
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Seats = _context.Seat.Where(x => x.CinemaId == (int)TempData["cinema"]);
+            ViewBag.Discounts = _context.Discount;
+
+            return View();
+        }
+
         public IActionResult Edit(Batch batch)
         {
 
@@ -132,5 +207,16 @@ namespace CineWeb.Controllers
             return RedirectToAction("Index");
         }
 
+        private bool SameDiscounts(DiscountList list,int[] discounts) 
+        {
+            int i = 0;
+            foreach (var item in list.Discounts)
+            {
+                if (item.Id != discounts[i])
+                    return false;
+                i++;
+            }
+            return true;
+        }
     }
 }

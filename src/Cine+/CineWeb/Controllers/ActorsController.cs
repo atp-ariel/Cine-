@@ -36,7 +36,7 @@ namespace CineWeb.Controllers
             {
                 _context.Actor.Add(actor);
                 _context.SaveChanges();
-                TempData["message"] = "Se ha agregado actor correctamente";
+                TempData["message"] = $"Se ha agregado el actor '{actor.Name}' correctamente";
                 return RedirectToAction("Index");
 
             }
@@ -68,7 +68,7 @@ namespace CineWeb.Controllers
             {
                 _context.Actor.Update(actor);
                 _context.SaveChanges();
-                TempData["message"] = "Se ha actualizado actor correctamente";
+                TempData["message"] = $"Se ha actualizado actor '{actor.Name}' correctamente";
                 return RedirectToAction("Index");
 
             }
@@ -105,7 +105,7 @@ namespace CineWeb.Controllers
 
             _context.Actor.Remove(actor);
             _context.SaveChanges();
-            TempData["message"] = "Se ha eliminado actor correctamente";
+            TempData["message"] = $"Se ha eliminado el actor '{actor.Name}' correctamente";
             return RedirectToAction("Index");
         }
     }

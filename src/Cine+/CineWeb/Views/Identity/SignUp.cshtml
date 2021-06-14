@@ -11,26 +11,33 @@
             <form asp-controller="Identity" asp-action="SignUp" method="post">
                 @Html.ValidationSummary()
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-md-6 col-sm-12">
                         <div class="form-group mb-3">
                             <input type="text" name="Username" asp-for="Username" placeholder="Nombre de Usuario" required class="form-control rounded-pill"/>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-md-6 col-sm-12">
                         <div class="form-group mb-3">
                             <input type="email" name="Email" asp-for="Email" placeholder="Correo Electrónico" required class="form-control rounded-pill"/>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-md-6 col-sm-12">
                         <div class="form-group mb-3">
-                            <input type="password" name="Password" asp-for="Password" placeholder="Contraseña" required class="form-control rounded-pill"/>
+                            <input type="password" name="Password" autocomplete="off" asp-for="Password" placeholder="Contraseña" required class="form-control rounded-pill"/>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-md-6 col-sm-12">
                         <div class="form-group mb-3">
-                            <input type="password" name="ConfirmedPassword" asp-for="ConfirmedPassword" placeholder="Confirmar contraseña" required class="form-control rounded-pill"/>
+                            <input type="password" name="ConfirmedPassword" autocomplete="off" asp-for="ConfirmedPassword" placeholder="Confirmar contraseña" required class="form-control rounded-pill"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group mb-3">
+                            <textarea name="Address" asp-for="Address" placeholder="Escriba su dirección" class="form-control rounded-125"></textarea>
                         </div>
                     </div>
                 </div>

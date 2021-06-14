@@ -1,0 +1,93 @@
+@{
+    ViewData["Title"] = "Socios del Club";
+}
+@using DomainLayer.Identity
+@model IEnumerable<AppUser>
+
+<!-- Modal confirm -->
+<div class="modal fade" id="modal-confirm" tabindex="-1" aria-labelledby="modal-confirm-title" aria-hidden="true">
+    <div class="modal-dialog modal-con">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-confirm-title"><i class="fa fa-alert"></i> Atención</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary">Sí</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal confirm -->
+
+<!-- All members of Cine+ Club -->
+<div class="row mt-5">
+    <div class="col-1"></div>
+    <div class="col-10">
+        <h2 class="my-2">Socios del Club Cine+</h2>
+
+        @if (TempData["message"] != null)
+        {
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                @TempData["message"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
+        @if (Model.Count() > 0)
+        {
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nombre de Usuario</th>
+                            <th>Correo Electrónico</th>
+                            <th>Teléfono</th>
+                            <th>Dirección</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                <td>@user.UserName</td>
+                                <td>@user.Email</td>
+                                <td>@user.PhoneNumber</td>
+                                <td>@user.Address</td>
+                                <td>
+                                    <a class="btn btn-primary rounded option" asp-controller="ClubCinePlus" asp-action="EditMember" asp-route-id="@user.UserName"><i class="fa fa-pencil"></i></a>
+                                    <button class="btn btn-primary rounded option opt-confirm" data-toogle="modal" data-target="#modal-confirm" data-content="¿Está seguro que desear eliminar a @user.UserName?"><i class="fa fa-trash-o"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <p class="font-weight-bold">No hay socios registrados.</p>
+            <a asp-controller="ClubCinePlus" asp-action="AddMembersClub" class="btn btn-link">Registrar socio</a>
+        }
+    </div>
+    <div class="col-1"></div>
+</div>
+
+@if (Model.Count() > 0)
+{
+    <!-- Statistic of members -->
+    <div class="row my-5">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <p class="mb-2 font-weight-bold">Cantidad de socios del club: @Model.Count() socios</p>
+        </div>
+        <div class="col-1"></div>
+    </div>
+}

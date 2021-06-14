@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DomainLayer
 {
-    public class OnlineTickectPurchase:TicketPurchase
+    public class OnlineTicketPurchase:TicketPurchase
     {
         [Display(Name ="Tarjeta de Crédito")]
         [Required]

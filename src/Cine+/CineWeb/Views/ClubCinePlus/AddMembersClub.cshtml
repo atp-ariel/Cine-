@@ -1,0 +1,58 @@
+@using DomainLayer.Identity
+@model SignUpModel
+@{ViewData["Title"] = "Registro de Socio";}
+
+<div class="row mt-5">
+    <div class="col-md-3 col-sm-2"></div>
+    <div class="col-md-6 col-sm-8">
+        <div class="wrap rounded p-5 pb-3">
+            <h1 class="text-center pb-2">Registro de Socios en Cine+</h1>
+
+            <form asp-controller="Identity" asp-action="SignUp" method="post">
+                @Html.ValidationSummary()
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group mb-3">
+                            <input type="text" name="Username" asp-for="Username" placeholder="Nombre de Usuario" required class="form-control rounded-pill"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group mb-3">
+                            <input type="email" name="Email" asp-for="Email" placeholder="Correo Electrónico" required class="form-control rounded-pill"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group mb-3">
+                            <input type="password" name="Password" autocomplete="off" asp-for="Password" placeholder="Contraseña" required class="form-control rounded-pill"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group mb-3">
+                            <input type="password" name="ConfirmedPassword" autocomplete="off" asp-for="ConfirmedPassword" placeholder="Confirmar contraseña" required class="form-control rounded-pill"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group mb-3">
+                            <textarea name="Address" asp-for="Address" placeholder="Escriba su dirección" class="form-control rounded-125"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <button type="submit" class="form-control btn btn-primary rounded-pill">Registrar</button>
+                </div>
+            </form>
+            <hr class="hr-grad"/>
+            <div class="d-flex pt-3">
+                <a class="text-center" asp-controller="ClubCinePlus" asp-action="GetMembersClub">Ver Socios del Club</a>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="col-md-3 scol-sm-2"></div>
+
+</div>

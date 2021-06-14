@@ -7,6 +7,7 @@ using RepositoryLayer.Identity;
 using RepositoryLayer.Seed;
 using RepositoryLayer;
 using Microsoft.EntityFrameworkCore;
+using ServiceLayer.Identity;
 
 namespace CineWeb
 {
@@ -29,8 +30,11 @@ namespace CineWeb
             //* Configure all about identity
             ConfigureIdentity.DoConfiguration(services, Configuration);
             services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlite(Configuration.GetConnectionString("CinePlus")));
+                options.UseSqlite(Configuration.GetConnectionString("CinePlus")));
 
+
+            services.AddScoped<IUserStore, CinemaUsersStore>();
+            services.AddScoped<IAuthorizeUser, CinemaAuthorization>();
         }
 
 
@@ -42,11 +46,15 @@ namespace CineWeb
                 app.UseDeveloperExceptionPage();
             }
 
+            // * Handle error 404
+            app.UseStatusCodePagesWithReExecute("/Home/Error404");
+
             // * To load static files
             app.UseStaticFiles();
 
             app.UseRouting();
 
+            // * Auth and sign
             app.UseAuthentication();
             app.UseAuthorization();
              
@@ -55,6 +63,8 @@ namespace CineWeb
                 endpoints.MapDefaultControllerRoute();
             });
 
+
+            // * Seeds
             IdentitySeedData.EnsurePopulated(app);
         }
     }

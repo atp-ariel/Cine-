@@ -33,9 +33,12 @@ namespace DomainLayer
         public virtual DiscountList DiscountList { get; set; }
 
         public float Price { get; set; }
+#nullable enable
+        public string? PartnerId { get; set; } = null;
+#nullable enable
+        [ForeignKey("PartnerId")]
+        public virtual Identity.AppUser? Partner { get; set; } = null!;
 
-        public int PartnerCode { get; set; }
-        public virtual Partner Partner { get; set; }
         public int PointsSpent { get; set; }
     }
 }
