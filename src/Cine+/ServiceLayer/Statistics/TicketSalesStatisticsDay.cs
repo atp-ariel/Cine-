@@ -14,14 +14,14 @@ namespace ServiceLayer.Statistics
 
         private int ticketsSold;
         private string[] hours;
-        private int[] ticketsSoldMonth;
+        private int[] ticketsSoldHours;
 
         public TicketSalesStatisticsDay(ApplicationDbContext context)
         {
             this.context = context;
         }
         public int TicketsSold { get { return ticketsSold; } private set { ticketsSold = value; } }
-        public int[] TicketsSoldMonth { get { return ticketsSoldMonth; } private set { ticketsSoldMonth = value; } }
+        public int[] TicketsSoldMonth { get { return ticketsSoldHours; } private set { ticketsSoldHours = value; } }
         public string[] Hours { get { return hours; } private set { hours = value; } }
 
         public void Filter(DateTime day, int n)
@@ -43,7 +43,7 @@ namespace ServiceLayer.Statistics
 
             }
             hours = ticketsSoldDict.Keys.ToArray();
-            ticketsSoldMonth = ticketsSoldDict.Values.ToArray();
+            ticketsSoldHours = ticketsSoldDict.Values.ToArray();
         }
     }
 }
