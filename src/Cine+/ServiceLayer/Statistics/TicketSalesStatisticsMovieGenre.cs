@@ -36,6 +36,7 @@ namespace ServiceLayer.Statistics
                     x.BatchScheduleEndTime.CompareTo(endTime) == 0));
                 }
             }
+            ticketsSold = count;
 
         }
     }

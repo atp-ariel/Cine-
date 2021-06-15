@@ -20,8 +20,8 @@ namespace ServiceLayer
         }
 
         public string Name { get => "More Views"; }
-        public Movie[] Movies { get; private set; }
-        public int[] Views { get { return viewsMovies; } private set { viewsMovies=value} }
+        public Movie[] Movies { get { return movies; } private set { movies = value; } }
+        public int[] Views { get { return viewsMovies; } private set { viewsMovies = value; } }
 
         public void ApplyCriterion(int n)
         {
@@ -48,7 +48,10 @@ namespace ServiceLayer
             }
 
 
-             dictMovie.Keys.OrderByDescending(x=>dictMovie[x]).Take(n).ToList();
+            movies = dictMovie.Keys.OrderByDescending(x => dictMovie[x]).Take(n).ToArray();
+            viewsMovies = new int[movies.Length];
+            int j = 0;
+            movies.ToList().ForEach(i => { viewsMovies[j] = dictMovie[i]; j++; });
         }
     }
 }
