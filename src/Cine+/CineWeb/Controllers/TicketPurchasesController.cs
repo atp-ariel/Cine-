@@ -149,6 +149,7 @@ namespace CineWeb.Controllers
                 foreach (var item in discounts)
                 {
                     var discount = _context.Discount.Find(item);
+                    discountList.TotalDiscounted += discount.DiscountedMoney;
                     discount.DiscountLists.Add(discountList);
                     discountList.Discounts.Add(discount);
                 }
@@ -160,10 +161,7 @@ namespace CineWeb.Controllers
                 _context.SaveChanges();
             }
 
-            foreach (var item in discountList.Discounts)
-            {
-                price -= item.DiscountedMoney;
-            }
+            price -= discountList.TotalDiscounted;
 
             if (price < 0)
                 price = 0;

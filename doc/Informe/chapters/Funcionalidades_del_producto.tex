@@ -67,4 +67,4 @@ No se cuenta con una pasarela de pago real con la cual deba comunicarse el siste
     \caption{Máquina de estados UML para la pasarela de pagos}
 \end{figure}
 
-La decisión de si queda saldo o no se realiza de forma aleatoria, con una probabilidad $p = 0.8$ de que quede saldo en la tarjeta y $1- p$ que no quede. En cualquier caso se devuelve un estado del pago: efecutado, o erróneo. Si fue aceptado entonces se procede a guardar toda la información restante en la base de datos y actualizar el estado de la compra de la entrada.
+La decisión de si queda saldo o no se realiza de forma aleatoria, con una probabilidad $p = 0.9$ de que quede saldo en la tarjeta y $1- p$ que no quede. En cualquier caso se devuelve un estado del pago: efecutado, o erróneo. Si fue aceptado entonces se procede a guardar toda la información restante en la base de datos y actualizar el estado de la compra de la entrada.

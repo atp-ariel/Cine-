@@ -8,13 +8,13 @@
     \caption{MERX de la modelación conceptual de la base de datos.}
 \end{figure}
 
-A partir de esta modelación se obtiene la siguiente descomposición que se cumple la Propiedad de Preservación de las Dependencias Funcionales (PPDF) y la Propiedad del Join sin Pérdida de información  y cada uno de sus esquemas relacionales se encuentra en 3ra Forma Normal.\\
+A partir de esta modelación se obtiene la siguiente descomposición que cumple la Propiedad de Preservación de las Dependencias Funcionales (PPDF) y la Propiedad del Join sin Pérdida de información  y cada uno de sus esquemas relacionales se encuentra en 3ra Forma Normal.\\
 	
-	$U_{Pelicula}=\{IDPe,NombrePe\}$
+	$U_{Pelicula}=\{IDPe, Titulo\}$
 	
-	$F_{Pelicula}=\{IDPe\rightarrow NombrePe\}$\\
+	$F_{Pelicula}=\{IDPe\rightarrow Titulo\}$\\
 	
-	$U_{Pais}=\{IDPe,NombrePe\}$
+	$U_{Pais}=\{IDPa, NombrePa\}$
 	
 	$F_{Pais}=\{IDPa\rightarrow NombrePa\}$\\
 	
@@ -30,33 +30,29 @@ A partir de esta modelación se obtiene la siguiente descomposición que se cump
 		
 	$F_{Horario}=\emptyset$\\
 	
-	$U_{Sala}={IDS}$
+	$U_{Sala}=\{IDS\}$
 	
 	$F_{Sala}=\emptyset$\\
 	
-	$U_{Tanda}={IDS,Inicio,Fin}$
-		
-	$F_{Tanda}=\emptyset$\\
-	
-	$U_{Butaca}={IDS,IDB}$
+	$U_{Butaca}=\{IDS,IDB\}$
 		
 	$F_{Butaca}=\emptyset$\\
 	
-	$U_{Proyecta}=\{IDS,Inicio,Fin,IDPe\}$
+	$U_{Tanda}=\{IDS, Inicio, Fin, Costo~en~dinero, Costo~en~puntos, IDPe\}$
 	
-	$F_{Proyecta}=\{IDS,Inicio,Fin\rightarrow IDPe\}$\\
+	$F_{Proyecta}=\{IDS, Inicio, Fin\rightarrow Costo~en~dinero, Costo~en~puntos, IDPe\}$\\
 	
-	$U_{Descuento}=\{IDD,NombreD,DineroDescontado\}$
+	$U_{Descuento}=\{IDD, NombreD, DineroDescontado\}$
 		
-	$F_{Descuento}=\{IDD\rightarrow NombreD,Dinero~Descontado\}$\\
+	$F_{Descuento}=\{IDD\rightarrow NombreD, Dinero~Descontado\}$\\
 	
 	$U_{Lista~de~Descuentos}=\{IDL,Total~Descontado\}$
 		
 	$F_{Lista~de~Descuentos}=\{IDL\rightarrow Total~Descontado\}$\\
 	
-	$U_{Compra~de~Entrada}=\{IDS,Inicio,Fin,IDB,IDL,Precio\}$
+	$U_{Compra~de~Entrada}=\{IDS, Inicio, Fin, IDB, IDL, Precio, Comprobante\}$
 		
-	$F_{Compra~de~Entrada}=\{IDS,Inicio,Fin,IDB\rightarrow IDL,Precio\}$\\
+	$F_{Compra~de~Entrada}=\{IDS, Inicio, Fin,IDB\rightarrow IDL, Precio, Comprobante\}$\\
 	
 	$U_{Socio}=\{C\acute{o}digo,Datos~Personales,Cuenta(puntos)\}$
 		
@@ -70,9 +66,9 @@ A partir de esta modelación se obtiene la siguiente descomposición que se cump
 		
 	$F_{C.E. Fisica}=\emptyset$\\
 	
-	$U_{C.E~Web}=\{IDS,Inicio,Fin,IDB,IDCEWeb,Tarjeta~de~Cr\acute{e}dito\}$
+	$U_{C.E~Web}=\{IDS,Inicio,Fin,IDB,Tarjeta~de~Cr\acute{e}dito\}$
 		
-	$F_{Realizar~Compra}=\{IDS,Inicio,Fin,IDB\rightarrow IDCEWeb,Tarjeta~de~Cr\acute{e}dito\}$\\
+	$F_{C.E~Web}=\{IDS,Inicio,Fin,IDB\rightarrow Tarjeta~de~Cr\acute{e}dito\}$\\
 		
 	$U_{Producida}=\{IDPe,IDPa\}$
 		
