@@ -38,6 +38,7 @@ namespace RepositoryLayer
         public DbSet<Actor> Actor { get; set; }
         public DbSet<Genre> Genre { get; set; }
         public DbSet<Country> Country { get; set; }
+        public DbSet<Rating> Rating { get; set; }
         public DbSet<Cinema> Cinema { get; set; }
         public DbSet<Seat> Seat { get; set; }
         public DbSet<Batch> Batch { get; set; }
