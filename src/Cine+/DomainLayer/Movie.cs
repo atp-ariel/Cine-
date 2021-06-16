@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace DomainLayer
 {
-    public class Movie 
+    public class Movie
     {
         public int Id { get; set; }
 
@@ -31,5 +31,4 @@ namespace DomainLayer
         public virtual ICollection<Actor> Actors { get; set; }
 
     }
-
 }
