@@ -36,7 +36,7 @@ namespace CineWeb.Controllers
             {
                 _context.Rating.Add(rating);
                 _context.SaveChanges();
-                TempData["message"] = $"Se ha agregado el rating '{rating.Name}' correctamente";
+                TempData["message"] = $"Se ha agregado la clasificación '{rating.Name}' correctamente";
                 return RedirectToAction("Index");
 
             }
@@ -68,7 +68,7 @@ namespace CineWeb.Controllers
             {
                 _context.Rating.Update(rating);
                 _context.SaveChanges();
-                TempData["message"] = $"Se ha actualizado actor '{rating.Name}' correctamente";
+                TempData["message"] = $"Se ha actualizado clasificación '{rating.Name}' correctamente";
                 return RedirectToAction("Index");
 
             }
@@ -94,7 +94,7 @@ namespace CineWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteActor(int? id)
+        public IActionResult DeleteRating(int? id)
         {
             var rating = _context.Rating.Find(id);
 
@@ -105,7 +105,7 @@ namespace CineWeb.Controllers
 
             _context.Rating.Remove(rating);
             _context.SaveChanges();
-            TempData["message"] = $"Se ha eliminado el actor '{rating.Name}' correctamente";
+            TempData["message"] = $"Se ha eliminado la clasificación '{rating.Name}' correctamente";
             return RedirectToAction("Index");
         }
     }

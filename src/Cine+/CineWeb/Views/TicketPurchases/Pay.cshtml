@@ -16,25 +16,29 @@
                 <form method="post" asp-action="Pay">
 
                     <input type="hidden" name="buyForm" value="@TempData["buyForm"]" />
+                    @if (TempData["code"] != null)
+                    {
+                        <input type="hidden" name="partnerCode" value="@TempData["code"].ToString()" />
+                    }
 
                     <div>
                         <label>Total a pagar: @TempData["totalPrice"]</label>
-                        @if ((int)TempData["buyForm"]==1)
+                        @if ((int)TempData["buyForm"] == 1)
                         {
                             <label>Tarjeta de Crédito<input type="text" name="creditCard" /></label>
                         }
                     </div>
 
                     <div>
-                        @if (TempData["code"]!=null)
+                        @if (TempData["code"] != null)
                         {
-                            <label>Paga en puntos: @TempData["totalPoints"]</label>
+                            <label>Pago en puntos: @TempData["totalPoints"]</label>
                         }
                     </div>
 
                     <div>
-                        <label><input type="radio" name="payForm" value="0" />Pago en efectivo</label>
-                        @if (TempData["code"] != null && ViewBag.UserPoints > TempData["totalPoints"])
+                        <label><input type="radio" name="payForm" value="0" />Pagar con dinero</label>
+                        @if (TempData["code"] != null && ViewBag.UserPoints > float.Parse((string)TempData["totalPoints"]))
                         {
                             <label><input type="radio" name="payForm" value="1" />Pagar con puntos</label>
                         }

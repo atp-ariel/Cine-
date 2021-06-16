@@ -100,7 +100,6 @@ namespace CineWeb.Controllers
                     BatchScheduleEndTime = (DateTime)TempData["end"],
                     CinemaId = (int)TempData["cinema"],
                     SeatId = seat,
-                    AppUserId = (string)TempData["code"],
                     Code = (string)TempData["codeSeats"]
                 };
             }
@@ -112,10 +111,12 @@ namespace CineWeb.Controllers
                     BatchScheduleEndTime = (DateTime)TempData["end"],
                     CinemaId = (int)TempData["cinema"],
                     SeatId = seat,
-                    AppUserId = (string)TempData["code"],
                     Code = (string)TempData["codeSeats"]
                 };
             }
+
+            if (TempData["code"] != null)
+                ticketPurchase.AppUserId = TempData["code"].ToString();
 
             var batch = _context.Batch.Find(ticketPurchase.CinemaId, ticketPurchase.BatchScheduleStartTime, ticketPurchase.BatchScheduleEndTime);
             float price = batch.TicketPrice;
@@ -174,7 +175,7 @@ namespace CineWeb.Controllers
             TempData["totalPrice"] = tp.ToString();
 
             temp = float.Parse((string)TempData["totalPoints"]);
-            tp = temp + ticketPurchase.PointsSpent;
+            tp = temp + batch.TicketPoints;
             TempData["totalPoints"] = tp.ToString();
 
             ticketPurchase.DiscountListId = discountList.Id;
@@ -189,8 +190,8 @@ namespace CineWeb.Controllers
         {
             if (TempData["code"] != null)
             {
-                var user = (await _cineUserManager.GetAllUsersBy("Member")).Where(c => c.Id == (string)TempData["code"]).First();
-                ViewBag.PointsUser = float.Parse(await _cineUserManager.GetClaim(user.UserName, "Points"));
+                var user = (await _cineUserManager.GetAllUsersBy("Member")).Where(c => c.Id == TempData["code"].ToString()).First();
+                ViewBag.UserPoints = float.Parse(await _cineUserManager.GetClaim(user.UserName, "Points"));
             }
             return View();
         }
@@ -278,6 +279,7 @@ namespace CineWeb.Controllers
                 _context.TicketPurchase.Remove(item);
             }
             _context.SaveChanges();
+            TempData["message"] = "Compra cancelada con éxito";
             return RedirectToAction("Index","Home");
         }
 

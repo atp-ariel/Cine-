@@ -32,12 +32,12 @@ namespace CineWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Movie movie,int[] countries=null,int[] genres=null,int[] actors=null)
+        public IActionResult Create(Movie movie, int rating, int[] countries=null,int[] genres=null,int[] actors=null)
         {
             if (ModelState.IsValid) 
             {
 
-                Save(movie, countries, genres, actors);
+                Save(movie, rating, countries, genres, actors);
 
                 _context.Movie.Add(movie);
                 _context.SaveChanges();
@@ -74,7 +74,7 @@ namespace CineWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Movie movie, int[] countries = null, int[] genres = null, int[] actors = null)
+        public IActionResult Edit(Movie movie, int rating, int[] countries = null, int[] genres = null, int[] actors = null)
         {
             IEnumerable<Movie> listMovies = _context.Movie.Include(m => m.Genres).Include(m => m.Countries).Include(m => m.Actors).Include(m => m.Batches).ToList();
 
@@ -89,7 +89,7 @@ namespace CineWeb.Controllers
                 movie.Genres.Clear();
                 movie.Actors.Clear();
 
-                Save(movie, countries, genres, actors);
+                Save(movie, rating, countries, genres, actors);
 
                 foreach (var item in movie.Batches)
                 {
@@ -147,8 +147,16 @@ namespace CineWeb.Controllers
         }
 
 
-        public void Save(Movie movie, int[] countries = null, int[] genres = null, int[] actors = null)
+        public void Save(Movie movie, int rating, int[] countries = null, int[] genres = null, int[] actors = null)
         {
+            if (rating!=0)
+            {
+                Rating auxRating = _context.Rating.Find(rating);
+                auxRating.Movies.Add(movie);
+                movie.RatingId = rating;
+                movie.Rating = auxRating;
+            }
+
             if (countries != null)
             {
                 foreach (var item in countries)

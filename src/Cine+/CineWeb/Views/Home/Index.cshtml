@@ -8,6 +8,15 @@
 <h1>Películas</h1>
 
 <div class="container">
+    @if (TempData["message"] != null)
+    {
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            @TempData["message"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
     <div class="row">
         <div class="col-sm-6">
             <h3>Lista de películas</h3>
@@ -25,6 +34,7 @@
                             <th>@Html.DisplayNameFor(m => m.Genres)</th>
                             <th>@Html.DisplayNameFor(m => m.Countries)</th>
                             <th>@Html.DisplayNameFor(m => m.Actors)</th>
+                            <th>@Html.DisplayNameFor(m => m.Rating.Name)</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
@@ -58,6 +68,15 @@
                                     @if (item.Actors != null && item.Actors.Count() > 0)
                                     {
                                         @String.Join(" , ", item.Actors.Select(a => a.Name))
+                                    }
+                                    else
+                                    {
+                                        <p class="text-black-50"> - </p>
+                                    }
+                                <td>
+                                    @if (item.RatingId != 0)
+                                    {
+                                        @item.Rating.Name
                                     }
                                     else
                                     {
