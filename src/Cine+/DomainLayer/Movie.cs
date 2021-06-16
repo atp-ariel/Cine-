@@ -29,6 +29,7 @@ namespace DomainLayer
 
         [Display(Name = "Actores")]
         public virtual ICollection<Actor> Actors { get; set; }
+
     }
-     
+
 }

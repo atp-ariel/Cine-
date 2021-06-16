@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "CancelBuy";
+    Layout = "_Layout";
+}
+
+<h1>Cancelar Compra</h1>
+
+<div class="container">
+    <div class="row justify-content-center text-center">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class=" wrap p-5">
+                <div class="row">
+                </div>
+                <form method="post" asp-action="CancelBuy">
+
+                    <div>
+                        <label>Introduzca su código de socio si pagó con puntos. Si no, introduzca la tarjeta de crédito con la que realizó el pago</label>
+                    </div>
+
+                    <div>
+                        <label>Código de socio o tarjeta de crédito<input type="text" name="codeCard" /></label>
+                    </div>
+
+                    <div>
+                        <label>Código de la compra<input type="text" name="codeBuy"/></label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Aceptar" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>

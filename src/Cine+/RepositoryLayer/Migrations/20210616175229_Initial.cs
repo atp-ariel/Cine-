@@ -21,32 +21,6 @@ namespace RepositoryLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AppUser",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Address = table.Column<string>(type: "TEXT", nullable: true),
-                    UserName = table.Column<string>(type: "TEXT", nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "TEXT", nullable: true),
-                    Email = table.Column<string>(type: "TEXT", nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "TEXT", nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
-                    PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "TEXT", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppUser", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Cinema",
                 columns: table => new
                 {
@@ -243,7 +217,8 @@ namespace RepositoryLayer.Migrations
                     ScheduleEndTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     CinemaId = table.Column<int>(type: "INTEGER", nullable: false),
                     MovieId = table.Column<int>(type: "INTEGER", nullable: false),
-                    TicketPrice = table.Column<float>(type: "REAL", nullable: false)
+                    TicketPrice = table.Column<float>(type: "REAL", nullable: false),
+                    TicketPoints = table.Column<float>(type: "REAL", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -326,20 +301,16 @@ namespace RepositoryLayer.Migrations
                     SeatId = table.Column<int>(type: "INTEGER", nullable: false),
                     DiscountListId = table.Column<int>(type: "INTEGER", nullable: false),
                     Price = table.Column<float>(type: "REAL", nullable: false),
-                    PartnerId = table.Column<string>(type: "TEXT", nullable: true),
-                    PointsSpent = table.Column<int>(type: "INTEGER", nullable: false),
+                    PointsSpent = table.Column<float>(type: "REAL", nullable: false),
+                    Code = table.Column<string>(type: "TEXT", nullable: true),
+                    Paid = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AppUserId = table.Column<string>(type: "TEXT", nullable: true),
                     Discriminator = table.Column<string>(type: "TEXT", nullable: false),
                     CreditCard = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TicketPurchase", x => new { x.CinemaId, x.BatchScheduleStartTime, x.BatchScheduleEndTime, x.SeatId });
-                    table.ForeignKey(
-                        name: "FK_TicketPurchase_AppUser_PartnerId",
-                        column: x => x.PartnerId,
-                        principalTable: "AppUser",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_TicketPurchase_Batch_CinemaId_BatchScheduleStartTime_BatchScheduleEndTime",
                         columns: x => new { x.CinemaId, x.BatchScheduleStartTime, x.BatchScheduleEndTime },
@@ -404,11 +375,6 @@ namespace RepositoryLayer.Migrations
                 name: "IX_TicketPurchase_DiscountListId",
                 table: "TicketPurchase",
                 column: "DiscountListId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TicketPurchase_PartnerId",
-                table: "TicketPurchase",
-                column: "PartnerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -442,9 +408,6 @@ namespace RepositoryLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Genre");
-
-            migrationBuilder.DropTable(
-                name: "AppUser");
 
             migrationBuilder.DropTable(
                 name: "Batch");

@@ -9,7 +9,7 @@ using RepositoryLayer;
 namespace RepositoryLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210616150500_Initial")]
+    [Migration("20210616175229_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -91,6 +91,9 @@ namespace RepositoryLayer.Migrations
 
                     b.Property<int>("MovieId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<float>("TicketPoints")
+                        .HasColumnType("REAL");
 
                     b.Property<float>("TicketPrice")
                         .HasColumnType("REAL");
@@ -195,61 +198,6 @@ namespace RepositoryLayer.Migrations
                     b.ToTable("Genre");
                 });
 
-            modelBuilder.Entity("DomainLayer.Identity.AppUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Address")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppUser");
-                });
-
             modelBuilder.Entity("DomainLayer.Movie", b =>
                 {
                     b.Property<int>("Id")
@@ -327,6 +275,12 @@ namespace RepositoryLayer.Migrations
                     b.Property<int>("SeatId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("DiscountListId")
                         .HasColumnType("INTEGER");
 
@@ -334,11 +288,11 @@ namespace RepositoryLayer.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("PartnerId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("PointsSpent")
+                    b.Property<bool>("Paid")
                         .HasColumnType("INTEGER");
+
+                    b.Property<float>("PointsSpent")
+                        .HasColumnType("REAL");
 
                     b.Property<float>("Price")
                         .HasColumnType("REAL");
@@ -346,8 +300,6 @@ namespace RepositoryLayer.Migrations
                     b.HasKey("CinemaId", "BatchScheduleStartTime", "BatchScheduleEndTime", "SeatId");
 
                     b.HasIndex("DiscountListId");
-
-                    b.HasIndex("PartnerId");
 
                     b.HasIndex("CinemaId", "SeatId");
 
@@ -491,10 +443,6 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Identity.AppUser", "Partner")
-                        .WithMany()
-                        .HasForeignKey("PartnerId");
-
                     b.HasOne("DomainLayer.Seat", "Seat")
                         .WithMany()
                         .HasForeignKey("CinemaId", "SeatId")
@@ -510,8 +458,6 @@ namespace RepositoryLayer.Migrations
                     b.Navigation("Batch");
 
                     b.Navigation("DiscountList");
-
-                    b.Navigation("Partner");
 
                     b.Navigation("Seat");
                 });

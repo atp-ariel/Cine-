@@ -37,7 +37,7 @@ namespace RepositoryLayer
 
         public IEnumerable<Movie> GetAll()
         {
-            return _dbContext.Movie.Include(m => m.Genres).Include(m => m.Countries).Include(m => m.Actors);
+            return _dbContext.Movie.Include(m => m.Genres).Include(m => m.Countries).Include(m => m.Actors).Include(m=>m.Rating);
         }
 
         public void Insert(Movie entity)

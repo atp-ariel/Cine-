@@ -23,8 +23,11 @@ namespace ServiceLayer.Identity
 
         #region FacadeMethods
         public async Task<AppUser> FindUserByUserName(string username) => await this._userStore.FindByUsername(username);
-        
-        public async Task<IEnumerable<AppUser>> GetAllUsersBy(string role) => await this._userStore.GetUsers(role);
+
+        public async Task<IEnumerable<AppUser>> GetAllUsersBy(string role)
+        {
+            return await this._userStore.GetUsers(role);
+        }
 
         public async Task<string> GetClaim(string username, string claim) => await this._userStore.GetClaimAsync(username, claim);
 

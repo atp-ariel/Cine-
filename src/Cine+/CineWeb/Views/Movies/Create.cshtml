@@ -22,7 +22,7 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="Title" class="control-label"></label>
-                        <input asp-for="Title" class="form-control roundede-pill" required/>
+                        <input asp-for="Title" class="form-control roundede-pill" required />
                         <span asp-validation-form="Name" class="text-danger">@Html.ValidationMessage("Title")</span>
                     </div>
 
@@ -51,12 +51,23 @@
                     <div class="form-group mb-3">
                         <label class="control-label">Actores</label>
                         <select multiple="multiple" data-name="actors" data-field="actor(es)" class="list-group form-control ms">
-
                             @foreach (var actor in ViewBag.Actors)
                             {
                                 <option value="@actor.Id">@actor.Name</option>
                             }
                         </select>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="control-label">Clasificaciones</label>
+                        <ul class="list-group">
+                            @foreach (var rating in ViewBag.Ratings)
+                            {
+                                <li class="list-group-item">
+                                    <label><input type="radio" name="rating" value="@rating.Id" />@rating.Name</label>
+                                </li>
+                            }
+                        </ul>
                     </div>
 
                     <div class="form-group">

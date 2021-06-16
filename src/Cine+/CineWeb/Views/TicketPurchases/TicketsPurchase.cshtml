@@ -1,0 +1,64 @@
+﻿@model IEnumerable<DomainLayer.Seat>
+@{
+    ViewData["Title"] = "Seleccionar sillas";
+    Layout = "_Layout";
+    TempData["cinema"] = TempData["cinema"];
+    TempData["start"] = TempData["start"];
+    TempData["end"] = TempData["end"];
+    TempData["code"] = TempData["code"];
+    TempData["buyForm"] = TempData["buyForm"];
+    TempData["codeSeats"] = TempData["codeSeats"];
+}
+
+<h1>Compra de entradas</h1>
+
+<div class="container">
+    <div class="row justify-content-center text-center">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class=" wrap p-5">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h3>Seleccionar sillas</h3>
+                    </div>
+                </div>
+                <form method="post" asp-action="DiscountLists">
+
+                    <div class="panel panel-default">
+                        <div class="panel heading">Escoja las sillas de su preferencia</div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                @{ int i = 0;}
+                                @foreach (var seat in Model)
+                                {
+                                    <li class="list-group-item">
+                                        @if (ViewBag.Reserved[i])
+                                        {
+                                            <label><input type="checkbox" name="seats" value="@seat.Id" disabled />@seat.Id</label>
+                                        }
+                                        else
+                                        {
+                                            if (ViewBag.Marked[i])
+                                            {
+                                                <label><input type="checkbox" checked="checked" name="seats" value="@seat.Id" />@seat.Id</label>
+                                            }
+                                            else 
+                                            {
+                                                <label><input type="checkbox" name="seats" value="@seat.Id" />@seat.Id</label>
+                                            }
+                                        }
+                                    </li>
+                                    i++;
+                                }
+                            </ul>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Enviar sillas" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>

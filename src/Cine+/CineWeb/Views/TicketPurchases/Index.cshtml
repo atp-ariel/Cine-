@@ -33,8 +33,8 @@
                         <th>@Html.DisplayNameFor(m => m.CinemaId)</th>
                         <th>@Html.DisplayNameFor(m => m.ScheduleStartTime)</th>
                         <th>@Html.DisplayNameFor(m => m.ScheduleEndTime)</th>
-                        <th>Película</th>
                         <th>@Html.DisplayNameFor(m => m.TicketPrice)</th>
+                        <th>@Html.DisplayNameFor(m => m.TicketPoints)</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
@@ -45,14 +45,17 @@
                             <td>@item.CinemaId</td>
                             <td>@item.ScheduleStartTime</td>
                             <td>@item.ScheduleEndTime</td>
-                            <td>@item.Movie.Title</td>
                             <td>@item.TicketPrice</td>
-
+                            <td>@item.TicketPoints</td>
 
                             <td>
-                                @Html.ActionLink("Comprar entrada física", "TicketPurchaseCreate", new { start = item.ScheduleStartTime, end = item.ScheduleEndTime, cinema = item.CinemaId })
-                                @Html.ActionLink("Comprar entrada online", "TicketPurchaseCreate", new { start = item.ScheduleStartTime, end = item.ScheduleEndTime, cinema = item.CinemaId })
-                                @Html.ActionLink("Cancelar compra online", "OnlineTicketPurchaseDelete", new { start = item.ScheduleStartTime, end = item.ScheduleEndTime, cinema = item.CinemaId })
+                                @Html.ActionLink("Comprar entradas en taquilla", "SeatCount", new { start = item.ScheduleStartTime, end = item.ScheduleEndTime, cinema = item.CinemaId, buyForm = 0 })
+                                @Html.ActionLink("Comprar entrada online", "SeatCount", new { start = item.ScheduleStartTime, end = item.ScheduleEndTime, cinema = item.CinemaId, buyForm = 1 })
+                                @if (DateTime.Now.AddHours(2) <= item.ScheduleStartTime)
+                                {
+                                    @Html.ActionLink("Cancelar compra", "CancelBuy")
+                                }
+
                             </td>
                         </tr>
                     }

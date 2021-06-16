@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewData["Title"] = "Pago";
+    Layout = "_Layout";
+}
+
+<h1>Compra de entradas</h1>
+
+<div class="container">
+    <div class="row justify-content-center text-center">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class=" wrap p-5">
+                <div class="row">
+                </div>
+                <form method="post" asp-action="Pay">
+
+                    <input type="hidden" name="buyForm" value="@TempData["buyForm"]" />
+                    @if (TempData["code"] != null)
+                    {
+                        <input type="hidden" name="partnerCode" value="@TempData["code"].ToString()" />
+                    }
+
+                    <div>
+                        <label>Total a pagar: @TempData["totalPrice"]</label>
+                        @if ((int)TempData["buyForm"] == 1)
+                        {
+                            <label>Tarjeta de Crédito<input type="text" name="creditCard" /></label>
+                        }
+                    </div>
+
+                    <div>
+                        @if (TempData["code"] != null)
+                        {
+                            <label>Pago en puntos: @TempData["totalPoints"]</label>
+                        }
+                    </div>
+
+                    <div>
+                        <label><input type="radio" name="payForm" value="0" />Pagar con dinero</label>
+                        @if (TempData["code"] != null && ViewBag.UserPoints > float.Parse((string)TempData["totalPoints"]))
+                        {
+                            <label><input type="radio" name="payForm" value="1" />Pagar con puntos</label>
+                        }
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Pagar" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>

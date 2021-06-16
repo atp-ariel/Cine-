@@ -29,7 +29,7 @@ namespace CineWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Movie movie,int rating, int[] countries=null,int[] genres=null,int[] actors=null)
+        public IActionResult Create(Movie movie, int rating, int[] countries=null,int[] genres=null,int[] actors=null)
         {
             if (ModelState.IsValid) 
             {

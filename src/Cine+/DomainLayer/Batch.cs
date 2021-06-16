@@ -34,5 +34,9 @@ namespace DomainLayer
         [Display(Name ="Precio de la entrada")]
         [Required(ErrorMessage ="Este campo es obligatorio")]
         public float TicketPrice { get; set; }
+
+        [Display(Name = "Precio de la entrada en puntos")]
+        [Required(ErrorMessage = "Este campo es obligatorio")]
+        public float TicketPoints { get; set; }
     }
 }
