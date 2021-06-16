@@ -63,8 +63,15 @@ namespace ServiceLayer
             this.MovieRepository.Delete(MovieRepository.Get(MovieID));
         }
 
-        public void UpdateRelations(Movie movie, int[] countries = null, int[] genres = null, int[] actors = null)
+        public void UpdateRelations(Movie movie, int rating, int[] countries = null, int[] genres = null, int[] actors = null)
         {
+            if (rating != 0)
+            {
+                Rating auxRating = new ApplicationDbContext().Rating.Find(rating);
+                auxRating.Movies.Add(movie);
+                movie.RatingId = rating;
+                movie.Rating = auxRating;
+            }
             if (countries != null)
                 foreach (var countryID in countries)
                 {

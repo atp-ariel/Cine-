@@ -29,12 +29,13 @@ namespace CineWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Movie movie,int[] countries=null,int[] genres=null,int[] actors=null)
+        public IActionResult Create(Movie movie,int rating, int[] countries=null,int[] genres=null,int[] actors=null)
         {
             if (ModelState.IsValid) 
             {
-                moviesManager.GetAllMovies();
-                moviesManager.UpdateRelations(movie, countries, genres, actors);
+                var listMovie = moviesManager.GetAllMovies();
+
+                moviesManager.UpdateRelations(movie,rating,  countries, genres, actors);
 
                 moviesManager.AddMovie(movie);
 
@@ -52,7 +53,7 @@ namespace CineWeb.Controllers
             if (id == null || id == 0)
                 return NotFound();
             
-            moviesManager.GetAllMovies();
+            var listMovie = moviesManager.GetAllMovies();
 
             var movie = moviesManager.FindById((int)id);
 
@@ -66,8 +67,9 @@ namespace CineWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Movie movie, int[] countries = null, int[] genres = null, int[] actors = null)
+        public IActionResult Edit(Movie movie, int rating, int[] countries = null, int[] genres = null, int[] actors = null)
         {
+            moviesManager.GetAllMovies();
 
             movie = moviesManager.FindById(movie.Id);
 
@@ -79,7 +81,7 @@ namespace CineWeb.Controllers
                 movie.Genres.Clear();
                 movie.Actors.Clear();
 
-                moviesManager.UpdateRelations(movie, countries, genres, actors);
+                moviesManager.UpdateRelations(movie, rating, countries, genres, actors);
 
                 moviesManager.AddBatchMovie(movie);
 
@@ -98,6 +100,7 @@ namespace CineWeb.Controllers
         {
             if (id == null || id == 0)
                 return NotFound();
+
             moviesManager.GetAllMovies();
 
             var movie = moviesManager.FindById((int)id);
@@ -113,6 +116,8 @@ namespace CineWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteMovie(int? id)
         {
+            moviesManager.GetAllMovies();
+
             var movie = moviesManager.FindById((int)id);
 
             if (movie == null)
@@ -127,6 +132,7 @@ namespace CineWeb.Controllers
             ViewBag.Genres = moviesManager.genres.GetAllGenres();
             ViewBag.Actors = moviesManager.actors.GetAllActors();
             ViewBag.Countries = moviesManager.country.GetAllCountrys();
+            ViewBag.Ratings = new ApplicationDbContext().Rating;
         }
     }
 }

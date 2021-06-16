@@ -8,6 +8,7 @@ using RepositoryLayer.Seed;
 using RepositoryLayer;
 using Microsoft.EntityFrameworkCore;
 using ServiceLayer.Identity;
+using ServiceLayer.Criteria;
 using DomainLayer;
 
 namespace CineWeb
@@ -33,8 +34,9 @@ namespace CineWeb
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("CinePlus")));
 
-            
 
+            //CriteriaManager.SelectedCriteria = CriteriaManager.GetSelectedCriterion(Configuration.GetValue<string>("SelectedCriteria"));
+            
             services.AddScoped<IUserStore, CinemaUsersStore>();
             services.AddScoped<IAuthorizeUser, CinemaAuthorization>();
 
@@ -44,6 +46,8 @@ namespace CineWeb
             services.AddScoped<IRepository<Movie>, MovieRepository>();
             services.AddScoped<IRepository<Batch>, BatchRepository>();
 
+            services.AddSingleton<IConfiguration>(Configuration);
+            CriteriaManager.UpdateSelected(Configuration, "More View");
         }
 
 

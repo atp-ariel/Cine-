@@ -31,7 +31,6 @@
                             <th>Correo Electrónico</th>
                             <th>Teléfono</th>
                             <th>Dirección</th>
-                            <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,10 +41,6 @@
                                 <td>@user.Email</td>
                                 <td>@user.PhoneNumber</td>
                                 <td>@user.Address</td>
-                                <td>
-                                    <a class="btn btn-primary rounded option" asp-controller="ClubCinePlus" asp-action="EditMember" asp-route-id="@user.UserName"><i class="fa fa-pencil"></i></a>
-                                    <button class="btn btn-primary rounded option opt-confirm" data-toogle="modal" data-target="#modal-confirm" data-content="¿Está seguro que desear eliminar a @user.UserName?"><i class="fa fa-trash-o"></i></button>
-                                </td>
                             </tr>
                         }
                     </tbody>

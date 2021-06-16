@@ -2,17 +2,15 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RepositoryLayer;
 
 namespace RepositoryLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210612210524_Initial")]
-    partial class Initial
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -118,6 +116,19 @@ namespace RepositoryLayer.Migrations
                     b.ToTable("Cinema");
                 });
 
+            modelBuilder.Entity("DomainLayer.Configurations", b =>
+                {
+                    b.Property<string>("KeyConfig")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("KeyConfig");
+
+                    b.ToTable("Configurations");
+                });
+
             modelBuilder.Entity("DomainLayer.Country", b =>
                 {
                     b.Property<int>("Id")
@@ -182,10 +193,68 @@ namespace RepositoryLayer.Migrations
                     b.ToTable("Genre");
                 });
 
+            modelBuilder.Entity("DomainLayer.Identity.AppUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppUser");
+                });
+
             modelBuilder.Entity("DomainLayer.Movie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("RatingId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
@@ -195,39 +264,25 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RatingId");
+
                     b.ToTable("Movie");
                 });
 
-            modelBuilder.Entity("DomainLayer.Partner", b =>
+            modelBuilder.Entity("DomainLayer.Rating", b =>
                 {
-                    b.Property<int>("Code")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Adress")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Mobile")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.Property<long>("Points")
-                        .HasColumnType("INTEGER");
+                    b.HasKey("Id");
 
-                    b.HasKey("Code");
-
-                    b.ToTable("Partner");
+                    b.ToTable("Rating");
                 });
 
             modelBuilder.Entity("DomainLayer.Schedule", b =>
@@ -277,8 +332,8 @@ namespace RepositoryLayer.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("PartnerCode")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("PartnerId")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("PointsSpent")
                         .HasColumnType("INTEGER");
@@ -290,7 +345,7 @@ namespace RepositoryLayer.Migrations
 
                     b.HasIndex("DiscountListId");
 
-                    b.HasIndex("PartnerCode");
+                    b.HasIndex("PartnerId");
 
                     b.HasIndex("CinemaId", "SeatId");
 
@@ -314,7 +369,7 @@ namespace RepositoryLayer.Migrations
                     b.ToTable("GenreMovie");
                 });
 
-            modelBuilder.Entity("DomainLayer.OnlineTickectPurchase", b =>
+            modelBuilder.Entity("DomainLayer.OnlineTicketPurchase", b =>
                 {
                     b.HasBaseType("DomainLayer.TicketPurchase");
 
@@ -322,7 +377,7 @@ namespace RepositoryLayer.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasDiscriminator().HasValue("OnlineTickectPurchase");
+                    b.HasDiscriminator().HasValue("OnlineTicketPurchase");
                 });
 
             modelBuilder.Entity("DomainLayer.PhysicalTicketPurchase", b =>
@@ -404,6 +459,17 @@ namespace RepositoryLayer.Migrations
                     b.Navigation("Schedule");
                 });
 
+            modelBuilder.Entity("DomainLayer.Movie", b =>
+                {
+                    b.HasOne("DomainLayer.Rating", "Rating")
+                        .WithMany("Movies")
+                        .HasForeignKey("RatingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Rating");
+                });
+
             modelBuilder.Entity("DomainLayer.Seat", b =>
                 {
                     b.HasOne("DomainLayer.Cinema", "Cinema")
@@ -423,11 +489,9 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Partner", "Partner")
+                    b.HasOne("DomainLayer.Identity.AppUser", "Partner")
                         .WithMany()
-                        .HasForeignKey("PartnerCode")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PartnerId");
 
                     b.HasOne("DomainLayer.Seat", "Seat")
                         .WithMany()
@@ -473,6 +537,11 @@ namespace RepositoryLayer.Migrations
             modelBuilder.Entity("DomainLayer.Movie", b =>
                 {
                     b.Navigation("Batches");
+                });
+
+            modelBuilder.Entity("DomainLayer.Rating", b =>
+                {
+                    b.Navigation("Movies");
                 });
 #pragma warning restore 612, 618
         }
