@@ -9,8 +9,8 @@ using RepositoryLayer;
 namespace RepositoryLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210612210524_Initial")]
-    partial class Initial
+    [Migration("20210616080420_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -91,6 +91,9 @@ namespace RepositoryLayer.Migrations
 
                     b.Property<int>("MovieId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<float>("TicketPoints")
+                        .HasColumnType("REAL");
 
                     b.Property<float>("TicketPrice")
                         .HasColumnType("REAL");
@@ -188,6 +191,9 @@ namespace RepositoryLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("RatingId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -195,39 +201,25 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RatingId");
+
                     b.ToTable("Movie");
                 });
 
-            modelBuilder.Entity("DomainLayer.Partner", b =>
+            modelBuilder.Entity("DomainLayer.Rating", b =>
                 {
-                    b.Property<int>("Code")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Adress")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Mobile")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.Property<long>("Points")
-                        .HasColumnType("INTEGER");
+                    b.HasKey("Id");
 
-                    b.HasKey("Code");
-
-                    b.ToTable("Partner");
+                    b.ToTable("Rating");
                 });
 
             modelBuilder.Entity("DomainLayer.Schedule", b =>
@@ -270,6 +262,12 @@ namespace RepositoryLayer.Migrations
                     b.Property<int>("SeatId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("DiscountListId")
                         .HasColumnType("INTEGER");
 
@@ -277,11 +275,11 @@ namespace RepositoryLayer.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("PartnerCode")
+                    b.Property<bool>("Paid")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("PointsSpent")
-                        .HasColumnType("INTEGER");
+                    b.Property<float>("PointsSpent")
+                        .HasColumnType("REAL");
 
                     b.Property<float>("Price")
                         .HasColumnType("REAL");
@@ -289,8 +287,6 @@ namespace RepositoryLayer.Migrations
                     b.HasKey("CinemaId", "BatchScheduleStartTime", "BatchScheduleEndTime", "SeatId");
 
                     b.HasIndex("DiscountListId");
-
-                    b.HasIndex("PartnerCode");
 
                     b.HasIndex("CinemaId", "SeatId");
 
@@ -314,7 +310,7 @@ namespace RepositoryLayer.Migrations
                     b.ToTable("GenreMovie");
                 });
 
-            modelBuilder.Entity("DomainLayer.OnlineTickectPurchase", b =>
+            modelBuilder.Entity("DomainLayer.OnlineTicketPurchase", b =>
                 {
                     b.HasBaseType("DomainLayer.TicketPurchase");
 
@@ -322,7 +318,7 @@ namespace RepositoryLayer.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasDiscriminator().HasValue("OnlineTickectPurchase");
+                    b.HasDiscriminator().HasValue("OnlineTicketPurchase");
                 });
 
             modelBuilder.Entity("DomainLayer.PhysicalTicketPurchase", b =>
@@ -404,6 +400,17 @@ namespace RepositoryLayer.Migrations
                     b.Navigation("Schedule");
                 });
 
+            modelBuilder.Entity("DomainLayer.Movie", b =>
+                {
+                    b.HasOne("DomainLayer.Rating", "Rating")
+                        .WithMany("Movies")
+                        .HasForeignKey("RatingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Rating");
+                });
+
             modelBuilder.Entity("DomainLayer.Seat", b =>
                 {
                     b.HasOne("DomainLayer.Cinema", "Cinema")
@@ -423,12 +430,6 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DomainLayer.Partner", "Partner")
-                        .WithMany()
-                        .HasForeignKey("PartnerCode")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DomainLayer.Seat", "Seat")
                         .WithMany()
                         .HasForeignKey("CinemaId", "SeatId")
@@ -444,8 +445,6 @@ namespace RepositoryLayer.Migrations
                     b.Navigation("Batch");
 
                     b.Navigation("DiscountList");
-
-                    b.Navigation("Partner");
 
                     b.Navigation("Seat");
                 });
@@ -473,6 +472,11 @@ namespace RepositoryLayer.Migrations
             modelBuilder.Entity("DomainLayer.Movie", b =>
                 {
                     b.Navigation("Batches");
+                });
+
+            modelBuilder.Entity("DomainLayer.Rating", b =>
+                {
+                    b.Navigation("Movies");
                 });
 #pragma warning restore 612, 618
         }

@@ -5,16 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using DomainLayer.Identity;
 
 namespace DomainLayer
 {
     public class TicketPurchase
     {
-        
+
         [Display(Name = "Sala")]
         public int CinemaId { get; set; }
 
-        [Display(Name ="Inicio función")]
+        [Display(Name = "Inicio función")]
         public DateTime BatchScheduleStartTime { get; set; }
 
         [Display(Name = "Final función")]
@@ -33,12 +34,14 @@ namespace DomainLayer
         public virtual DiscountList DiscountList { get; set; }
 
         public float Price { get; set; }
-#nullable enable
-        public string? PartnerId { get; set; } = null;
-#nullable enable
-        [ForeignKey("PartnerId")]
-        public virtual Identity.AppUser? Partner { get; set; } = null!;
 
-        public int PointsSpent { get; set; }
+        public float PointsSpent { get; set; }
+
+        public string Code { get; set; }
+
+        public bool Paid { get; set; }
+
+#nullable enable
+        public string? AppUserId { get; set; } = null;
     }
 }

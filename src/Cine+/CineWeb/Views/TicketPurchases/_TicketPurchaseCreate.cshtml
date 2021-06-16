@@ -1,0 +1,38 @@
+﻿@model IEnumerable<DomainLayer.Discount>
+
+@{ 
+    int seat = (int)ViewData["seat"];
+    TempData["seats"] = (int[])ViewData["seats"];
+}
+
+<div class="container">
+    <div class="row justify-content-center text-center">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class=" wrap p-5">
+                <form method="post" asp-action="TicketPurchaseCreate">
+                    <label>Silla @seat</label>
+                    <input type="hidden" name="seat" value="@seat"/>
+                    <div class="panel panel-default">
+                        <div class="panel heading">Descuentos</div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                @foreach (var discount in Model)
+                                {
+                                    <li class="list-group-item">
+                                        <label><input type="checkbox" name="discounts" value="@discount.Id" />@discount.Name. Dinero descontado: @discount.DiscountedMoney</label>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Reservar" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>
+

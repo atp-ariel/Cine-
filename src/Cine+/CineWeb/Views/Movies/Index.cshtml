@@ -30,6 +30,7 @@
                             <th>@Html.DisplayNameFor(m => m.Genres)</th>
                             <th>@Html.DisplayNameFor(m => m.Countries)</th>
                             <th>@Html.DisplayNameFor(m => m.Actors)</th>
+                            <th>@Html.DisplayNameFor(m=>m.Rating)</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
@@ -63,6 +64,14 @@
                                     @if (item.Actors != null && item.Actors.Count() > 0)
                                     {
                                         @String.Join(" , ", item.Actors.Select(a => a.Name))
+                                    }
+                                    else
+                                    {
+                                        <p class="text-black-50"> - </p>
+                                    }
+                                    @if (item.Rating != null)
+                                    {
+                                        @item.Rating
                                     }
                                     else
                                     {

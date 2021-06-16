@@ -24,6 +24,12 @@ namespace DomainLayer
 
         [Display(Name = "Actores")]
         public virtual ICollection<Actor> Actors { get; set; }
+
+        [Required(ErrorMessage = "Este campo es obligatorio")]
+        [Display(Name = "Clasificación")]
+        public int RatingId { get; set; }
+        public Rating Rating { get; set; }
+
     }
-     
+
 }

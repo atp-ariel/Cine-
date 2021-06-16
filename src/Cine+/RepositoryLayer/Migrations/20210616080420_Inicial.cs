@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RepositoryLayer.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -87,33 +87,16 @@ namespace RepositoryLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Movie",
+                name: "Rating",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false)
+                    Name = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Movie", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Partner",
-                columns: table => new
-                {
-                    Code = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    Mobile = table.Column<string>(type: "TEXT", nullable: false),
-                    Email = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    Adress = table.Column<string>(type: "TEXT", nullable: false),
-                    Points = table.Column<long>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Partner", x => x.Code);
+                    table.PrimaryKey("PK_Rating", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -171,6 +154,26 @@ namespace RepositoryLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Movie",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Title = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    RatingId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Movie", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Movie_Rating_RatingId",
+                        column: x => x.RatingId,
+                        principalTable: "Rating",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ActorMovie",
                 columns: table => new
                 {
@@ -191,6 +194,40 @@ namespace RepositoryLayer.Migrations
                         column: x => x.MoviesId,
                         principalTable: "Movie",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Batch",
+                columns: table => new
+                {
+                    ScheduleStartTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ScheduleEndTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CinemaId = table.Column<int>(type: "INTEGER", nullable: false),
+                    MovieId = table.Column<int>(type: "INTEGER", nullable: false),
+                    TicketPrice = table.Column<float>(type: "REAL", nullable: false),
+                    TicketPoints = table.Column<float>(type: "REAL", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Batch", x => new { x.CinemaId, x.ScheduleStartTime, x.ScheduleEndTime });
+                    table.ForeignKey(
+                        name: "FK_Batch_Cinema_CinemaId",
+                        column: x => x.CinemaId,
+                        principalTable: "Cinema",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Batch_Movie_MovieId",
+                        column: x => x.MovieId,
+                        principalTable: "Movie",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Batch_Schedule_ScheduleStartTime_ScheduleEndTime",
+                        columns: x => new { x.ScheduleStartTime, x.ScheduleEndTime },
+                        principalTable: "Schedule",
+                        principalColumns: new[] { "StartTime", "EndTime" },
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -243,39 +280,6 @@ namespace RepositoryLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Batch",
-                columns: table => new
-                {
-                    ScheduleStartTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ScheduleEndTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    CinemaId = table.Column<int>(type: "INTEGER", nullable: false),
-                    MovieId = table.Column<int>(type: "INTEGER", nullable: false),
-                    TicketPrice = table.Column<float>(type: "REAL", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Batch", x => new { x.CinemaId, x.ScheduleStartTime, x.ScheduleEndTime });
-                    table.ForeignKey(
-                        name: "FK_Batch_Cinema_CinemaId",
-                        column: x => x.CinemaId,
-                        principalTable: "Cinema",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Batch_Movie_MovieId",
-                        column: x => x.MovieId,
-                        principalTable: "Movie",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Batch_Schedule_ScheduleStartTime_ScheduleEndTime",
-                        columns: x => new { x.ScheduleStartTime, x.ScheduleEndTime },
-                        principalTable: "Schedule",
-                        principalColumns: new[] { "StartTime", "EndTime" },
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "TicketPurchase",
                 columns: table => new
                 {
@@ -285,8 +289,10 @@ namespace RepositoryLayer.Migrations
                     SeatId = table.Column<int>(type: "INTEGER", nullable: false),
                     DiscountListId = table.Column<int>(type: "INTEGER", nullable: false),
                     Price = table.Column<float>(type: "REAL", nullable: false),
-                    PartnerCode = table.Column<int>(type: "INTEGER", nullable: false),
-                    PointsSpent = table.Column<int>(type: "INTEGER", nullable: false),
+                    PointsSpent = table.Column<float>(type: "REAL", nullable: false),
+                    Code = table.Column<string>(type: "TEXT", nullable: true),
+                    Paid = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AppUserId = table.Column<string>(type: "TEXT", nullable: true),
                     Discriminator = table.Column<string>(type: "TEXT", nullable: false),
                     CreditCard = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -304,12 +310,6 @@ namespace RepositoryLayer.Migrations
                         column: x => x.DiscountListId,
                         principalTable: "DiscountList",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_TicketPurchase_Partner_PartnerCode",
-                        column: x => x.PartnerCode,
-                        principalTable: "Partner",
-                        principalColumn: "Code",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_TicketPurchase_Seat_CinemaId_SeatId",
@@ -350,6 +350,11 @@ namespace RepositoryLayer.Migrations
                 column: "MoviesId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Movie_RatingId",
+                table: "Movie",
+                column: "RatingId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TicketPurchase_CinemaId_SeatId",
                 table: "TicketPurchase",
                 columns: new[] { "CinemaId", "SeatId" });
@@ -358,11 +363,6 @@ namespace RepositoryLayer.Migrations
                 name: "IX_TicketPurchase_DiscountListId",
                 table: "TicketPurchase",
                 column: "DiscountListId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TicketPurchase_PartnerCode",
-                table: "TicketPurchase",
-                column: "PartnerCode");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -401,9 +401,6 @@ namespace RepositoryLayer.Migrations
                 name: "DiscountList");
 
             migrationBuilder.DropTable(
-                name: "Partner");
-
-            migrationBuilder.DropTable(
                 name: "Seat");
 
             migrationBuilder.DropTable(
@@ -414,6 +411,9 @@ namespace RepositoryLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Cinema");
+
+            migrationBuilder.DropTable(
+                name: "Rating");
         }
     }
 }

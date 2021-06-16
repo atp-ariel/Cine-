@@ -20,7 +20,7 @@ namespace CineWeb.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Movie> listMovies = _context.Movie.Include(m => m.Genres).Include(m => m.Countries).Include(m => m.Actors).ToList();
+            IEnumerable<Movie> listMovies = _context.Movie.Include(m => m.Genres).Include(m => m.Countries).Include(m => m.Actors).Include(m=>m.Rating).ToList();
             return View(listMovies);
         }
 
@@ -186,6 +186,7 @@ namespace CineWeb.Controllers
             ViewBag.Genres = _context.Genre;
             ViewBag.Actors = _context.Actor;
             ViewBag.Countries = _context.Country;
+            ViewBag.Ratings = _context.Rating;
         }
     }
 }
