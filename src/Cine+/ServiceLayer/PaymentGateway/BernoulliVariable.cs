@@ -1,7 +1,8 @@
-using System;
+﻿using System;
 
-namespace APIBank.Models{
-    public class BernoulliVariable
+namespace ServiceLayer.PaymentGateway
+{
+    internal class BernoulliVariable
     {
         #region Fields
         double _p = 0.5;
@@ -9,11 +10,11 @@ namespace APIBank.Models{
 
         #region Properties
         private Random Rnd { get; set; }
-        public double P => this._p;
+        internal double P => this._p;
         #endregion Properties
 
         #region Constructor
-        public BernoulliVariable(double p)
+        internal BernoulliVariable(double p)
         {
             if (p < 0 && p > 1)
                 throw new Exception("A probabilty must be on [0,1] interval");
@@ -23,7 +24,7 @@ namespace APIBank.Models{
         #endregion Constructor
 
         #region Methods
-        public int GetX()
+        internal int GetX()
         {
             var U = this.Rnd.NextDouble();
             return U < this.P ? 1 : 0;

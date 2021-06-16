@@ -8,6 +8,7 @@ using RepositoryLayer.Seed;
 using RepositoryLayer;
 using Microsoft.EntityFrameworkCore;
 using ServiceLayer.Identity;
+using DomainLayer;
 
 namespace CineWeb
 {
@@ -32,9 +33,17 @@ namespace CineWeb
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("CinePlus")));
 
+            
 
             services.AddScoped<IUserStore, CinemaUsersStore>();
             services.AddScoped<IAuthorizeUser, CinemaAuthorization>();
+
+            services.AddScoped<IRepository<Genre>, GenreRepository>();
+            services.AddScoped<IRepository<Actor>, ActorRepository>();
+            services.AddScoped<IRepository<Country>, CountryRepository>();
+            services.AddScoped<IRepository<Movie>, MovieRepository>();
+            services.AddScoped<IRepository<Batch>, BatchRepository>();
+
         }
 
 

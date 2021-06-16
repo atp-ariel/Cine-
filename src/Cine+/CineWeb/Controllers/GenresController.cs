@@ -1,7 +1,8 @@
 ﻿using DomainLayer;
 using Microsoft.AspNetCore.Mvc;
-using RepositoryLayer;
 using System.Collections.Generic;
+using ServiceLayer;
+using RepositoryLayer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 
@@ -10,17 +11,15 @@ namespace CineWeb.Controllers
     [Authorize(Roles = "Manager")]
     public class GenresController : Controller
     {
-        private readonly ApplicationDbContext _context;
-
-        public GenresController(ApplicationDbContext context)
+        private readonly GenreManager _manager;
+        public GenresController(IRepository<Genre> repository)
         {
-            _context = context;
+            this._manager = new GenreManager(repository);
         }
 
         public IActionResult Index()
         {
-            IEnumerable<Genre> listGenres = _context.Genre;
-            return View(listGenres);
+            return View(_manager.GetAllGenres());
         }
 
         public IActionResult Create()
@@ -34,8 +33,7 @@ namespace CineWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Genre.Add(genre);
-                _context.SaveChanges();
+                _manager.AddGenre(genre);
                 TempData["message"] = "Se ha agregado género correctamente";
                 return RedirectToAction("Index");
             }
@@ -49,7 +47,7 @@ namespace CineWeb.Controllers
                 return NotFound();
             }
 
-            var genre = _context.Genre.Find(id);
+            var genre = _manager.FindById((int)id);
 
             if (genre == null)
             {
@@ -65,8 +63,7 @@ namespace CineWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Genre.Update(genre);
-                _context.SaveChanges();
+                _manager.UpdateGenre(genre);
                 TempData["message"] = "Se ha actualizado género correctamente";
                 return RedirectToAction("Index");
 
@@ -82,7 +79,7 @@ namespace CineWeb.Controllers
                 return NotFound();
             }
 
-            var genre = _context.Genre.Find(id);
+            var genre = _manager.FindById((int)id);
 
             if (genre== null)
             {
@@ -96,15 +93,14 @@ namespace CineWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteGenre(int? id)
         {
-            var genre = _context.Genre.Find(id);
+            var genre = _manager.FindById((int)id);
 
             if (genre == null)
             {
                 return NotFound();
             }
 
-            _context.Genre.Remove(genre);
-            _context.SaveChanges();
+            _manager.DeleteGenre(genre.Id);
             TempData["message"] = "Se ha eliminado género correctamente";
             return RedirectToAction("Index");
         }

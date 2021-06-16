@@ -1,27 +1,24 @@
 ﻿using DomainLayer;
 using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using ServiceLayer;
 
 namespace CineWeb.Controllers
 {
     [Authorize(Roles = "Manager")]
     public class MoviesController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly MoviesManager moviesManager;
 
-        public MoviesController(ApplicationDbContext context)
+        public MoviesController(IRepository<Movie> repo, IRepository<Country> country, IRepository<Actor> actors, IRepository<Genre> genres)
         {
-            _context = context;
+            moviesManager = new MoviesManager(repo, country, actors, genres);
         }   
 
         public IActionResult Index()
         {
-            IEnumerable<Movie> listMovies = _context.Movie.Include(m => m.Genres).Include(m => m.Countries).Include(m => m.Actors).ToList();
-            return View(listMovies);
+            return View(moviesManager.GetAllMovies());
         }
 
         public IActionResult Create() 
@@ -36,11 +33,10 @@ namespace CineWeb.Controllers
         {
             if (ModelState.IsValid) 
             {
+                moviesManager.GetAllMovies();
+                moviesManager.UpdateRelations(movie, countries, genres, actors);
 
-                Save(movie, countries, genres, actors);
-
-                _context.Movie.Add(movie);
-                _context.SaveChanges();
+                moviesManager.AddMovie(movie);
 
                 TempData["message"] = "Se ha creado película correctamente";
 
@@ -54,18 +50,14 @@ namespace CineWeb.Controllers
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)
-            {
                 return NotFound();
-            }
+            
+            moviesManager.GetAllMovies();
 
-            IEnumerable<Movie> listMovies = _context.Movie.Include(m => m.Genres).Include(m => m.Countries).Include(m => m.Actors).ToList();
-
-            var movie = _context.Movie.Find(id);
+            var movie = moviesManager.FindById((int)id);
 
             if (movie == null)
-            {
                 return NotFound();
-            }
 
             ViewBags();
 
@@ -76,28 +68,22 @@ namespace CineWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Movie movie, int[] countries = null, int[] genres = null, int[] actors = null)
         {
-            IEnumerable<Movie> listMovies = _context.Movie.Include(m => m.Genres).Include(m => m.Countries).Include(m => m.Actors).Include(m => m.Batches).ToList();
 
-            movie = _context.Movie.Find(movie.Id);
+            movie = moviesManager.FindById(movie.Id);
 
             if (ModelState.IsValid)
             {
-                _context.Movie.Remove(movie);
-                _context.SaveChanges();
+                moviesManager.DeleteMovie(movie.Id);
 
                 movie.Countries.Clear();
                 movie.Genres.Clear();
                 movie.Actors.Clear();
 
-                Save(movie, countries, genres, actors);
+                moviesManager.UpdateRelations(movie, countries, genres, actors);
 
-                foreach (var item in movie.Batches)
-                {
-                    _context.Batch.Add(item);
-                }
+                moviesManager.AddBatchMovie(movie);
 
-                _context.Movie.Add(movie);
-                _context.SaveChanges();
+                moviesManager.AddMovie(movie);
 
                 TempData["message"] = "Se ha editado película correctamente";
                 return RedirectToAction("Index");
@@ -111,18 +97,12 @@ namespace CineWeb.Controllers
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
-            {
                 return NotFound();
-            }
+            moviesManager.GetAllMovies();
 
-            IEnumerable<Movie> listMovies = _context.Movie.Include(m => m.Genres).Include(m => m.Countries).Include(m => m.Actors).ToList();
-
-            var movie = _context.Movie.Find(id);
-
+            var movie = moviesManager.FindById((int)id);
             if (movie == null)
-            {
                 return NotFound();
-            }
 
             ViewBags();
 
@@ -133,59 +113,20 @@ namespace CineWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteMovie(int? id)
         {
-            var movie = _context.Movie.Find(id);
+            var movie = moviesManager.FindById((int)id);
 
             if (movie == null)
-            {
                 return NotFound();
-            }
 
-            _context.Movie.Remove(movie);
-            _context.SaveChanges();
+            moviesManager.DeleteMovie(movie.Id);
             TempData["message"] = "Se ha eliminado película correctamente";
             return RedirectToAction("Index");
         }
-
-
-        public void Save(Movie movie, int[] countries = null, int[] genres = null, int[] actors = null)
+        private void ViewBags() 
         {
-            if (countries != null)
-            {
-                foreach (var item in countries)
-                {
-                    Country country = _context.Country.Find(item);
-                    movie.Countries.Add(country);
-                    country.Movies.Add(movie);
-                }
-
-            }
-
-            if (genres != null)
-            {
-                foreach (var item in genres)
-                {
-                    Genre genre = _context.Genre.Find(item);
-                    movie.Genres.Add(genre);
-                    genre.Movies.Add(movie);
-                }
-            }
-
-            if (actors != null)
-            {
-                foreach (var item in actors)
-                {
-                    Actor actor = _context.Actor.Find(item);
-                    movie.Actors.Add(actor);
-                    actor.Movies.Add(movie);
-                }
-            }
-        }
-
-        public void ViewBags() 
-        {
-            ViewBag.Genres = _context.Genre;
-            ViewBag.Actors = _context.Actor;
-            ViewBag.Countries = _context.Country;
+            ViewBag.Genres = moviesManager.genres.GetAllGenres();
+            ViewBag.Actors = moviesManager.actors.GetAllActors();
+            ViewBag.Countries = moviesManager.country.GetAllCountrys();
         }
     }
 }

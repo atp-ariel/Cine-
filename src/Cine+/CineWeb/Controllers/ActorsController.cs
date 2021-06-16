@@ -1,26 +1,24 @@
 ﻿using DomainLayer;
 using Microsoft.AspNetCore.Mvc;
+using ServiceLayer;
 using RepositoryLayer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CineWeb.Controllers
 {
+    [Authorize(Roles="Manager")]
     public class ActorsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ActorManager actorManager;
 
-        public ActorsController(ApplicationDbContext context)
+        public ActorsController(IRepository<Actor> actors)
         {
-            _context = context;
+            actorManager = new ActorManager(actors);
         }
 
         public IActionResult Index()
         {
-            IEnumerable<Actor> listActors = _context.Actor;
-            return View(listActors);
+            return View(actorManager.GetAllActors());
         }
 
         public IActionResult Create()
@@ -34,8 +32,7 @@ namespace CineWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Actor.Add(actor);
-                _context.SaveChanges();
+                actorManager.AddActor(actor);
                 TempData["message"] = $"Se ha agregado el actor '{actor.Name}' correctamente";
                 return RedirectToAction("Index");
 
@@ -50,7 +47,7 @@ namespace CineWeb.Controllers
                 return NotFound();
             }
 
-            var actor = _context.Actor.Find(id);
+            var actor = actorManager.FindById((int)id);
 
             if (actor == null)
             {
@@ -66,8 +63,7 @@ namespace CineWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Actor.Update(actor);
-                _context.SaveChanges();
+                actorManager.UpdateActor(actor);
                 TempData["message"] = $"Se ha actualizado actor '{actor.Name}' correctamente";
                 return RedirectToAction("Index");
 
@@ -82,7 +78,7 @@ namespace CineWeb.Controllers
                 return NotFound();
             }
 
-            var actor = _context.Actor.Find(id);
+            var actor = actorManager.FindById((int)id);
 
             if (actor == null)
             {
@@ -96,15 +92,14 @@ namespace CineWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteActor(int? id)
         {
-            var actor = _context.Actor.Find(id);
+            var actor = actorManager.FindById((int)id);
 
             if (actor == null)
             {
                 return NotFound();
             }
 
-            _context.Actor.Remove(actor);
-            _context.SaveChanges();
+            actorManager.DeleteActor((int)id);
             TempData["message"] = $"Se ha eliminado el actor '{actor.Name}' correctamente";
             return RedirectToAction("Index");
         }

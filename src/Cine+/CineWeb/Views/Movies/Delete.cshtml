@@ -36,20 +36,22 @@
                             {
                                 bool find = false;
                                 <li class="list-group-item">
+                                @if (Model.Countries != null)
+                                {
                                     @foreach (var c in Model.Countries)
                                     {
                                         @if (country.Id == c.Id)
                                         {
                                             find = true;
-                                            <label><input type="checkbox" name="countries" checked="checked" value="@country.Id" disabled/>@country.Name</label>
+                                            <label><input type="checkbox" name="countries" checked="checked" value="@country.Id" disabled />@country.Name</label>
                                             break;
                                         }
                                     }
                                     @if (!find)
                                     {
-                                        <label><input type="checkbox" name="countries" value="@country.Id" disabled/>@country.Name</label>
+                                        <label><input type="checkbox" name="countries" value="@country.Id" disabled />@country.Name</label>
                                     }
-
+                                }
                                 </li>
                             }
                         </ul>

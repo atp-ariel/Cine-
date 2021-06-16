@@ -11,8 +11,10 @@ namespace ServiceLayer.Identity
         private readonly SignInManager<AppUser> _signInManager;
 
         #endregion
-        public SignInManager<AppUser> SignInManager => _signInManager;
+
         #region Properties
+        public SignInManager<AppUser> SignInManager => _signInManager;
+        #endregion
 
         #region Constructors
         public CinemaAuthorization(SignInManager<AppUser> signIn)
@@ -21,7 +23,8 @@ namespace ServiceLayer.Identity
         }
         #endregion
 
-        #endregion
+
+        #region Methods
         /// <summary>
         /// Login a user
         /// </summary>
@@ -39,5 +42,6 @@ namespace ServiceLayer.Identity
         {
             await SignInManager.SignOutAsync();
         }
+        #endregion
     }
 }

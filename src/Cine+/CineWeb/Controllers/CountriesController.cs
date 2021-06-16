@@ -1,26 +1,22 @@
 ﻿using DomainLayer;
 using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+using ServiceLayer;
 namespace CineWeb.Controllers
 {
     public class CountriesController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly CountryManager countryManager;
 
-        public CountriesController(ApplicationDbContext context)
+        public CountriesController(IRepository<Country> countryRepo)
         {
-            _context = context;
+            countryManager = new CountryManager(countryRepo);
         }
 
         public IActionResult Index()
         {
-            IEnumerable<Country> listCountries = _context.Country;
-            return View(listCountries);
+            return View(countryManager.GetAllCountrys());
         }
 
         public IActionResult Create()
@@ -34,8 +30,7 @@ namespace CineWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Country.Add(country);
-                _context.SaveChanges();
+                countryManager.AddCountry(country);
                 TempData["message"] = "Se ha agregado país correctamente";
                 return RedirectToAction("Index");
             }
@@ -49,7 +44,7 @@ namespace CineWeb.Controllers
                 return NotFound();
             }
 
-            var country = _context.Country.Find(id);
+            var country = countryManager.FindById((int)id);
 
             if (country == null)
             {
@@ -65,8 +60,7 @@ namespace CineWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Country.Update(country);
-                _context.SaveChanges();
+                countryManager.UpdateCountry(country);
                 TempData["message"] = "Se ha actualizado país correctamente";
                 return RedirectToAction("Index");
 
@@ -81,7 +75,7 @@ namespace CineWeb.Controllers
                 return NotFound();
             }
 
-            var country = _context.Country.Find(id);
+            var country = countryManager.FindById((int)id);
 
             if (country == null)
             {
@@ -95,15 +89,14 @@ namespace CineWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteCountry(int? id)
         {
-            var country = _context.Country.Find(id);
+            var country = countryManager.FindById((int)id);
 
             if (country == null)
             {
                 return NotFound();
             }
 
-            _context.Country.Remove(country);
-            _context.SaveChanges();
+            countryManager.DeleteCountry((int)id);
             TempData["message"] = "Se ha eliminado país correctamente";
             return RedirectToAction("Index");
         }
