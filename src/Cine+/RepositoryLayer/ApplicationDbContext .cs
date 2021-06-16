@@ -44,6 +44,5 @@ namespace RepositoryLayer
         public DbSet<Batch> Batch { get; set; }
         public DbSet<Schedule> Schedule { get; set; }
         public DbSet<Discount> Discount { get; set; }
-        public DbSet<Rating> Rating { get; set; }
     }
 }

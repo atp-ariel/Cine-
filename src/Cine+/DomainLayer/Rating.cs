@@ -12,7 +12,7 @@ namespace DomainLayer
         public int Id { get; set; }
         [StringLength(50, ErrorMessage = "Maximum 50 characters allowed")]
         [Required(ErrorMessage = "Este campo es obligatorio")]
-        [Display(Name = "Nombre")]
+        [Display(Name = "Clasificación")]
         public string Name { get; set; }
 
         public virtual ICollection<Movie> Movies { get; set; }
