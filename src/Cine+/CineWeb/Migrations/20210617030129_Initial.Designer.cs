@@ -9,8 +9,8 @@ using RepositoryLayer.Identity;
 namespace CineWeb.Migrations
 {
     [DbContext(typeof(AppIdentityContext))]
-    [Migration("20210616080541_Inicial")]
-    partial class Inicial
+    [Migration("20210617030129_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

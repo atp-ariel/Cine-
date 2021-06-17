@@ -4,3 +4,68 @@
 @{
     Layout = "_Layout";
 }
+@using DomainLayer.Identity
+@model IEnumerable<AppUser>
+
+<!-- All boxofficers of Cine+ Club -->
+<div class="row mt-5">
+    <div class="col-1"></div>
+    <div class="col-10">
+        <h2 class="my-2">Gerentes del Cine</h2>
+
+        @if (TempData["message"] != null)
+        {
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                @TempData["message"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
+        @if (Model.Count() > 0)
+        {
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nombre de Usuario</th>
+                            <th>Correo Electrónico</th>
+                            <th>Teléfono</th>
+                            <th>Dirección</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                <td>@user.UserName</td>
+                                <td>@user.Email</td>
+                                <td>@user.PhoneNumber</td>
+                                <td>@user.Address</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <p class="font-weight-bold">No hay gerentes registrados.</p>
+            <a asp-controller="ClubCinePlus" asp-action="AddMembersClub" class="btn btn-link">Registrar taquillero</a>
+        }
+    </div>
+    <div class="col-1"></div>
+</div>
+
+@if (Model.Count() > 0)
+{
+    <!-- Statistic of members -->
+    <div class="row my-5">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <p class="mb-2 font-weight-bold">Cantidad de gerentes del cine: @Model.Count() gerentes</p>
+        </div>
+        <div class="col-1"></div>
+    </div>
+}

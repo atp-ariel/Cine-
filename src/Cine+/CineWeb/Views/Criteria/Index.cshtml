@@ -1,0 +1,34 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using ServiceLayer.Criteria
+@model IEnumerable<(string, ICriterion)>
+@{
+    Layout = "_Layout";
+}
+
+<div class="row justify-content-center">
+    <div class="col-2"></div>
+    <div class="col-8">
+        <div class="wrap p-5">
+            <h1>Seleccionar el criterio de sugeridas</h1>
+            <form asp-controller="Criteria" asp-action="SelectCriteria" method="POST">
+                <div class="form-group mb-3">
+                    @foreach (var criterio in Model)
+                    {
+                        <label>
+                            <input type="radio" name="selection" value="@criterio.Item1" />@criterio.Item1
+                        </label>
+                    }
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">
+                        Enviar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-2"></div>
+</div>
+

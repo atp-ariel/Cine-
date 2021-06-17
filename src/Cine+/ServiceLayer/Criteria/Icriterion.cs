@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DomainLayer;
+﻿using System.Data;
 
-namespace ServiceLayer
+namespace ServiceLayer.Criteria
 {
-    public interface Icriterion
+    public interface ICriterion
     {
         public string Name { get; }
-        public void ApplyCriterion(int n);
+        public DataTable ApplyCriterion(int n);
     }
 }

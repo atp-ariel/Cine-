@@ -2,11 +2,6 @@
 
 Proyecto final de Ingeniería de Software, [la orientación](https://evea.uh.cu/mod/resource/view.php?id=11766) del proyecto se encuentra en el EVEA.
 
-## Para ver formularios de Login y Crear cuenta
-
-* `Identity/SignIn` -> ver login
-* `Identity/SignUp` -> ver Crear cuenta
-
 
 ## Acerca del desarrollo y control de versiones
 
@@ -24,25 +19,11 @@ git clone https://github.com/ArielTriana/Cine-.git
 ```
 ## Acerca de la documentación
 
-Toda la documentación se va a desarrollar en Latex.
+Toda la documentación del proyecto se incluye `doc/`, allí existen tres directorios:
 
-No se incluyen en el repositorio los `.pdf` de la documentación ni la orden del proyecto para contribuir al ahorro de MB. Solamente se incluye la plantilla
-
-Para generar los `.pdf`, se debe ejecutar el script `build.sh` incluido en `/doc/Informe`. . Ejemplo:
-
-El informe final se desarrolló utilizando el Latex Template **Book**, los capítulos están en la carpeta `/doc/Informe/chapters/` en un `.tex` aparte.
-
-## Acerca de la pasarela
-
-La pasarela de pagos hasta el momento es una api que tiene un solo Controlador, se debe acceder a través de `api/transfer_money/{number of origin card}/{pin}/{number of final card}/{amount}`.
-
-Esto devuelve un `json` con los siguientes campos:
-
-* `status`: estado de la transferencia. `101`, y `102`.
-* `resultMessage`: Mensaje resultante de la transferencia.
-
-La pasarela está implementada como un Bernoulli con parámetro p = 0.9.
-
+* `Individuales/`: directorio que almacena los informes individuales de cada integrante del equipo desarrollador del proyecto.
+* `Informe/`: se incluye el informe del proyecto con la plantilla requerida
+* `Planificacion/`: se incluye la planificación del proyecto utilizando GanttProject.
 
 # Desarrolladores
 

@@ -8,6 +8,8 @@ using RepositoryLayer.Seed;
 using RepositoryLayer;
 using Microsoft.EntityFrameworkCore;
 using ServiceLayer.Identity;
+using ServiceLayer.Criteria;
+using DomainLayer;
 
 namespace CineWeb
 {
@@ -33,8 +35,16 @@ namespace CineWeb
                 options.UseSqlite(Configuration.GetConnectionString("CinePlus")));
 
 
+            //CriteriaManager.SelectedCriteria = CriteriaManager.GetSelectedCriterion(Configuration.GetValue<string>("SelectedCriteria"));
+            
             services.AddScoped<IUserStore, CinemaUsersStore>();
             services.AddScoped<IAuthorizeUser, CinemaAuthorization>();
+
+            services.AddScoped<IRepository<Genre>, GenreRepository>();
+            services.AddScoped<IRepository<Actor>, ActorRepository>();
+            services.AddScoped<IRepository<Country>, CountryRepository>();
+            services.AddScoped<IRepository<Movie>, MovieRepository>();
+            services.AddScoped<IRepository<Batch>, BatchRepository>();
         }
 
 
@@ -65,7 +75,7 @@ namespace CineWeb
 
 
             // * Seeds
-            IdentitySeedData.EnsurePopulated(app);
+            Sower.SowSeeds(app);
         }
     }
 }

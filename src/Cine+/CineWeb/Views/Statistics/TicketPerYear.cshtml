@@ -1,0 +1,97 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model (int[], int[])
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Tickets por día";
+}
+
+<div class="container">
+
+    <div class="row wrap d-block p-5 mb-5">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="h1 text-center">Estadísticas del año</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <form method="post" asp-controller="Statistics" asp-action="TicketPerYear">
+                    <div class="form-group mb-3">
+                        <input type="datetime-local" data-val="true" class="form-control rounded-pill" name="month" required />
+                    </div>
+                    <div class="form-group mb-3">
+                        <button type="submit" class="btn btn-primary rounded-pill">
+                            Consultar
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </div>
+
+    @if (Model != (null, null))
+    {
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Mes</th>
+                            <th>No. entradas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Item1.Length; i++)
+                        {
+                            <tr>
+
+                                <td>@Model.Item1[i]</td>
+                                <td>@Model.Item2[i]</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-6">
+                <div>
+                    <canvas id="chart"></canvas>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@if (Model != (null, null))
+{
+    <script src="~/js/chart.js"></script>
+    <script>
+        const data = {
+            labels: [@String.Join(" , ", Model.Item1)],
+            datasets: [{
+                label: 'Ticket vs Mes',
+                data: [@String.Join(" , ", Model.Item2)],
+            }]
+        };
+        const config = {
+            type: 'line',
+            data,
+            options: {}
+        };
+        var myChart = new Chart(
+            document.getElementById('chart'),
+            config
+        );
+    </script>
+}
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}

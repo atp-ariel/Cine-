@@ -1,32 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RepositoryLayer;
-using Microsoft.EntityFrameworkCore;
 using DomainLayer;
+using System.Data;
+using Microsoft.EntityFrameworkCore;
 
-namespace ServiceLayer
-{   
-    public class MoreViewsCriterion : Icriterion
+namespace ServiceLayer.Criteria
+{
+    public class MoreViewsCriterion : ICriterion
     {
         private readonly ApplicationDbContext context;
-        Movie[] movies;
-        int[] viewsMovies;
         public MoreViewsCriterion(ApplicationDbContext context)
         {
             this.context = context;
         }
-
+        public MoreViewsCriterion(IRepository<Movie> movies) : this(new ApplicationDbContext())
+        {
+        }
         public string Name { get => "More Views"; }
-        public Movie[] Movies { get { return movies; } private set { movies = value; } }
-        public int[] Views { get { return viewsMovies; } private set { viewsMovies = value; } }
 
-        public void ApplyCriterion(int n)
+        public DataTable ApplyCriterion(int n)
         {
             Dictionary<Movie, int> dictMovie = new Dictionary<Movie, int>();
-            List<Batch> batches = context.Batch.ToList();
+            IList<Batch> batches = context.Batch.Include(b => b.Movie).ToList();
             foreach (Batch batch in batches)
             {
                 int cinemaId = batch.CinemaId;
@@ -41,17 +38,20 @@ namespace ServiceLayer
                     dictMovie[movie] = count;
                 else dictMovie[movie] += count;
             }
-            if (dictMovie.Count <= n)
-            {
-                dictMovie.Keys.OrderByDescending(x => dictMovie[x]).ToList();
-                return;
-            }
 
-
-            movies = dictMovie.Keys.OrderByDescending(x => dictMovie[x]).Take(n).ToArray();
-            viewsMovies = new int[movies.Length];
+            List<Movie> _movies = dictMovie.Keys.OrderByDescending(x => dictMovie[x]).Take(n).ToList();
+            int[] _views = new int[_movies.Count];
             int j = 0;
-            movies.ToList().ForEach(i => { viewsMovies[j] = dictMovie[i]; j++; });
+            _movies.ForEach(i => { _views[j] = dictMovie[i]; j++; });
+
+            DataTable _table = new DataTable();
+            _table.Columns.Add("Movies", typeof(Movie));
+            _table.Columns.Add("Views", typeof(int));
+
+            for (int i = 0; i < _movies.Count; i++)
+                _table.Rows.Add(_movies[i], _views[i]);
+
+            return _table;
         }
     }
 }

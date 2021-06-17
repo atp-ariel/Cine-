@@ -16,15 +16,15 @@ namespace CineWeb.Controllers
         public MoviesController(ApplicationDbContext context)
         {
             _context = context;
-        }   
+        }
 
         public IActionResult Index()
         {
-            IEnumerable<Movie> listMovies = _context.Movie.Include(m => m.Genres).Include(m => m.Countries).Include(m => m.Actors).Include(m=>m.Rating).ToList();
+            IEnumerable<Movie> listMovies = _context.Movie.Include(m => m.Genres).Include(m => m.Countries).Include(m => m.Actors).Include(m => m.Rating).ToList();
             return View(listMovies);
         }
 
-        public IActionResult Create() 
+        public IActionResult Create()
         {
             ViewBags();
             return View();
@@ -32,9 +32,9 @@ namespace CineWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Movie movie, int rating, int[] countries=null,int[] genres=null,int[] actors=null)
+        public IActionResult Create(Movie movie, int rating, int[] countries = null, int[] genres = null, int[] actors = null)
         {
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
 
                 Save(movie, rating, countries, genres, actors);
@@ -149,7 +149,7 @@ namespace CineWeb.Controllers
 
         public void Save(Movie movie, int rating, int[] countries = null, int[] genres = null, int[] actors = null)
         {
-            if (rating!=0)
+            if (rating != 0)
             {
                 Rating auxRating = _context.Rating.Find(rating);
                 auxRating.Movies.Add(movie);
@@ -189,7 +189,7 @@ namespace CineWeb.Controllers
             }
         }
 
-        public void ViewBags() 
+        public void ViewBags()
         {
             ViewBag.Genres = _context.Genre;
             ViewBag.Actors = _context.Actor;

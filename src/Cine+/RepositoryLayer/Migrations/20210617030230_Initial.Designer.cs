@@ -9,8 +9,8 @@ using RepositoryLayer;
 namespace RepositoryLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210616080420_Inicial")]
-    partial class Inicial
+    [Migration("20210617030230_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -119,6 +119,19 @@ namespace RepositoryLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cinema");
+                });
+
+            modelBuilder.Entity("DomainLayer.Configurations", b =>
+                {
+                    b.Property<string>("KeyConfig")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("KeyConfig");
+
+                    b.ToTable("Configurations");
                 });
 
             modelBuilder.Entity("DomainLayer.Country", b =>
@@ -283,6 +296,9 @@ namespace RepositoryLayer.Migrations
 
                     b.Property<float>("Price")
                         .HasColumnType("REAL");
+
+                    b.Property<DateTime>("TimeReserve")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("CinemaId", "BatchScheduleStartTime", "BatchScheduleEndTime", "SeatId");
 

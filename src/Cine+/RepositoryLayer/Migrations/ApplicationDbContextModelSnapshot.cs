@@ -119,6 +119,19 @@ namespace RepositoryLayer.Migrations
                     b.ToTable("Cinema");
                 });
 
+            modelBuilder.Entity("DomainLayer.Configurations", b =>
+                {
+                    b.Property<string>("KeyConfig")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("KeyConfig");
+
+                    b.ToTable("Configurations");
+                });
+
             modelBuilder.Entity("DomainLayer.Country", b =>
                 {
                     b.Property<int>("Id")
@@ -281,6 +294,9 @@ namespace RepositoryLayer.Migrations
 
                     b.Property<float>("Price")
                         .HasColumnType("REAL");
+
+                    b.Property<DateTime>("TimeReserve")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("CinemaId", "BatchScheduleStartTime", "BatchScheduleEndTime", "SeatId");
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RepositoryLayer.Migrations
 {
-    public partial class Inicial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,6 +31,18 @@ namespace RepositoryLayer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cinema", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Configurations",
+                columns: table => new
+                {
+                    KeyConfig = table.Column<string>(type: "TEXT", nullable: false),
+                    Value = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Configurations", x => x.KeyConfig);
                 });
 
             migrationBuilder.CreateTable(
@@ -292,6 +304,7 @@ namespace RepositoryLayer.Migrations
                     PointsSpent = table.Column<float>(type: "REAL", nullable: false),
                     Code = table.Column<string>(type: "TEXT", nullable: true),
                     Paid = table.Column<bool>(type: "INTEGER", nullable: false),
+                    TimeReserve = table.Column<DateTime>(type: "TEXT", nullable: false),
                     AppUserId = table.Column<string>(type: "TEXT", nullable: true),
                     Discriminator = table.Column<string>(type: "TEXT", nullable: false),
                     CreditCard = table.Column<string>(type: "TEXT", nullable: true)
@@ -369,6 +382,9 @@ namespace RepositoryLayer.Migrations
         {
             migrationBuilder.DropTable(
                 name: "ActorMovie");
+
+            migrationBuilder.DropTable(
+                name: "Configurations");
 
             migrationBuilder.DropTable(
                 name: "CountryMovie");

@@ -9,11 +9,10 @@ using System.Linq;
 
 namespace RepositoryLayer.Seed
 {
-    public static class IdentitySeedData {
+    public class IdentitySeedData: ISeed {
 
         #region Datas
-
-        private static Tuple<AppUser, string, string>[] users = new Tuple<AppUser, string, string>[]{
+        private Tuple<AppUser, string, string>[] users = new Tuple<AppUser, string, string>[]{
                 Tuple.Create(
                     new AppUser(){
                         UserName = "Admin",
@@ -44,10 +43,21 @@ namespace RepositoryLayer.Seed
                     },
                     "Happy.1199",
                     "Member"
+                ),
+                Tuple.Create(
+                    new AppUser()
+                    {
+                        UserName = "Steve",
+                        Email = "steve@gmail.com",
+                        PhoneNumber = "5-215-10-45",
+                        Address = "Julio Trigo 120",
+                    },
+                    "St3v3.1234",
+                    "Member"
                 )
             };
 
-        public static IdentityRole[] roles = new[]
+        private IdentityRole[] roles = new[]
             {
                 new IdentityRole{Name="Member"},
                 new IdentityRole{Name="BoxOfficer"},
@@ -56,7 +66,7 @@ namespace RepositoryLayer.Seed
         #endregion
 
         #region Seeds Methods
-        private static async void EnsurePopulatedUsers(UserManager<AppUser> userManager) {
+        private async void EnsurePopulatedUsers(UserManager<AppUser> userManager) {
             
             foreach (var user in users)
             {
@@ -64,25 +74,23 @@ namespace RepositoryLayer.Seed
                 IdentityResult result;
                 if (tempUser == null)
                     result = await userManager.CreateAsync(user.Item1, user.Item2);
-
             }
         }
         
-        private static async void EnsurePopulatedRoles(RoleManager<IdentityRole> roleManager)
+        private async void EnsurePopulatedRoles(RoleManager<IdentityRole> roleManager)
         {
-
             foreach (var role in roles)
                 await roleManager.CreateAsync(role);
         }
 
-        private static async void EnsurePopulatedUserRoles(UserManager<AppUser> userManager)
+        private async void EnsurePopulatedUserRoles(UserManager<AppUser> userManager)
         {
             foreach (var user in users)
                 if ((await userManager.FindByNameAsync(user.Item1.UserName)) != null)
                     await userManager.AddToRoleAsync(user.Item1, user.Item3);
         }
 
-        public static  void EnsurePopulated(IApplicationBuilder app)
+        public void EnsurePopulated(IApplicationBuilder app)
         {
             AppIdentityContext context = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<AppIdentityContext>();
             if (context.Database.GetPendingMigrations().Any())

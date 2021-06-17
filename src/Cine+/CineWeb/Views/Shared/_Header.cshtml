@@ -20,6 +20,12 @@
     <!-- Authorized users options -->
     @if (isAuth)
     {
+        @if (roleMember)
+        {
+            <li class="nav-item">
+                <a class="nav-link dropdown-item" asp-controller="Batches" asp-action="Index">Cartelera</a>
+            </li>
+        }
         @if (roleManager)
         {
             <!-- Staff menu -->
@@ -37,7 +43,7 @@
             <!-- Batch Menu -->
             <li class="nav-item dropdown">
                 <a id="dropdownMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-link nav-link dropdown-toggle">
-                    Tandas
+                    Administrar Cartelera
                 </a>
                 <ul aria-labelledby="dropdownMenu1" class="dropdown-menu dropdown-menu-right border-0 shadow">
                     <!-- Movies menu -->
@@ -72,7 +78,7 @@
                     <!-- End Genres menu -->
                     <!--  Country menu -->
                     <li class="dropdown-submenu">
-                        <a id="dropdownMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">
+                        <a id="dropdownMenu4" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">
                             Países
                         </a>
                         <ul aria-labelledby="dropdownMenu4" class="dropdown-menu dropdown-menu-right border-0 shadow">
@@ -85,13 +91,12 @@
                         </ul>
                     </li>
                     <!-- End Country menu -->
-
                     <!--  Actor menu -->
                     <li class="dropdown-submenu">
-                        <a id="dropdownMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">
+                        <a id="dropdownMenu5" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">
                             Actores
                         </a>
-                        <ul aria-labelledby="dropdownMenu4" class="dropdown-menu dropdown-menu-right border-0 shadow">
+                        <ul aria-labelledby="dropdownMenu5" class="dropdown-menu dropdown-menu-right border-0 shadow">
                             <li>
                                 <a tabindex="-1" asp-controller="Actors" asp-action="Create" class="dropdown-item"><i class="fa fa-plus"></i> Añadir</a>
                             </li>
@@ -101,12 +106,52 @@
                         </ul>
                     </li>
                     <!-- End Actor menu -->
+                    <!-- Cinema menu -->
+                    <li class="dropdown-submenu">
+                        <a id="dropdownMenu6" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">
+                            Salas
+                        </a>
+                        <ul aria-labelledby="dropdownMenu6" class="dropdown-menu dropdown-menu-right border-0 shadow">
+                            <li>
+                                <a tabindex="-1" asp-controller="Cinemas" asp-action="Create" class="dropdown-item"><i class="fa fa-plus"></i> Añadir</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Cinemas" asp-action="Index" class="dropdown-item"><i class="fa fa-list"></i> Ver todos</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- End Cinema menu -->
+                    <!-- Batches menu -->
+                    <li class="dropdown-submenu">
+                        <a id="dropdownMenu6" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">
+                            Funciones
+                        </a>
+                        <ul aria-labelledby="dropdownMenu6" class="dropdown-menu dropdown-menu-right border-0 shadow">
+                            <li>
+                                <a tabindex="-1" asp-controller="Batches" asp-action="Create" class="dropdown-item"><i class="fa fa-plus"></i> Añadir</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Batches" asp-action="Index" class="dropdown-item"><i class="fa fa-list"></i> Ver todos</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- End Batches menu -->
                 </ul>
             </li>
-            
-                    
             <!-- End Batch Menu -->
 
+            <!-- Discount menu-->
+            <li class="nav-item">
+                <a class="nav-link dropdown-item" asp-controller="Discounts" asp-action="Index">Descuentos</a>
+            </li>
+            <!-- End Discount menu-->
+
+
+            <!-- Statistic menu -->
+            <li class="nav-item">
+                <a class="nav-link dropdown-item" asp-controller="Statistics" asp-action="Index">Estadísticas</a>
+            </li>
+            <!-- End Statistic menu -->
         }
         @if (roleManager || roleBoxOfficer)
         {
