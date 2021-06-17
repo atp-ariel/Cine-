@@ -1,20 +1,31 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using ServiceLayer.Criteria;
+using RepositoryLayer;
+
 namespace CineWeb.Controllers
 {
 
     public class CriteriaController : Controller
     {
-        public IActionResult Index()
+        private CriteriaManager criteriaManager;
+
+        public CriteriaController()
         {
-            return View();
+            criteriaManager = new CriteriaManager();
         }
 
-        [Authorize(Roles ="Manager")]
-        public IActionResult SelectCriteria()
+        public IActionResult Index()
         {
-            return View();
+            return View(criteriaManager.GetCriterions());
+        }
+
+        [HttpPost]
+        [Authorize(Roles ="Manager")]
+        public IActionResult SelectCriteria(string selection)
+        {
+            criteriaManager.UpdateSelected(new ConfigRepository(), selection);
+            return RedirectToAction("Index", "Home");
         }
     }
 }

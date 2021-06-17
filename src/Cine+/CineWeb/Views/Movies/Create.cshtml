@@ -68,6 +68,12 @@
                                 </li>
                             }
                         </ul>
+                        <select class="list-group custom-select form-control">
+                            @foreach(var rating in ViewBag.Ratings)
+                            {
+                                <option name="rating" selected value="@rating.Id">@rating.Name</option>
+                            }
+                        </select>
                     </div>
 
                     <div class="form-group">

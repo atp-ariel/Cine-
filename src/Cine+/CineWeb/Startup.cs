@@ -45,9 +45,6 @@ namespace CineWeb
             services.AddScoped<IRepository<Country>, CountryRepository>();
             services.AddScoped<IRepository<Movie>, MovieRepository>();
             services.AddScoped<IRepository<Batch>, BatchRepository>();
-
-            services.AddSingleton<IConfiguration>(Configuration);
-            CriteriaManager.UpdateSelected(Configuration, "More View");
         }
 
 

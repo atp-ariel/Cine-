@@ -1,27 +1,30 @@
 ﻿using DomainLayer;
 using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
-using ServiceLayer;
 
 namespace CineWeb.Controllers
 {
     [Authorize(Roles = "Manager")]
     public class MoviesController : Controller
     {
-        private readonly MoviesManager moviesManager;
+        private readonly ApplicationDbContext _context;
 
-        public MoviesController(IRepository<Movie> repo, IRepository<Country> country, IRepository<Actor> actors, IRepository<Genre> genres)
+        public MoviesController(ApplicationDbContext context)
         {
-            moviesManager = new MoviesManager(repo, country, actors, genres);
-        }   
+            _context = context;
+        }
 
         public IActionResult Index()
         {
-            return View(moviesManager.GetAllMovies());
+            IEnumerable<Movie> listMovies = _context.Movie.Include(m => m.Genres).Include(m => m.Countries).Include(m => m.Actors).Include(m => m.Rating).ToList();
+            return View(listMovies);
         }
 
-        public IActionResult Create() 
+        public IActionResult Create()
         {
             ViewBags();
             return View();
@@ -29,15 +32,15 @@ namespace CineWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Movie movie, int rating, int[] countries=null,int[] genres=null,int[] actors=null)
+        public IActionResult Create(Movie movie, int rating, int[] countries = null, int[] genres = null, int[] actors = null)
         {
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
-                var listMovie = moviesManager.GetAllMovies();
 
-                moviesManager.UpdateRelations(movie,rating,  countries, genres, actors);
+                Save(movie, rating, countries, genres, actors);
 
-                moviesManager.AddMovie(movie);
+                _context.Movie.Add(movie);
+                _context.SaveChanges();
 
                 TempData["message"] = "Se ha creado película correctamente";
 
@@ -51,14 +54,18 @@ namespace CineWeb.Controllers
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)
+            {
                 return NotFound();
-            
-            var listMovie = moviesManager.GetAllMovies();
+            }
 
-            var movie = moviesManager.FindById((int)id);
+            IEnumerable<Movie> listMovies = _context.Movie.Include(m => m.Genres).Include(m => m.Countries).Include(m => m.Actors).ToList();
+
+            var movie = _context.Movie.Find(id);
 
             if (movie == null)
+            {
                 return NotFound();
+            }
 
             ViewBags();
 
@@ -69,23 +76,28 @@ namespace CineWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Movie movie, int rating, int[] countries = null, int[] genres = null, int[] actors = null)
         {
-            moviesManager.GetAllMovies();
+            IEnumerable<Movie> listMovies = _context.Movie.Include(m => m.Genres).Include(m => m.Countries).Include(m => m.Actors).Include(m => m.Batches).ToList();
 
-            movie = moviesManager.FindById(movie.Id);
+            movie = _context.Movie.Find(movie.Id);
 
             if (ModelState.IsValid)
             {
-                moviesManager.DeleteMovie(movie.Id);
+                _context.Movie.Remove(movie);
+                _context.SaveChanges();
 
                 movie.Countries.Clear();
                 movie.Genres.Clear();
                 movie.Actors.Clear();
 
-                moviesManager.UpdateRelations(movie, rating, countries, genres, actors);
+                Save(movie, rating, countries, genres, actors);
 
-                moviesManager.AddBatchMovie(movie);
+                foreach (var item in movie.Batches)
+                {
+                    _context.Batch.Add(item);
+                }
 
-                moviesManager.AddMovie(movie);
+                _context.Movie.Add(movie);
+                _context.SaveChanges();
 
                 TempData["message"] = "Se ha editado película correctamente";
                 return RedirectToAction("Index");
@@ -99,13 +111,18 @@ namespace CineWeb.Controllers
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
+            {
                 return NotFound();
+            }
 
-            moviesManager.GetAllMovies();
+            IEnumerable<Movie> listMovies = _context.Movie.Include(m => m.Genres).Include(m => m.Countries).Include(m => m.Actors).ToList();
 
-            var movie = moviesManager.FindById((int)id);
+            var movie = _context.Movie.Find(id);
+
             if (movie == null)
+            {
                 return NotFound();
+            }
 
             ViewBags();
 
@@ -116,23 +133,68 @@ namespace CineWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteMovie(int? id)
         {
-            moviesManager.GetAllMovies();
-
-            var movie = moviesManager.FindById((int)id);
+            var movie = _context.Movie.Find(id);
 
             if (movie == null)
+            {
                 return NotFound();
+            }
 
-            moviesManager.DeleteMovie(movie.Id);
+            _context.Movie.Remove(movie);
+            _context.SaveChanges();
             TempData["message"] = "Se ha eliminado película correctamente";
             return RedirectToAction("Index");
         }
-        private void ViewBags() 
+
+
+        public void Save(Movie movie, int rating, int[] countries = null, int[] genres = null, int[] actors = null)
         {
-            ViewBag.Genres = moviesManager.genres.GetAllGenres();
-            ViewBag.Actors = moviesManager.actors.GetAllActors();
-            ViewBag.Countries = moviesManager.country.GetAllCountrys();
-            ViewBag.Ratings = new ApplicationDbContext().Rating;
+            if (rating != 0)
+            {
+                Rating auxRating = _context.Rating.Find(rating);
+                auxRating.Movies.Add(movie);
+                movie.RatingId = rating;
+                movie.Rating = auxRating;
+            }
+
+            if (countries != null)
+            {
+                foreach (var item in countries)
+                {
+                    Country country = _context.Country.Find(item);
+                    movie.Countries.Add(country);
+                    country.Movies.Add(movie);
+                }
+
+            }
+
+            if (genres != null)
+            {
+                foreach (var item in genres)
+                {
+                    Genre genre = _context.Genre.Find(item);
+                    movie.Genres.Add(genre);
+                    genre.Movies.Add(movie);
+                }
+            }
+
+            if (actors != null)
+            {
+                foreach (var item in actors)
+                {
+                    Actor actor = _context.Actor.Find(item);
+                    movie.Actors.Add(actor);
+                    actor.Movies.Add(movie);
+                }
+            }
+        }
+
+        public void ViewBags()
+        {
+            ViewBag.Genres = _context.Genre;
+            ViewBag.Actors = _context.Actor;
+            ViewBag.Countries = _context.Country;
+            ViewBag.Ratings = _context.Rating;
         }
     }
 }

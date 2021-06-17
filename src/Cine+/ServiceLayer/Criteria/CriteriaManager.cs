@@ -9,9 +9,9 @@ namespace ServiceLayer.Criteria
 {
     public  class CriteriaManager
     {
-        public ICriterion SelectedCriteria;
+        public string SelectedCriteria => new ConfigRepository().Get("SelectedCriteria").Value;
 
-        public static IEnumerable<(string, ICriterion)> GetCriterions()
+        public  IEnumerable<(string, ICriterion)> GetCriterions()
         {
             var _criterios = new List<(string, ICriterion)>();
             foreach (Type type in Assembly.GetExecutingAssembly().GetTypes().Where(type => type.GetInterfaces().Contains(typeof(ICriterion))))
@@ -21,20 +21,20 @@ namespace ServiceLayer.Criteria
             }
         }
 
-        public static ICriterion GetSelectedCriterion(string criterioName)
+        public  ICriterion GetSelectedCriterion()
         {
             foreach (Type type in Assembly.GetExecutingAssembly().GetTypes().Where(type => type.GetInterfaces().Contains(typeof(ICriterion))))
             {
                 ICriterion _criterio = (ICriterion)Activator.CreateInstance(type, new MovieRepository(new ApplicationDbContext()));
-                if (_criterio.Name == criterioName)
+                if (_criterio.Name == SelectedCriteria)
                     return _criterio;
             }
             return null;
         }
 
-        public static void UpdateSelected(IConfiguration configuration, string selection)
+        public  void UpdateSelected(ConfigRepository config, string selection)
         {
-            configuration["SelectedCriteria"] = selection;
+            config.Set("SelectedCriteria", selection);
         }
 
     }

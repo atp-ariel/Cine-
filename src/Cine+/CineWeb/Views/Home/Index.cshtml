@@ -1,22 +1,64 @@
-@model IEnumerable<DomainLayer.Movie>
-
+@model (System.Data.DataTable, IEnumerable<DomainLayer.Movie>)
+@using System.Data
+@using DomainLayer
 @{
     ViewData["Title"] = "Principal";
     Layout = "_Layout";
 }
 
-<h1>Películas</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Películas sugeridas</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            @if (Model.Item1.Rows.Count > 0)
+            {
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            @foreach(DataColumn item in Model.Item1.Columns)
+                            {
+                                <th>@item.ColumnName</th>
+                            }
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (DataRow item in Model.Item1.Rows)
+                        {
+                        <tr>
+                            @foreach (DataColumn column in Model.Item1.Columns)
+                            {
+                                @if (column.ColumnName == "Movies")
+                                {
+                                    <td>@(((Movie)item[Model.Item1.Columns.IndexOf(column.ColumnName)]).Title)</td>
+                                }
+                                else
+                                {
+                                    <td>@item[Model.Item1.Columns.IndexOf(column.ColumnName)]</td>
+                                }
+                            }
+                            <td>
+                                <a asp-controller="TicketPurchases" asp-action="Index" asp-route-id="@(((Movie)item[0]).Id)" class="btn btn-primary option rounded">Ver tandas</a>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p class="font-italic">No existen películas sugeridas</p>
+            }
+        </div>
+    </div>
+</div>
 
 <div class="container">
-    @if (TempData["message"] != null)
-    {
-        <div class="alert alert-info alert-dismissible fade show" role="alert">
-            @TempData["message"]
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    }
     <div class="row">
         <div class="col-sm-6">
             <h3>Lista de películas</h3>
@@ -24,25 +66,23 @@
     </div>
     <div class="row">
         <div class="col-12">
-            @if (Model.Count() > 0)
+            @if (Model.Item2.Count() > 0)
             {
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>@Html.DisplayNameFor(m => m.Id)</th>
-                            <th>@Html.DisplayNameFor(m => m.Title)</th>
-                            <th>@Html.DisplayNameFor(m => m.Genres)</th>
-                            <th>@Html.DisplayNameFor(m => m.Countries)</th>
-                            <th>@Html.DisplayNameFor(m => m.Actors)</th>
-                            <th>@Html.DisplayNameFor(m => m.Rating.Name)</th>
+                            <th>Título</th>
+                            <th>Géneros</th>
+                            <th>Películas</th>
+                            <th>Actores</th>
+                            <th>Calificaciones</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.Item2)
                         {
                             <tr>
-                                <td>@item.Id</td>
                                 <td>@item.Title</td>
                                 <td>
                                     @if (item.Genres != null && item.Genres.Count() > 0)
@@ -84,7 +124,7 @@
                                     }
                                 </td>
                                 <td>
-                                    <a asp-controller="TicketPurchases" asp-action="Index" asp-route-id="@item.Id" class="btn btn-primary option rounded">Seleccionar</a>
+                                    <a asp-controller="TicketPurchases" asp-action="Index" asp-route-id="@item.Id" class="btn btn-primary option rounded">Ver tandas</a>
                                 </td>
                             </tr>
                         }
@@ -93,7 +133,7 @@
             }
             else
             {
-                <p class="font-italic">No existen pel�culas registradas</p>
+                <p class="font-italic">No existen películas registradas</p>
             }
         </div>
     </div>

@@ -33,7 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Criteria\" />
     <Folder Include="wwwroot\img\" />
   </ItemGroup>
 

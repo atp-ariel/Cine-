@@ -21,7 +21,7 @@ namespace ServiceLayer.Statistics
             this.context = context;
         }
         public int TicketsSold { get { return ticketsSold; } private set { ticketsSold = value; } }
-        public int[] TicketsSoldMonth { get { return ticketsSoldHours; } private set { ticketsSoldHours = value; } }
+        public int[] TicketsSoldHour { get { return ticketsSoldHours; } private set { ticketsSoldHours = value; } }
         public string[] Hours { get { return hours; } private set { hours = value; } }
 
         public void Filter(DateTime day, int n)

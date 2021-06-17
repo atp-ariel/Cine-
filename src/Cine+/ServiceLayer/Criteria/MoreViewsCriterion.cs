@@ -4,6 +4,7 @@ using System.Linq;
 using RepositoryLayer;
 using DomainLayer;
 using System.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ServiceLayer.Criteria
 {
@@ -22,7 +23,7 @@ namespace ServiceLayer.Criteria
         public DataTable ApplyCriterion(int n)
         {
             Dictionary<Movie, int> dictMovie = new Dictionary<Movie, int>();
-            List<Batch> batches = context.Batch.ToList();
+            IList<Batch> batches = context.Batch.Include(b => b.Movie).ToList();
             foreach (Batch batch in batches)
             {
                 int cinemaId = batch.CinemaId;
