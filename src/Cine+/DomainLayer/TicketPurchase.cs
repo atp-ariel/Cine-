@@ -41,6 +41,8 @@ namespace DomainLayer
 
         public bool Paid { get; set; }
 
+        public DateTime TimeReserve { get; set; }
+
 #nullable enable
         public string? AppUserId { get; set; } = null;
     }
