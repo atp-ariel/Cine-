@@ -9,7 +9,7 @@ using RepositoryLayer;
 namespace RepositoryLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210616175229_Initial")]
+    [Migration("20210617030230_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -296,6 +296,9 @@ namespace RepositoryLayer.Migrations
 
                     b.Property<float>("Price")
                         .HasColumnType("REAL");
+
+                    b.Property<DateTime>("TimeReserve")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("CinemaId", "BatchScheduleStartTime", "BatchScheduleEndTime", "SeatId");
 

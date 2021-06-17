@@ -25,6 +25,13 @@ namespace CineWeb.Controllers
 
         public IActionResult Index(int id)
         {
+            IEnumerable<TicketPurchase> ticketPurchases = _context.TicketPurchase;
+            foreach (var item in ticketPurchases)
+            {
+                if (!item.Paid && DateTime.Now > item.TimeReserve.AddMinutes(10))
+                    _context.TicketPurchase.Remove(item);
+            }
+            _context.SaveChanges();
             IEnumerable<Batch> listBatches = _context.Batch.Include(m => m.Schedule).Include(m => m.Cinema).Where(m => m.Movie.Id == id && m.ScheduleStartTime > DateTime.Now).ToList();
             return View(listBatches);
         }
@@ -100,7 +107,8 @@ namespace CineWeb.Controllers
                     BatchScheduleEndTime = (DateTime)TempData["end"],
                     CinemaId = (int)TempData["cinema"],
                     SeatId = seat,
-                    Code = (string)TempData["codeSeats"]
+                    Code = (string)TempData["codeSeats"],
+                    TimeReserve=DateTime.Now
                 };
             }
             else
@@ -111,7 +119,8 @@ namespace CineWeb.Controllers
                     BatchScheduleEndTime = (DateTime)TempData["end"],
                     CinemaId = (int)TempData["cinema"],
                     SeatId = seat,
-                    Code = (string)TempData["codeSeats"]
+                    Code = (string)TempData["codeSeats"],
+                    TimeReserve=DateTime.Now
                 };
             }
 
@@ -149,6 +158,7 @@ namespace CineWeb.Controllers
                 foreach (var item in discounts)
                 {
                     var discount = _context.Discount.Find(item);
+                    discountList.TotalDiscounted += discount.DiscountedMoney;
                     discount.DiscountLists.Add(discountList);
                     discountList.Discounts.Add(discount);
                 }
@@ -160,10 +170,7 @@ namespace CineWeb.Controllers
                 _context.SaveChanges();
             }
 
-            foreach (var item in discountList.Discounts)
-            {
-                price -= item.DiscountedMoney;
-            }
+            price -= discountList.TotalDiscounted;
 
             if (price < 0)
                 price = 0;

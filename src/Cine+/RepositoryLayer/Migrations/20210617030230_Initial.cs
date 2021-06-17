@@ -304,6 +304,7 @@ namespace RepositoryLayer.Migrations
                     PointsSpent = table.Column<float>(type: "REAL", nullable: false),
                     Code = table.Column<string>(type: "TEXT", nullable: true),
                     Paid = table.Column<bool>(type: "INTEGER", nullable: false),
+                    TimeReserve = table.Column<DateTime>(type: "TEXT", nullable: false),
                     AppUserId = table.Column<string>(type: "TEXT", nullable: true),
                     Discriminator = table.Column<string>(type: "TEXT", nullable: false),
                     CreditCard = table.Column<string>(type: "TEXT", nullable: true)

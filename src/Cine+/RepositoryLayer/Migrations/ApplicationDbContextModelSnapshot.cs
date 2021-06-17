@@ -295,6 +295,9 @@ namespace RepositoryLayer.Migrations
                     b.Property<float>("Price")
                         .HasColumnType("REAL");
 
+                    b.Property<DateTime>("TimeReserve")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("CinemaId", "BatchScheduleStartTime", "BatchScheduleEndTime", "SeatId");
 
                     b.HasIndex("DiscountListId");
