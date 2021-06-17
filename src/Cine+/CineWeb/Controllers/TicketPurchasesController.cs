@@ -25,6 +25,13 @@ namespace CineWeb.Controllers
 
         public IActionResult Index(int id)
         {
+            IEnumerable<TicketPurchase> ticketPurchases = _context.TicketPurchase;
+            foreach (var item in ticketPurchases)
+            {
+                if (!item.Paid && DateTime.Now > item.TimeReserve.AddMinutes(10))
+                    _context.TicketPurchase.Remove(item);
+            }
+            _context.SaveChanges();
             IEnumerable<Batch> listBatches = _context.Batch.Include(m => m.Schedule).Include(m => m.Cinema).Where(m => m.Movie.Id == id && m.ScheduleStartTime > DateTime.Now).ToList();
             return View(listBatches);
         }
@@ -100,7 +107,8 @@ namespace CineWeb.Controllers
                     BatchScheduleEndTime = (DateTime)TempData["end"],
                     CinemaId = (int)TempData["cinema"],
                     SeatId = seat,
-                    Code = (string)TempData["codeSeats"]
+                    Code = (string)TempData["codeSeats"],
+                    TimeReserve=DateTime.Now
                 };
             }
             else
@@ -111,7 +119,8 @@ namespace CineWeb.Controllers
                     BatchScheduleEndTime = (DateTime)TempData["end"],
                     CinemaId = (int)TempData["cinema"],
                     SeatId = seat,
-                    Code = (string)TempData["codeSeats"]
+                    Code = (string)TempData["codeSeats"],
+                    TimeReserve=DateTime.Now
                 };
             }
 
