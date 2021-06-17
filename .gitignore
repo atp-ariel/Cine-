@@ -5,6 +5,8 @@ doc/Informe/*.log
 doc/Informe/*.toc
 doc/Informe/*.out
 
+doc/Individuales/*.docx
+
 ## Ignore plantilla
 Informe plantilla.docx
 
