@@ -16,10 +16,10 @@ En caso de que las credenciales del usuario sean correctas esta página redirecc
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.4]{./chapters/img/Index.png}
+	\includegraphics[scale=0.35]{./chapters/img/Index.png}
 	
 	\label{fig:Index}
-	\caption{Index}
+	\caption{P\'agina Inicial}
 \end{figure}
 \newpage
 
@@ -36,13 +36,22 @@ A continuación se presentan las cabeceras de los tres (3) tipos de usuarios:\\
 \end{figure}
 \begin{figure}[h!]
 	\centering
+	\includegraphics[scale=0.4]{./chapters/img/header_taquillero.png}
+	
+	\label{fig:header_taquillero}
+	\caption{Cabecera Taquillero}
+\end{figure}
+\begin{figure}[h!]
+	\centering
 	\includegraphics[scale=0.4]{./chapters/img/header_client.png}
 	
 	\label{fig:header_client}
 	\caption{Cabecera Cliente}
 \end{figure}
 
-Para el registro de usuarios como jugadores se tiene el siguiente formulario accesible desde la cabecera de los usuarios que no están autenticados.
+
+Para el registro de usuarios se tiene el siguiente formulario accesible desde la cabecera de los usuarios que no están autenticados.
+\newpage
 
 \begin{figure}[h!]
 	\centering
@@ -52,7 +61,7 @@ Para el registro de usuarios como jugadores se tiene el siguiente formulario acc
 	\caption{Registro}
 \end{figure}
 
-Los gerentes son los que est\'an facultados para la designación de nuevos taquilleros. Para ello se cuenta con un formulario accesible desde el acápite \verb|Designar| en la cabecera de estos tipos de usuarios. A continuación se presenta el formulario de registro de un nuevo taquillero.\\
+Los gerentes son los que est\'an facultados para la designación de nuevos taquilleros y gerentes. Para ello se cuenta con un formulario similar al de registro de usuarios accesible desde \verb|Trabajadores|, opci\'on \verb|Gerentes| y \verb|Taquilleros| disponible en la cabecera de los usuarios con el rol de gerente.
 
 \subsection{Gestión de Cartelera}
 
@@ -70,6 +79,7 @@ Todas las opciones referentes a la gestión de cartelera est\'an disponibles en 
 \subsubsection{Gestor de Pel\'iculas}
 La opci\'on referente a la gesti\'on de pel\'iculas es accesible desde la pesta\~na \verb*|Administar| \verb*|Cartelera|. Al hacer click se despliegan dos opciones referentes a pel\'iculas como se observa en la siguiente imagen.
 
+\newpage
 \begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.35]{./chapters/img/movie_option.png}
@@ -78,7 +88,7 @@ La opci\'on referente a la gesti\'on de pel\'iculas es accesible desde la pesta\
 	\caption{Opciones Gestor Pel\'icula}
 	
 \end{figure}
-La opci\'on \verb*|Ver| \verb*|Todas| carga la p\'agina Movies donde se muestra la tabla de las pel\'iculas registradas en la base de datos y la botones para agregar, editar o eliminar estas.
+La opci\'on \verb*|Ver| \verb*|Todas| carga la p\'agina Movies donde se muestra la tabla de las pel\'iculas registradas en la base de datos y la botones para agregar o eliminar estas.
 
 \begin{figure}[h!]
 	\centering
@@ -90,7 +100,7 @@ La opci\'on \verb*|Ver| \verb*|Todas| carga la p\'agina Movies donde se muestra 
 \end{figure}
 
 Al agregar una pel\'icula se debe especificar \'el(los) g\'eneros a la que pertenece, la calificaci\'on, pa\'is y los actores que en ella participan as\'i como se observa en la siguiente imagen.
-
+\newpage
 \begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.35]{./chapters/img/add_movie.png}
@@ -117,7 +127,7 @@ La informaci\'on relacionada con las funciones se encuentra representada de form
 \end{figure}
 
 \subsection{Gestor de Socios}
-Las opciones referentes a la gesti\'on de socios son accesibles desde la pesta\~na \verb*|Club| \verb*|Cine+| 
+Las opciones referentes a la gesti\'on de socios son accesibles desde la pesta\~na \verb*|Club| \verb*|Cine+| disponible en la cabecera de taquillero y gerente
 
 \begin{figure}[h!]
 	\centering
@@ -151,10 +161,60 @@ La pesta\~na \verb*|Descuentos| disponible en la cabecera direcciona a la p\'agi
 	
 \end{figure}
 
+
+
+\subsection{Gestor de Trabajadores}
+La pesta\~na \verb*|Trabajadores| disponible desde la cabecera de los gerentes despliega dos opciones, la primera \verb*|Taquilleros| la cual direcciona a una p\'agina donde se muestran la informaci\'on referente a los taquilleros registrados y muestra la opci\'on \verb*|Registrar|  \verb*|Taquillero| con un formulario similar al del registro de usuario.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.35]{./chapters/img/ver_taquilleros.png}
+	
+	\label{fig:ver_taquilleros}
+	\caption{Taquilleros}
+	
+\end{figure}
+
+La segunda opci\'on \verb*|Gerentes| direcciona a una p\'agina donde se muestran la informaci\'on referente a los gerentes registrados y muestra la opci\'on \verb*|Registrar|  \verb*|Gerente| con un formulario similar al del registro de usuario.
+\newpage
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.35]{./chapters/img/ver_gerentes.png}
+	
+	\label{fig:ver_gerentes}
+	\caption{Gerentes}
+	
+\end{figure}
+
+\subsection{Sugerencias}
+Esta opci\'on es accesible desde las cabecera de los gerentes, esta direcciona a una p\'agina donde se muestran los criterios a aplicar en la sugerencia de pel\'iculas que se muestra en la p\'agina inicial de la aplicaci\'on.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.35]{./chapters/img/criteria.png}
+	
+	\label{fig:criteria}
+	\caption{Sugerencias}
+	
+\end{figure}
+
+\subsection{Estad\'isticas}
+Esta opci\'on es accesible desde las cabecera de los gerentes, esta direcciona a una p\'agina donde se muestran las diferentes opciones para la consulta de ventas seg\'un el filtro escogido.
+\newpage
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.35]{./chapters/img/statistics.png}
+	
+	\label{fig:statistics}
+	\caption{Estad\'isticas}
+	
+\end{figure}
 \subsection{Compra de entradas}
 Un usuario puede visualizar las funciones tanto desde la p\'agina inicial accediendo a las tandas desde el bot\'on ubicado en el mismo rengl\'on de la pel\'icula referida como desde la pesta\~na Cartelera disponible en la cabecera para los usuarios clientes, esta \'ultima al hacer click direcciona a la p\'agina donde se muestra el listado de funciones, en cada rengl\'on se muestra una funci\'on y las opciones asociadas a estas.\\
 
-La opci\'on comprar entrada redirecciona a la siguiente p\'agina:
+\subsubsection{Paso 1}
+En este paso se muestra el campo de C\'odigo de Socio que puede ser especificado y el N\'umero de entradas especificar la cantidad de estas, para avanzar se debe hacer click en el bot\'on \verb*|Aceptar|\\
+
 \begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.35]{./chapters/img/ticketpurchase1.png}
@@ -164,4 +224,61 @@ La opci\'on comprar entrada redirecciona a la siguiente p\'agina:
 	
 \end{figure}
 
-En el campo de C\'odigo de Socio se debe especificar en caso de ser el cliente socio del club, y el N\'umero de entradas especificar la cantidad de estas.
+\subsubsection{Paso 2}
+En este paso se muestra las sillas disponibles de la sala donde el usuario puede seleccionar a su conveniencia, el sistema por defecto seleccionar\'a de forma consecutiva en caso de estar disponibles de acuerdo a la cantidad especificada en el paso anterior, para avanzar se debe hacer click en el bot\'on \verb*|Enviar| \verb*|Sillas|.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.35]{./chapters/img/seat.png}
+	
+	\label{fig:seats}
+	\caption{Seleccionar Sillas}
+\end{figure}
+
+\subsubsection{Paso 3}
+En este paso se muestra la lista de descuentos disponibles a aplicar para cada silla. El usuario puede o no especificar por cada silla el descuento a aplicar, luego debe proceder a reservar las silla ya sea la cantidad especificada inicial o una cantidad menor a esta, para avanzar \'ultimo se debe hacer click en el bot\'on \verb*|Pagar|.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.35]{./chapters/img/reserve.png}
+	
+	\label{fig:reserve}
+	\caption{Reservar Sillas}
+\end{figure}
+
+\subsubsection{Paso 4}
+En este paso se muestra el total a pagar con dinero y con cr\'editos, este \'ultimo aparece en caso de que sea especificado el c\'odigo de socio en paso 1, el campo tarjeta de cr\'edito y la opci\'on de pagar con dinero. El usuario en caso de desear pagar con dinero deber\'a especificar el n\'umero de tarjeta de cr\'edito en el campo correspondiente, en otro caso, pagar con cr\'edito solo no se activa la opci\'on de pagar con dinero. Para avanzar al pr\'oximo paso se hacer click en el bot\'on \verb*|Pagar|.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.35]{./chapters/img/ticketpurchase2.png}
+	
+	\label{fig:ticketpurchase2}
+	\caption{Tickect de compra}
+	
+\end{figure}
+
+
+\subsubsection{Paso 5}
+En este paso se muestra el c\'odigo de compra. El cliente debe guardarlo en caso que se desee cancelar la reservaci\'on
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.35]{./chapters/img/ticketpurchase3.png}
+	
+	\label{fig:ticketpurchase3}
+	\caption{Tickect de compra}
+	
+\end{figure}
+
+\subsection{Informaci\'on Personal}
+El usuario puede visualizar su informaci\'on personal accediendo desde la pesta\~na con el \'icono de usuario, al hacer click en esta aparece la opci\'on Informaci\'on Personal, la que direcciona a una p\'agina donde se muestran los datos introducidos por el usuario en el registro de su cuenta adem\'as del c\'odigo de socio generado pro el sistema.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.35]{./chapters/img/personal_info.png}
+	
+	\label{fig:personal_info}
+	\caption{Informaci\'on Personal}
+	
+\end{figure}
