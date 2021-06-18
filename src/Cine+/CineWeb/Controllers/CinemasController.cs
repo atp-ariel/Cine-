@@ -2,24 +2,24 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer;
-using System.Collections.Generic;
+using ServiceLayer;
+
 
 namespace CineWeb.Controllers
 {
     [Authorize(Roles = "Manager")]
     public class CinemasController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly CinemaManager cinemaManager;
 
-        public CinemasController(ApplicationDbContext context)
+        public CinemasController(IRepository<Cinema> cinemas)
         {
-            _context = context;
+            cinemaManager = new CinemaManager(cinemas);
         }
 
         public IActionResult Index()
         {
-            IEnumerable<Cinema> cinemas = _context.Cinema;
-            return View(cinemas);
+            return View(cinemaManager.GetAllCinemas());
         }
 
         public IActionResult Create()
@@ -33,8 +33,7 @@ namespace CineWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                Save(cinema);
-                _context.SaveChanges();
+                cinemaManager.AddCinema(cinema);
                 TempData["message"] = "Se ha agregado sala correctamente";
                 return RedirectToAction("Index");
             }
@@ -48,7 +47,7 @@ namespace CineWeb.Controllers
                 return NotFound();
             }
 
-            var cinema = _context.Cinema.Find(id);
+            var cinema = cinemaManager.FindById((int)id);
 
             if (cinema == null)
             {
@@ -64,10 +63,8 @@ namespace CineWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Cinema.Remove(cinema);
-                _context.SaveChanges();
-                Save(cinema);
-                _context.SaveChanges();
+                cinemaManager.UpdateCinema(cinema);
+
                 TempData["message"] = "Se ha actualizado actor correctamente";
                 return RedirectToAction("Index");
 
@@ -82,7 +79,7 @@ namespace CineWeb.Controllers
                 return NotFound();
             }
 
-            var cinema = _context.Cinema.Find(id);
+            var cinema = cinemaManager.FindById((int)id);
 
             if (cinema == null)
             {
@@ -96,32 +93,18 @@ namespace CineWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteCinema(int? id)
         {
-            var cinema = _context.Cinema.Find(id);
+            var cinema = cinemaManager.FindById((int)id);
 
             if (cinema == null)
             {
                 return NotFound();
             }
 
-            _context.Cinema.Remove(cinema);
-            _context.SaveChanges();
+            cinemaManager.DeleteCinema((int)id);
             TempData["message"] = "Se ha eliminado actor correctamente";
             return RedirectToAction("Index");
         }
 
-        public void Save(Cinema cinema) 
-        {
-            for (int i = 1; i <= cinema.Capacity; i++)
-            {
-                Seat seat = new Seat
-                {
-                    Id = i,
-                    CinemaId = cinema.Id,
-                    Cinema = cinema,
-                };
-                _context.Seat.Add(seat);
-            }
-            _context.Cinema.Add(cinema);
-        }
+
     }
 }
