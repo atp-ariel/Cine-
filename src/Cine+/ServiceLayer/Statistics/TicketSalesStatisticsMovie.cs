@@ -20,8 +20,8 @@ namespace ServiceLayer.Statistics
         public int TicketsSold { get { return ticketsSold; } private set { ticketsSold = value; } }
         public void Filter(Movie movie)
         {
-            List<Batch> batches = context.Batch.ToList();
-            int idMovie = movie.Id;
+            List<Batch> batches = context.Batch.Where(x=>x.Movie==movie).ToList();
+            
             int count = 0;
 
             foreach (var batch in batches)

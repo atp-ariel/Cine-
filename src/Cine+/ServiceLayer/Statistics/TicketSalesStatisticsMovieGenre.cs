@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RepositoryLayer;
 using DomainLayer;
+using Microsoft.EntityFrameworkCore;
 
 namespace ServiceLayer.Statistics
 {
@@ -20,7 +21,7 @@ namespace ServiceLayer.Statistics
 
         public void Filter(string genre)
         {
-            Genre genre_ = context.Genre.First(x => x.Name == genre);
+            Genre genre_ = context.Genre.Include(x=>x.Movies).ThenInclude(x=>x.Batches).First(x => x.Name == genre);
             List<Movie> movies = genre_.Movies.ToList();
             int count = 0;
             foreach (var movie in movies)
