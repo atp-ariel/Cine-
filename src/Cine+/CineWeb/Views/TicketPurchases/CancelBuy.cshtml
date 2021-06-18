@@ -11,20 +11,14 @@
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
             <div class=" wrap p-5">
-                <div class="row">
-                </div>
+                <p class="font-weight-normal">Introduzca su código de socio si pagó con puntos. Si no, introduzca la tarjeta de crédito con la que realizó el pago</p>
                 <form method="post" asp-action="CancelBuy">
-
-                    <div>
-                        <label>Introduzca su código de socio si pagó con puntos. Si no, introduzca la tarjeta de crédito con la que realizó el pago</label>
+                    <div class="form-group mb-3">
+                        <label>Código de socio o tarjeta de crédito <input class="form-control" type="text" name="codeCard" /></label>
                     </div>
 
-                    <div>
-                        <label>Código de socio o tarjeta de crédito<input type="text" name="codeCard" /></label>
-                    </div>
-
-                    <div>
-                        <label>Código de la compra<input type="text" name="codeBuy"/></label>
+                    <div class="form-group mb-3">
+                        <label>Código de la compra<input class="form-control" type="text" name="codeBuy" /></label>
                     </div>
 
                     <div class="form-group">

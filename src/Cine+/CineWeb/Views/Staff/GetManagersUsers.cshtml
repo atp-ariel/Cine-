@@ -11,7 +11,14 @@
 <div class="row mt-5">
     <div class="col-1"></div>
     <div class="col-10">
-        <h2 class="my-2">Gerentes del Cine</h2>
+        <div class="row">
+            <div class="col-6">
+                <h2 class="my-2">Gerentes del Cine</h2>
+            </div>
+            <div class="col-6">
+                <a asp-controller="Staff" asp-action="AddManager" class="btn btn-primary rounded-pill d-block">Registrar gerente</a>
+            </div>
+        </div>
 
         @if (TempData["message"] != null)
         {
@@ -52,7 +59,7 @@
         else
         {
             <p class="font-weight-bold">No hay gerentes registrados.</p>
-            <a asp-controller="ClubCinePlus" asp-action="AddMembersClub" class="btn btn-link">Registrar taquillero</a>
+            <a asp-controller="Staff" asp-action="AddManager" class="btn btn-link">Registrar gerente</a>
         }
     </div>
     <div class="col-1"></div>

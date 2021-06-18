@@ -28,5 +28,29 @@ namespace CineWeb.Controllers
             var managers = await _cineUserManager.GetAllUsersBy("Manager");
             return View(managers);
         }
+
+        public IActionResult AddManager()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddManager(SignUpModel model)
+        {
+            this._cineUserManager.SignUpUser(model, "Manager");
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult AddBoxOfficer()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddBoxOfficer(SignUpModel model)
+        {
+            this._cineUserManager.SignUpUser(model, "BoxOfficer");
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

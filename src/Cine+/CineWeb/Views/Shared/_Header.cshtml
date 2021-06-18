@@ -23,7 +23,7 @@
         @if (roleMember)
         {
             <li class="nav-item">
-                <a class="nav-link dropdown-item" asp-controller="TicketPurchases" asp-action="Index">Cartelera</a>
+                <a class="nav-link dropdown-item" asp-controller="Home" asp-action="Billboard">Cartelera</a>
             </li>
         }
         @if (roleManager)
@@ -146,6 +146,9 @@
             </li>
             <!-- End Discount menu-->
 
+            <li class="nav-item">
+                <a class="nav-link dropdown-item" asp-controller="Criteria" asp-action="Index">Sugerencias</a>
+            </li>
 
             <!-- Statistic menu -->
             <li class="nav-item">

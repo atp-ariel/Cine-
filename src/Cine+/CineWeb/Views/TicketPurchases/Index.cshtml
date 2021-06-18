@@ -57,21 +57,22 @@
                             <td>@item.TicketPoints</td>
                             @if (auth &&  !manager)
                             {
-                                <td>
+                        <td>
 
-                                    @if (officer)
-                                    {
-                                        @Html.ActionLink("Comprar entradas", "SeatCount", new { start = item.ScheduleStartTime, end = item.ScheduleEndTime, cinema = item.CinemaId, buyForm = 0 })
-                                    }
-                                    @if (member)
-                                    {
-                                        @Html.ActionLink("Comprar entrada", "SeatCount", new { start = item.ScheduleStartTime, end = item.ScheduleEndTime, cinema = item.CinemaId, buyForm = 1 })
-                                    }
-                                    @if (DateTime.Now.AddHours(2) <= item.ScheduleStartTime)
-                                    {
-                                        @Html.ActionLink("Cancelar compra", "CancelBuy")
-                                    }
-                                </td>
+                            @if (officer)
+                            {
+                                @Html.ActionLink("Comprar", "SeatCount", new { start = item.ScheduleStartTime, end = item.ScheduleEndTime, cinema = item.CinemaId, buyForm = 0 })
+                            }
+                            @if (member)
+                            {
+                                @Html.ActionLink("Comprar", "SeatCount", new { start = item.ScheduleStartTime, end = item.ScheduleEndTime, cinema = item.CinemaId, buyForm = 1 })
+                                @if (DateTime.Now.AddHours(2) <= item.ScheduleStartTime)
+                                {
+                                    @Html.ActionLink("Cancelar", "CancelBuy")
+                                }
+                            }
+
+                        </td>
                              }
 
                         </tr>

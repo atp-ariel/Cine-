@@ -1,0 +1,89 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout";
+}
+@model IEnumerable<DomainLayer.Movie>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="h1">
+                Cartelera
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            @if (Model.Count() > 0)
+            {
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Géneros</th>
+                            <th>Películas</th>
+                            <th>Actores</th>
+                            <th>Calificaciones</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Title</td>
+                                <td>
+                                    @if (item.Genres != null && item.Genres.Count() > 0)
+                                    {
+                                        @String.Join(" , ", item.Genres.Select(g => g.Name))
+                                    }
+                                    else
+                                    {
+                                        <p class="text-black-50"> - </p>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.Countries != null && item.Countries.Count() > 0)
+                                    {
+                                        @String.Join(" , ", item.Countries.Select(c => c.Name))
+                                    }
+                                    else
+                                    {
+                                        <p class="text-black-50"> - </p>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.Actors != null && item.Actors.Count() > 0)
+                                    {
+                                        @String.Join(" , ", item.Actors.Select(a => a.Name))
+                                    }
+                                    else
+                                    {
+                                        <p class="text-black-50"> - </p>
+                                    }
+                                <td>
+                                    @if (item.RatingId != 0)
+                                    {
+                                        @item.Rating.Name
+                                    }
+                                    else
+                                    {
+                                        <p class="text-black-50"> - </p>
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-controller="TicketPurchases" asp-action="Index" asp-route-id="@item.Id" class="btn btn-primary option rounded">Ver tandas</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p class="font-italic">No existen películas registradas</p>
+            }
+        </div>
+    </div>
+</div>

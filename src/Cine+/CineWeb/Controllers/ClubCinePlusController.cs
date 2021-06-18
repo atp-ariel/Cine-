@@ -14,5 +14,6 @@ namespace CineWeb.Controllers
             this._cineUserManager = new CinemaUserFacade(authorizeUser, userStore);
         }
 
+        
     }
 }

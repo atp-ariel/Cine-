@@ -10,7 +10,7 @@
 
     @if (TempData["message"] != null)
     {
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
             @TempData["message"]
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -23,7 +23,7 @@
             <h3>Lista de descuentos establecidos</h3>
         </div>
         <div class="col-sm-6">
-            <a class="btn btn-success d-block" asp-action="Create" asp-controller="Discounts">Agregar descuento</a>
+            <a class="btn btn-primary rounded-pill d-block" asp-action="Create" asp-controller="Discounts">Agregar descuento</a>
         </div>
     </div>
     <div class="row">
@@ -47,9 +47,8 @@
                             <td>@item.DiscountedMoney</td>
 
                             <td>
-                                <a asp-controller="Discounts" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
-
-                                <a asp-controller="Discounts" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+                                <a asp-controller="Discounts" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary option rounded-125"><i class="fa fa-pencil"></i></a>
+                                <a asp-controller="Discounts" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary option rounded-125"><i class="fa fa-trash-o"></i></a>
                             </td>
                         </tr>
 
