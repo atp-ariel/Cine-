@@ -7,6 +7,15 @@
 }
 
 <div class="container">
+    @if (TempData["message"] != null)
+    {
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            @TempData["message"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
     <div class="row">
         <div class="col-sm-6">
             <h3>Películas sugeridas</h3>
@@ -20,7 +29,7 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            @foreach(DataColumn item in Model.Item1.Columns)
+                            @foreach (DataColumn item in Model.Item1.Columns)
                             {
                                 <th>@item.ColumnName</th>
                             }
@@ -30,22 +39,22 @@
                     <tbody>
                         @foreach (DataRow item in Model.Item1.Rows)
                         {
-                        <tr>
-                            @foreach (DataColumn column in Model.Item1.Columns)
-                            {
-                                @if (column.ColumnName == "Movies")
+                            <tr>
+                                @foreach (DataColumn column in Model.Item1.Columns)
                                 {
-                                    <td>@(((Movie)item[Model.Item1.Columns.IndexOf(column.ColumnName)]).Title)</td>
+                                    @if (column.ColumnName == "Movies")
+                                    {
+                                        <td>@(((Movie)item[Model.Item1.Columns.IndexOf(column.ColumnName)]).Title)</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@item[Model.Item1.Columns.IndexOf(column.ColumnName)]</td>
+                                    }
                                 }
-                                else
-                                {
-                                    <td>@item[Model.Item1.Columns.IndexOf(column.ColumnName)]</td>
-                                }
-                            }
-                            <td>
-                                <a asp-controller="TicketPurchases" asp-action="Index" asp-route-id="@(((Movie)item[0]).Id)" class="btn btn-primary option rounded">Ver tandas</a>
-                            </td>
-                        </tr>
+                                <td>
+                                    <a asp-controller="TicketPurchases" asp-action="Index" asp-route-id="@(((Movie)item[0]).Id)" class="btn btn-primary option rounded">Ver tandas</a>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>
