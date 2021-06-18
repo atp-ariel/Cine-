@@ -26,10 +26,9 @@ namespace ServiceLayer.Statistics
         public void Filter(DateTime month)
         {
 
-            month = new DateTime(month.Year, month.Month, 1, month.Hour, month.Minute, month.Second);
             Dictionary<int, int> ticketsSoldDict = new Dictionary<int, int>();
-            DateTime start = month;
-            DateTime end = month.AddDays(1);
+            DateTime start = new DateTime(month.Year, month.Month,1);
+            DateTime end = start.AddDays(1);
 
             List<TicketPurchase> tickets = context.TicketPurchase.ToList();
             int count = context.TicketPurchase.Count(x => (x.BatchScheduleStartTime.CompareTo(start) >= 0 && x.BatchScheduleEndTime.CompareTo(end) <= 0));
