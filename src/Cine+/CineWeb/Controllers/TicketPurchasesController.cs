@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ServiceLayer.Identity;
 using ServiceLayer.PaymentGateway;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace CineWeb.Controllers
 {

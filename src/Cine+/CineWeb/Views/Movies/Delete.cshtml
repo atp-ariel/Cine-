@@ -11,7 +11,7 @@
 
     <div class="row">
         <div class="col-sm-6">
-            <h3>Editar Película</h3>
+            <h3>Eliminar Película</h3>
         </div>
     </div>
 
@@ -21,99 +21,56 @@
 
                 <input type="hidden" asp-for="Id" />
 
+                <div class="d-flex mb-1">
+                    <p class="font-weight-bold mr-5">Título:</p>
+                    <p>@Model.Title</p>
+                </div>
+                <div class="d-flex mb-1">
+                    <p class="font-weight-bold mr-5">Clasificación:</p>
+                    <p>@Model.Rating.Name</p>
+                </div>
+
+                <div class="d-flex mb-1">
+                    <p class="font-weight-bold mr-5">Países:</p>
+
+                    @if (Model.Countries != null || Model.Countries.Count > 0)
+                    {
+                        <p>@String.Join(" , ", Model.Countries.Select(c => c.Name))</p>
+
+                    }
+                    else
+                    {
+                        <p>-</p>
+                    }
+                </div>
+
+                <div class="d-flex mb-1">
+                    <p class="font-weight-bold mr-5">Géneros:</p>
+                    @if (Model.Genres != null || Model.Genres.Count > 0)
+                    {
+                        <p>@String.Join(" , ", Model.Genres.Select(c => c.Name))</p>
+
+                    }
+                    else
+                    {
+                        <p>-</p>
+                    }
+                </div>
+
+                <div class="d-flex mb-1">
+                    <p class="font-weight-bold mr-5">Actores:</p>
+                    @if (Model.Actors != null || Model.Actors.Count > 0)
+                    {
+                        <p>@String.Join(" , ", Model.Actors.Select(c => c.Name))</p>
+                    }
+                    else
+                    {
+                        <p>-</p>
+                    }
+                </div>
+
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Title" class="control-label"></label>
-                    <input asp-for="Title" class="form-control" disabled />
-                    <span asp-validation-form="Title" class="text-danger"></span>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel heading">Países</div>
-                    <div class="panel-body">
-                        <ul class="list-group">
-                            @foreach (var country in ViewBag.Countries)
-                            {
-                                bool find = false;
-                                <li class="list-group-item">
-                                @if (Model.Countries != null)
-                                {
-                                    @foreach (var c in Model.Countries)
-                                    {
-                                        @if (country.Id == c.Id)
-                                        {
-                                            find = true;
-                                            <label><input type="checkbox" name="countries" checked="checked" value="@country.Id" disabled />@country.Name</label>
-                                            break;
-                                        }
-                                    }
-                                    @if (!find)
-                                    {
-                                        <label><input type="checkbox" name="countries" value="@country.Id" disabled />@country.Name</label>
-                                    }
-                                }
-                                </li>
-                            }
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel heading">Géneros</div>
-                    <div class="panel-body">
-                        <ul class="list-group">
-                            @foreach (var genre in ViewBag.Genres)
-                            {
-                                bool find = false;
-                                <li class="list-group-item">
-                                    @foreach (var g in Model.Genres)
-                                    {
-                                        @if (genre.Id == g.Id)
-                                        {
-                                            find = true;
-                                            <label><input type="checkbox" name="genres" checked="checked" value="@genre.Id" disabled/>@genre.Name</label>
-                                            break;
-                                        }
-                                    }
-                                    @if (!find)
-                                    {
-                                        <label><input type="checkbox" name="genres" value="@genre.Id" disabled/>@genre.Name</label>
-                                    }
-
-                                </li>
-                            }
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel heading">Actores</div>
-                    <div class="panel-body">
-                        <ul class="list-group">
-                            @foreach (var actor in ViewBag.Actors)
-                            {
-                                bool find = false;
-                                <li class="list-group-item">
-                                    @foreach (var a in Model.Actors)
-                                    {
-                                        @if (actor.Id == a.Id)
-                                        {
-                                            find = true;
-                                            <label><input type="checkbox" name="actors" checked="checked" value="@actor.Id" disabled/>@actor.Name</label>
-                                            break;
-                                        }
-                                    }
-                                    @if (!find)
-                                    {
-                                        <label><input type="checkbox" name="actors" value="@actor.Id" disabled/>@actor.Name</label>
-                                    }
-
-                                </li>
-                            }
-                        </ul>
-                    </div>
-                </div>
-
+                
                 <div class="form-group">
                     <input type="submit" value="Eliminar película" class="btn btn-primary" />
                 </div>

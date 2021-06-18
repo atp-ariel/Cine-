@@ -35,7 +35,6 @@
                     <thead>
                         <tr>
                             <th>@Html.DisplayNameFor(m => m.Title)</th>
-                            <th>@Html.DisplayNameFor(m => m.Rating)</th>
                             <th>@Html.DisplayNameFor(m => m.Genres)</th>
                             <th>@Html.DisplayNameFor(m => m.Countries)</th>
                             <th>@Html.DisplayNameFor(m => m.Actors)</th>
@@ -48,7 +47,6 @@
                         {
                             <tr>
                                 <td>@item.Title</td>
-                                <td>@item.Rating.Name</td>
                                 <td>
                                     @if (item.Genres != null && item.Genres.Count() > 0)
                                     {
@@ -90,7 +88,6 @@
                                     }
                                 </td>
                                 <td>
-                                    <a asp-controller="Movies" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary option rounded"><i class="fa fa-pencil"></i></a>
                                     <a asp-controller="Movies" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary option rounded"><i class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>

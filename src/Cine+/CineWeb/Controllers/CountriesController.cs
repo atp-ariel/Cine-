@@ -1,10 +1,12 @@
 ﻿using DomainLayer;
 using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer;
-using System.Collections.Generic;
 using ServiceLayer;
+using Microsoft.AspNetCore.Authorization;
+
 namespace CineWeb.Controllers
 {
+    [Authorize(Roles = "Manager")]
     public class CountriesController : Controller
     {
         private readonly CountryManager countryManager;

@@ -15,7 +15,6 @@ namespace RepositoryLayer
         public MovieRepository(ApplicationDbContext context)
         {
             this._dbContext = context;
-            GetAll();
         }
 
         #region Methods
@@ -32,12 +31,13 @@ namespace RepositoryLayer
 
         public Movie Get(int id)
         {
-            return _dbContext.Movie.Find(id);
+            IEnumerable<Movie> movies = GetAll().Where(c => c.Id == id);
+            return movies == null || movies.Count() == 0 ? null : movies.First();
         }
 
         public IEnumerable<Movie> GetAll()
         {
-            return _dbContext.Movie.Include(m => m.Genres).Include(m => m.Countries).Include(m => m.Actors).Include(m=>m.Rating);
+            return _dbContext.Movie.Include(m => m.Genres).Include(m => m.Countries).Include(m => m.Actors).Include(m => m.Rating);
         }
 
         public void Insert(Movie entity)

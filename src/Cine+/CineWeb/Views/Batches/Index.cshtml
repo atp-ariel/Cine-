@@ -10,7 +10,7 @@
 
     @if (TempData["message"] != null)
     {
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
             @TempData["message"]
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -23,7 +23,7 @@
             <h3>Lista de funciones</h3>
         </div>
         <div class="col-sm-6">
-            <a class="btn btn-success d-block" asp-action="Create" asp-controller="Batches">Agregar función</a>
+            <a class="btn btn-primary d-block rounded-pill" asp-action="Create" asp-controller="Batches"><i class="fa fa-plus"></i> Agregar función</a>
         </div>
     </div>
     <div class="row">
@@ -62,7 +62,7 @@
         }
         else
         {
-            <p>No existen registros</p>
+            <p class="font-italic">No existen funciones registradas</p>
         }
     </div>
 

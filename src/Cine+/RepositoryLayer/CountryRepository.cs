@@ -13,9 +13,9 @@ namespace RepositoryLayer
         #endregion
 
         #region Constructor
-        public CountryRepository()
+        public CountryRepository(ApplicationDbContext context)
         {
-            _dbContext = new ApplicationDbContext();
+            _dbContext = context;
         }
         #endregion
 

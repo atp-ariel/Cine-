@@ -48,5 +48,18 @@ namespace CineWeb.Controllers
             ticket.Filter(month);
             return View((x: ticket.Months, y: ticket.TicketsSoldYear));
         }
+
+        public IActionResult TicketPerPeriod()
+        {
+            return View(-1);
+        }
+
+        [HttpPost]
+        public IActionResult TicketPerPeriod(DateTime start, DateTime end)
+        {
+            var ticket = new TicketSalesStatisticsPeriod(new ApplicationDbContext());
+            ticket.Filter(start, end);
+            return View(ticket.TicketsSold);
+        }
     }
 }

@@ -23,7 +23,7 @@
         @if (roleMember)
         {
             <li class="nav-item">
-                <a class="nav-link dropdown-item" asp-controller="Batches" asp-action="Index">Cartelera</a>
+                <a class="nav-link dropdown-item" asp-controller="TicketPurchases" asp-action="Index">Cartelera</a>
             </li>
         }
         @if (roleManager)
@@ -173,7 +173,7 @@
                 <p class="dropdown-item-text">Hola @username</p>
                 @if (roleMember)
                 {
-                    <a class="nav-link dropdown-item" asp-controller="Identity" asp-action="EditInfo">Editar Información</a>
+                    <a class="nav-link dropdown-item" asp-controller="Identity" asp-action="PersonalInfo" asp-route-username="@username">Información Personal</a>
                 }
                 <hr class="dropdown-divider" />
                 <a class="nav-link dropdown-item" asp-controller="Identity" asp-action="LogOut">Cerrar Sesión</a>

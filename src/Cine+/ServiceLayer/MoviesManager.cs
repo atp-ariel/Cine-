@@ -11,14 +11,16 @@ namespace ServiceLayer
         public readonly ActorManager actors;
         public readonly GenreManager genres;
         private readonly IRepository<Movie> MovieRepository;
+        private IRepository<Rating> ratings;
         #endregion
 
         #region Constructor
-        public MoviesManager(IRepository<Movie> repository, IRepository<Country> country, IRepository<Actor> actors, IRepository<Genre> genres)
+        public MoviesManager(IRepository<Movie> repository, IRepository<Country> country, IRepository<Actor> actors, IRepository<Genre> genres, IRepository<Rating> r)
         {
             this.country = new CountryManager(country);
             this.actors = new ActorManager( actors);
             this.genres = new GenreManager(genres);
+            this.ratings = r;
             this.MovieRepository = repository;
             GetAllMovies();
         }
@@ -67,7 +69,7 @@ namespace ServiceLayer
         {
             if (rating != 0)
             {
-                Rating auxRating = new ApplicationDbContext().Rating.Find(rating);
+                Rating auxRating = ratings.Get(rating);
                 auxRating.Movies.Add(movie);
                 movie.RatingId = rating;
                 movie.Rating = auxRating;

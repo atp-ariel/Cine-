@@ -1,4 +1,5 @@
 ﻿using DomainLayer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer;
 using System;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace CineWeb.Controllers
 {
+    [Authorize(Roles = "Manager")]
     public class RatingsController : Controller
     {
         private readonly ApplicationDbContext _context;

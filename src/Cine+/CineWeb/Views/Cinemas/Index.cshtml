@@ -11,7 +11,7 @@
 
     @if (TempData["message"] != null)
     {
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
             @TempData["message"]
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -24,7 +24,7 @@
             <h3>Lista de salas</h3>
         </div>
         <div class="col-sm-6">
-            <a class="btn btn-success d-block" asp-action="Create" asp-controller="Cinemas">Agregar sala</a>
+            <a class="btn btn-primary d-block rounded-pill" asp-action="Create" asp-controller="Cinemas"><i class="fa fa-plus"></i> Agregar sala</a>
         </div>
     </div>
     <div class="row">
@@ -46,9 +46,9 @@
                             <td>@item.Capacity</td>
 
                             <td>
-                                <a asp-controller="Cinemas" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
+                                <a asp-controller="Cinemas" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary option rounded"><i class="fa fa-pencil"></i></a>
 
-                                <a asp-controller="Cinemas" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+                                <a asp-controller="Cinemas" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary option rounded"><i class="fa fa-trash-o"></i></a>
                             </td>
                         </tr>
 
@@ -58,7 +58,7 @@
         }
         else
         {
-            <p>No existen registros</p>
+            <p class="font-italic">No existen salas registradas</p>
         }
     </div>
 

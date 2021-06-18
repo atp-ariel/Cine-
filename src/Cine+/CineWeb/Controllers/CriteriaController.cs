@@ -15,6 +15,7 @@ namespace CineWeb.Controllers
             criteriaManager = new CriteriaManager();
         }
 
+        [Authorize(Roles = "Manager")]
         public IActionResult Index()
         {
             return View(criteriaManager.GetCriterions());

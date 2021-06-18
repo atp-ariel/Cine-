@@ -1,0 +1,45 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout";
+}
+@using DomainLayer.Identity; 
+@model AppUser
+
+
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+        <h1 class="h1 mb-5">Información Personal</h1>
+
+        <div class="d-flex mb-1">
+            <p class="font-weight-bold mr-5">Nombre de usuario:</p>
+            <p>@Model.UserName</p>
+        </div>
+
+        <div class="d-flex mb-0">
+            <p class="font-weight-bold mr-5 mb-0">Código de usuario:</p>
+            <p id="id-user" class="mb-0">@Model.Id</p>
+        </div>
+        <div class="d-block mb-1">
+            <small class="small font-italic"><i class="fa fa-info-circle"></i>(código para las compras)</small>
+        </div>
+
+        <div class="d-flex mb-1">
+            <p class="font-weight-bold mr-5">Correo electrónico:</p>
+            <p>@Model.Email</p>
+        </div>
+
+        <div class="d-flex mb-1">
+            <p class="font-weight-bold mr-5">Teléfono:</p>
+            <p>@Model.PhoneNumber</p>
+        </div>
+
+        <div class="d-flex mb-1">
+            <p class="font-weight-bold mr-5">Dirección:</p>
+            <p>@Model.Address</p>
+        </div>
+    </div>
+    <div class="col-2"></div>
+</div>

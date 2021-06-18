@@ -5,7 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using RepositoryLayer.Identity;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 
 namespace RepositoryLayer.Seed
 {
@@ -57,6 +59,12 @@ namespace RepositoryLayer.Seed
                 )
             };
 
+        private Dictionary<string, int> points = new Dictionary<string, int>()
+        {
+            {"Ariel", 0 },
+            {"Steve", 0 }
+        };
+
         private IdentityRole[] roles = new[]
             {
                 new IdentityRole{Name="Member"},
@@ -102,6 +110,17 @@ namespace RepositoryLayer.Seed
             EnsurePopulatedUsers(userManager);
             EnsurePopulatedRoles(roleManager);
             EnsurePopulatedUserRoles(userManager);
+            EnsurePopulatedUsersClaim(userManager);
+        }
+
+        private async void EnsurePopulatedUsersClaim(UserManager<AppUser> userManager)
+        {
+            foreach(var item in points)
+            {
+                AppUser user = await userManager.FindByNameAsync(item.Key);
+                if (!(await userManager.GetClaimsAsync(user)).Select(c => c.Type).Contains("Points"))
+                    await userManager.AddClaimAsync(user, new Claim("Points", item.Value.ToString()));
+            }
         }
         #endregion
     }

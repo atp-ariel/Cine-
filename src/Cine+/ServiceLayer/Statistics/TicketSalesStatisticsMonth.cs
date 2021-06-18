@@ -25,6 +25,8 @@ namespace ServiceLayer.Statistics
 
         public void Filter(DateTime month)
         {
+
+            month = new DateTime(month.Year, month.Month, 1, month.Hour, month.Minute, month.Second);
             Dictionary<int, int> ticketsSoldDict = new Dictionary<int, int>();
             DateTime start = month;
             DateTime end = month.AddDays(1);

@@ -40,7 +40,7 @@
                         <th>@Html.DisplayNameFor(m => m.ScheduleEndTime)</th>
                         <th>@Html.DisplayNameFor(m => m.TicketPrice)</th>
                         <th>@Html.DisplayNameFor(m => m.TicketPoints)</th>
-                        @if (auth)
+                        @if (auth && !manager)
                         {
                             <th>Opciones</th>
                         }
@@ -55,7 +55,7 @@
                             <td>@item.ScheduleEndTime</td>
                             <td>@item.TicketPrice</td>
                             <td>@item.TicketPoints</td>
-                            @if (auth)
+                            @if (auth &&  !manager)
                             {
                                 <td>
 

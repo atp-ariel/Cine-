@@ -7,9 +7,14 @@ namespace RepositoryLayer
     public class ActorRepository : IRepository<Actor>
     {
         #region Fields & Properties
-        private ApplicationDbContext _dbContext = new ApplicationDbContext();
+        private ApplicationDbContext _dbContext;
         public int Count => GetAll().Count();
         #endregion
+
+        public ActorRepository(ApplicationDbContext context)
+        {
+            _dbContext = context;
+        }
 
         #region Methods
         public void Delete(Actor entity)

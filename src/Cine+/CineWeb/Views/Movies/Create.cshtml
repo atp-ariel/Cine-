@@ -60,18 +60,11 @@
 
                     <div class="form-group mb-3">
                         <label class="control-label">Clasificaciones</label>
-                        <ul class="list-group">
-                            @foreach (var rating in ViewBag.Ratings)
-                            {
-                                <li class="list-group-item">
-                                    <label><input type="radio" name="rating" value="@rating.Id" />@rating.Name</label>
-                                </li>
-                            }
-                        </ul>
-                        <select class="list-group custom-select form-control">
+                       
+                        <select  name="rating"  required class="list-group custom-select form-control">
                             @foreach(var rating in ViewBag.Ratings)
                             {
-                                <option name="rating" selected value="@rating.Id">@rating.Name</option>
+                                <option selected value="@rating.Id">@rating.Name</option>
                             }
                         </select>
                     </div>

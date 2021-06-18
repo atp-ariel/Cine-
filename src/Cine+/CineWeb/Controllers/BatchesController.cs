@@ -4,11 +4,12 @@ using RepositoryLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CineWeb.Controllers
 {
+    [Authorize(Roles = "Manager")]
     public class BatchesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -24,12 +25,14 @@ namespace CineWeb.Controllers
             return View(listBatches);
         }
 
+        
         public IActionResult Create()
         {
             ViewBags();
             return View();
         }
 
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Batch batch)
@@ -47,7 +50,8 @@ namespace CineWeb.Controllers
             ViewBags();
             return View();
         }
-
+        
+        
         public IActionResult Edit(DateTime? start,DateTime? end, int? cinema)
         {
             if (cinema == null || cinema == 0|| start==null || end==null)
@@ -71,6 +75,7 @@ namespace CineWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        
         public IActionResult Edit(Batch batch)
         {
 
@@ -87,6 +92,7 @@ namespace CineWeb.Controllers
             return View();
         }
 
+        
         public IActionResult Delete(DateTime? start, DateTime? end, int? cinema)
         {
             if (cinema == null || cinema == 0 || start == null || end == null)
@@ -109,6 +115,7 @@ namespace CineWeb.Controllers
         }
 
         [HttpPost]
+        
         [ValidateAntiForgeryToken]
         public IActionResult DeleteBatch(Batch batch)
         {
@@ -124,7 +131,7 @@ namespace CineWeb.Controllers
             return RedirectToAction("Index");
         }
 
-        public void ViewBags()
+        private void ViewBags()
         {
             ViewBag.Cinemas = _context.Cinema;
             ViewBag.Movies = _context.Movie;
