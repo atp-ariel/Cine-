@@ -21,7 +21,7 @@ namespace ServiceLayer.Statistics
         public void Filter(DateTime start,DateTime end)
         {
             List<TicketPurchase> tickets = context.TicketPurchase.ToList();
-            int count = context.TicketPurchase.Count(x => (x.BatchScheduleStartTime.CompareTo(start) >= 0 && x.BatchScheduleEndTime.CompareTo(end) <= 0));
+            int count = context.TicketPurchase.Count(x => (x.TimeReserve.CompareTo(start) >= 0 && x.TimeReserve.CompareTo(end) <= 0));
             ticketsSold = count;
         }
     }

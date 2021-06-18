@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RepositoryLayer;
 using DomainLayer;
+using Microsoft.EntityFrameworkCore;
 
 namespace ServiceLayer.Statistics
 {
@@ -20,7 +21,7 @@ namespace ServiceLayer.Statistics
 
         public void Filter(string country)
         {
-            Country country_ = context.Country.First(x => x.Name == country);
+            Country country_ = context.Country.Include(x=>x.Movies).ThenInclude(x=>x.Batches).First(x => x.Name == country);
             List<Movie> movies = country_.Movies.ToList();
             int count = 0;
             foreach (var movie in movies)

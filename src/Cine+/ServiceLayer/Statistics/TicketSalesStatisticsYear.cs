@@ -39,7 +39,7 @@ namespace ServiceLayer.Statistics
             {
                 end = end.AddMonths(1);
                 start = start.AddMonths(1);
-                int count_ = context.TicketPurchase.Count(x => x.BatchScheduleStartTime.CompareTo(start) >= 0 && x.BatchScheduleEndTime.CompareTo(end) < 0);
+                int count_ = context.TicketPurchase.Count(x => x.BatchScheduleStartTime.CompareTo(start) > 0 && x.BatchScheduleEndTime.CompareTo(end) <= 0);
                 ticketsSoldDict.Add(start.Month, count_);
                 ticketsSold += count_;
 

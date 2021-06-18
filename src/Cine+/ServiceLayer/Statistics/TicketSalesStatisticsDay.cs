@@ -27,18 +27,17 @@ namespace ServiceLayer.Statistics
         public void Filter(DateTime day, int n)
         {
             Dictionary<string, int> ticketsSoldDict = new Dictionary<string, int>();
-            DateTime start = day;
-            DateTime end = day.AddHours(n);
+            DateTime start =new DateTime(day.Year,day.Month,day.Day);
+            DateTime end = start.AddHours(n);
             
-            List<TicketPurchase> tickets = context.TicketPurchase.ToList();
-            int count = context.TicketPurchase.Count(x => (x.BatchScheduleStartTime.CompareTo(start) >= 0 && x.BatchScheduleEndTime.CompareTo(end) <= 0));
+            int count = context.TicketPurchase.Count(x => (x.TimeReserve.CompareTo(start) >= 0 && x.TimeReserve.CompareTo(end) <= 0));
             ticketsSoldDict.Add(start.Hour.ToString() + "-"+end.Hour.ToString(), count);
 
             for (int i = n; i <=24-n; i+=n)
             {
                 end = end.AddHours(n);
                 start=start.AddHours(n);
-                int count_ = context.TicketPurchase.Count(x => (x.BatchScheduleStartTime.CompareTo(start) > 0 && x.BatchScheduleEndTime.CompareTo(end) <= 0));
+                int count_ = context.TicketPurchase.Count(x => (x.TimeReserve.CompareTo(start) > 0 && x.TimeReserve.CompareTo(end) <= 0));
                 ticketsSoldDict.Add(start.Hour.ToString() + "-" + end.Hour.ToString(), count_);
 
             }
