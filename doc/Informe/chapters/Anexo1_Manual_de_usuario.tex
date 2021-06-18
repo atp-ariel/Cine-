@@ -61,7 +61,9 @@ Para el registro de usuarios se tiene el siguiente formulario accesible desde la
 	\caption{Registro}
 \end{figure}
 
-Los gerentes son los que est\'an facultados para la designación de nuevos taquilleros y gerentes. Para ello se cuenta con un formulario similar al de registro de usuarios accesible desde \verb|Trabajadores|, opci\'on \verb|Gerentes| y \verb|Taquilleros| disponible en la cabecera de los usuarios con el rol de gerente.
+Los gerentes son los que est\'an facultados para la designación de nuevos taquilleros y gerentes. Para ello se cuenta con un formulario similar al de registro de usuarios accesible desde \verb|Trabajadores|, opci\'on \verb|Gerentes| y \verb|Taquilleros| disponible en la cabecera de los usuarios con el rol de gerente.\\
+
+Los taquilleros tiene como tarea la venta de entrada en taquilla y la gestion de cuentas de socio.
 
 \subsection{Gestión de Cartelera}
 
@@ -210,10 +212,10 @@ Esta opci\'on es accesible desde las cabecera de los gerentes, esta direcciona a
 	
 \end{figure}
 \subsection{Compra de entradas}
-Un usuario puede visualizar las funciones tanto desde la p\'agina inicial accediendo a las tandas desde el bot\'on ubicado en el mismo rengl\'on de la pel\'icula referida como desde la pesta\~na Cartelera disponible en la cabecera para los usuarios clientes, esta \'ultima al hacer click direcciona a la p\'agina donde se muestra el listado de funciones, en cada rengl\'on se muestra una funci\'on y las opciones asociadas a estas.\\
+Un usuario logueado o no, puede visualizar las funciones tanto desde la p\'agina inicial accediendo a las tandas desde el bot\'on ubicado en el mismo rengl\'on de la pel\'icula referida como desde la pesta\~na Cartelera disponible en la cabecera para los usuarios clientes, esta \'ultima al hacer click direcciona a la p\'agina donde se muestra el listado de funciones, en cada rengl\'on se muestra una funci\'on y las opciones asociadas a estas.\\
 
 \subsubsection{Paso 1}
-En este paso se muestra el campo de C\'odigo de Socio que puede ser especificado y el N\'umero de entradas especificar la cantidad de estas, para avanzar se debe hacer click en el bot\'on \verb*|Aceptar|\\
+En este paso se muestra el campo de C\'odigo de Socio que puede ser especificado en caso del  estar registrado como socio y en el campo el N\'umero de entradas se debe especificar la cantidad de estas, para avanzar se debe hacer click en el bot\'on \verb*|Aceptar|\\
 
 \begin{figure}[h!]
 	\centering
@@ -225,7 +227,7 @@ En este paso se muestra el campo de C\'odigo de Socio que puede ser especificado
 \end{figure}
 
 \subsubsection{Paso 2}
-En este paso se muestra las sillas disponibles de la sala donde el usuario puede seleccionar a su conveniencia, el sistema por defecto seleccionar\'a de forma consecutiva en caso de estar disponibles de acuerdo a la cantidad especificada en el paso anterior, para avanzar se debe hacer click en el bot\'on \verb*|Enviar| \verb*|Sillas|.
+En este paso se muestra las sillas disponibles de la sala donde se puede seleccionar a conveniencia, el sistema autom\'aticamente seleccionar\'a de forma consecutiva en caso de estar disponibles de acuerdo a la cantidad especificada en el paso anterior, para avanzar se debe hacer click en el bot\'on \verb*|Enviar| \verb*|Sillas|.
 
 \begin{figure}[h!]
 	\centering
@@ -236,7 +238,7 @@ En este paso se muestra las sillas disponibles de la sala donde el usuario puede
 \end{figure}
 
 \subsubsection{Paso 3}
-En este paso se muestra la lista de descuentos disponibles a aplicar para cada silla. El usuario puede o no especificar por cada silla el descuento a aplicar, luego debe proceder a reservar las silla ya sea la cantidad especificada inicial o una cantidad menor a esta, para avanzar \'ultimo se debe hacer click en el bot\'on \verb*|Pagar|.
+En este paso se muestra la lista de descuentos disponibles a aplicar para cada silla. En caso que se desee puede especificar por cada silla el descuento a aplicar, luego debe proceder a reservar las silla ya sea la cantidad especificada inicial o una cantidad menor a esta, para avanzar se debe hacer click en el bot\'on \verb*|Pagar|.
 
 \begin{figure}[h!]
 	\centering
@@ -247,7 +249,7 @@ En este paso se muestra la lista de descuentos disponibles a aplicar para cada s
 \end{figure}
 
 \subsubsection{Paso 4}
-En este paso se muestra el total a pagar con dinero y con cr\'editos, este \'ultimo aparece en caso de que sea especificado el c\'odigo de socio en paso 1, el campo tarjeta de cr\'edito y la opci\'on de pagar con dinero. El usuario en caso de desear pagar con dinero deber\'a especificar el n\'umero de tarjeta de cr\'edito en el campo correspondiente, en otro caso, pagar con cr\'edito solo no se activa la opci\'on de pagar con dinero. Para avanzar al pr\'oximo paso se hacer click en el bot\'on \verb*|Pagar|.
+En este paso se muestra el total a pagar con dinero y con puntos, este \'ultimo aparece en caso de que sea especificado el c\'odigo de socio en el paso 1, el campo tarjeta de cr\'edito y la opci\'on de pagar con dinero. En caso que se desee pagar con dinero se deber\'a especificar el n\'umero de tarjeta de cr\'edito en el campo correspondiente, en otro caso, se podr\'a pagar con puntos, para esta opci\'on no se debe activar la opci\'on  Pagar con dinero. Para avanzar al pr\'oximo paso se hacer click en el bot\'on \verb*|Pagar|.
 
 \begin{figure}[h!]
 	\centering
@@ -272,7 +274,7 @@ En este paso se muestra el c\'odigo de compra. El cliente debe guardarlo en caso
 \end{figure}
 
 \subsection{Informaci\'on Personal}
-El usuario puede visualizar su informaci\'on personal accediendo desde la pesta\~na con el \'icono de usuario, al hacer click en esta aparece la opci\'on Informaci\'on Personal, la que direcciona a una p\'agina donde se muestran los datos introducidos por el usuario en el registro de su cuenta adem\'as del c\'odigo de socio generado pro el sistema.
+El usuario puede visualizar su informaci\'on personal accediendo desde la pesta\~na con el \'icono de usuario, al hacer click en esta aparece la opci\'on Informaci\'on Personal, la que direcciona a una p\'agina donde se muestran los datos introducidos por el usuario en el registro de su cuenta adem\'as del c\'odigo de socio generado por el sistema.
 
 \begin{figure}[h!]
 	\centering
