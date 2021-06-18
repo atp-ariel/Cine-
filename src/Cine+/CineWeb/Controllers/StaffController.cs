@@ -35,9 +35,9 @@ namespace CineWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddManager(SignUpModel model)
+        public async Task<IActionResult> AddManager(SignUpModel model)
         {
-            this._cineUserManager.SignUpUser(model, "Manager");
+            await this._cineUserManager.SignUpUser(model, "Manager");
             return RedirectToAction("Index", "Home");
         }
 
@@ -47,9 +47,9 @@ namespace CineWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddBoxOfficer(SignUpModel model)
+        public async Task<IActionResult> AddBoxOfficer(SignUpModel model)
         {
-            this._cineUserManager.SignUpUser(model, "BoxOfficer");
+            await this._cineUserManager.SignUpUser(model, "BoxOfficer");
             return RedirectToAction("Index", "Home");
         }
     }

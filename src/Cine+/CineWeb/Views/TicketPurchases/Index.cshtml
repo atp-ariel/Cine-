@@ -63,15 +63,11 @@
                             {
                                 @Html.ActionLink("Comprar", "SeatCount", new { start = item.ScheduleStartTime, end = item.ScheduleEndTime, cinema = item.CinemaId, buyForm = 0 })
                             }
-                            @if (member)
-                            {
                                 @Html.ActionLink("Comprar", "SeatCount", new { start = item.ScheduleStartTime, end = item.ScheduleEndTime, cinema = item.CinemaId, buyForm = 1 })
                                 @if (DateTime.Now.AddHours(2) <= item.ScheduleStartTime)
                                 {
                                     @Html.ActionLink("Cancelar", "CancelBuy")
                                 }
-                            }
-
                         </td>
                              }
 
