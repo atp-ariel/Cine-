@@ -10,7 +10,7 @@ namespace RepositoryLayer.Seed
     {
         private Configurations[] _configurations = new[]
         {
-            new Configurations(){KeyConfig = "SelectedCriteria", Value="Random" }
+            new Configurations(){KeyConfig = "SelectedCriteria", Value="Películas en orden aleatorio" }
         };
         public void EnsurePopulated(IApplicationBuilder app)
         {

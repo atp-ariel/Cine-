@@ -137,7 +137,23 @@
                         </ul>
                     </li>
                     <!-- End Batches menu -->
+                    <!-- Ratings menu -->
+                    <li class="dropdown-submenu">
+                        <a id="dropdownMenu7" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">
+                            Clasificaciones
+                        </a>
+                        <ul aria-labelledby="dropdownMenu7" class="dropdown-menu dropdown-menu-right border-0 shadow">
+                            <li>
+                                <a tabindex="-1" asp-controller="Ratings" asp-action="Create" class="dropdown-item"><i class="fa fa-plus"></i> Añadir</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Ratings" asp-action="Index" class="dropdown-item"><i class="fa fa-list"></i> Ver todas</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- End Ratings menu -->
                 </ul>
+                
             </li>
             <!-- End Batch Menu -->
 

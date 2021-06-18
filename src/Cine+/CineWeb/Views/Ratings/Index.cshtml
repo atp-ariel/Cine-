@@ -37,7 +37,6 @@
                         <tr>
                             <th>@Html.DisplayNameFor(m => m.Id)</th>
                             <th>@Html.DisplayNameFor(m => m.Name)</th>
-                            <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,10 +45,6 @@
                             <tr>
                                 <td>@item.Id</td>
                                 <td>@item.Name</td>
-                                <td>
-                                    <a asp-controller="Ratings" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary option rounded"><i class="fa fa-pencil"></i></a>
-                                    <a asp-controller="Ratings" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary option rounded"><i class="fa fa-trash-o"></i></a>
-                                </td>
                             </tr>
 
                         }
