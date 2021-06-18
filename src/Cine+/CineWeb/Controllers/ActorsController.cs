@@ -93,7 +93,7 @@ namespace CineWeb.Controllers
         public IActionResult DeleteActor(int? id)
         {
             var actor = actorManager.FindById((int)id);
-
+                
             if (actor == null)
             {
                 return NotFound();

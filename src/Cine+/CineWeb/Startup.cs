@@ -46,6 +46,7 @@ namespace CineWeb
             services.AddScoped<IRepository<Movie>, MovieRepository>();
             services.AddScoped<IRepository<Rating>, RatingRepository>();
             services.AddScoped<IRepository<Batch>, BatchRepository>();
+            services.AddScoped<IRepository<Cinema>, CinemaRepository>();
         }
 
 
