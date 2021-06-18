@@ -17,7 +17,8 @@
                         @foreach (var criterio in Model)
                         {
                             <div class="custom-control custom-radio" >
-                                <input type="radio"  class="custom-control-input" name="selection" value="@criterio.Item1" id="select-@criterio.Item1.GetHashCode()"/> <label class="custom-control-label" for="select-@criterio.Item1.GetHashCode()">@criterio.Item1</label>
+                                <input type="radio"  class="custom-control-input" name="selection" value="@criterio.Item1" id="select-@criterio.Item1.GetHashCode()"/> 
+                                <label class="custom-control-label" for="select-@criterio.Item1.GetHashCode()">@criterio.Item1</label>
                             </div>
                         }
                 </div>
