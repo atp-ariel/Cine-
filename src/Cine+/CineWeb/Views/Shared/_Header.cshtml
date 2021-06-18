@@ -17,7 +17,7 @@
         <a class="nav-link" asp-controller="Home" asp-action="Index">Inicio</a>
     </li>
     <!-- End of home option -->
-    @if (roleMember || isAuth)
+    @if (roleMember || !isAuth)
     {
         <li class="nav-item">
             <a class="nav-link dropdown-item" asp-controller="Home" asp-action="Billboard">Cartelera</a>

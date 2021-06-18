@@ -40,7 +40,7 @@
                         <th>@Html.DisplayNameFor(m => m.ScheduleEndTime)</th>
                         <th>@Html.DisplayNameFor(m => m.TicketPrice)</th>
                         <th>@Html.DisplayNameFor(m => m.TicketPoints)</th>
-                        @if (auth && !manager)
+                        @if (!officer && !manager)
                         {
                             <th>Opciones</th>
                         }
@@ -55,21 +55,18 @@
                             <td>@item.ScheduleEndTime</td>
                             <td>@item.TicketPrice</td>
                             <td>@item.TicketPoints</td>
-                            @if (auth &&  !manager)
-                            {
-                        <td>
+                            <td>
 
-                            @if (officer)
-                            {
-                                @Html.ActionLink("Comprar", "SeatCount", new { start = item.ScheduleStartTime, end = item.ScheduleEndTime, cinema = item.CinemaId, buyForm = 0 })
-                            }
-                                @Html.ActionLink("Comprar", "SeatCount", new { start = item.ScheduleStartTime, end = item.ScheduleEndTime, cinema = item.CinemaId, buyForm = 1 })
-                                @if (DateTime.Now.AddHours(2) <= item.ScheduleStartTime)
+                                @if (officer)
                                 {
-                                    @Html.ActionLink("Cancelar", "CancelBuy")
+                                    @Html.ActionLink("Comprar", "SeatCount", new { start = item.ScheduleStartTime, end = item.ScheduleEndTime, cinema = item.CinemaId, buyForm = 0 })
                                 }
-                        </td>
-                             }
+                                @Html.ActionLink("Comprar", "SeatCount", new { start = item.ScheduleStartTime, end = item.ScheduleEndTime, cinema = item.CinemaId, buyForm = 1 })
+                                    @if (DateTime.Now.AddHours(2) <= item.ScheduleStartTime)
+                                    {
+                                        @Html.ActionLink("Cancelar", "CancelBuy")
+                                    }
+                            </td>
 
                         </tr>
                     }
