@@ -16,14 +16,13 @@
                     <div class="panel panel-default">
                         <div class="panel heading">Descuentos</div>
                         <div class="panel-body mb-3">
-                            <ul class="list-group">
+                            <select multiple="multiple" data-name="discounts" data-field="descuentos" class="list-group form-control ms">
+
                                 @foreach (var discount in Model)
                                 {
-                                    <li class="list-group-item">
-                                        <label><input type="checkbox" name="discounts" value="@discount.Id" />@discount.Name. Dinero descontado: @discount.DiscountedMoney</label>
-                                    </li>
+                                    <option value="@discount.Id">@discount.Name  ($ @discount.DiscountedMoney OFF)</option>
                                 }
-                            </ul>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">

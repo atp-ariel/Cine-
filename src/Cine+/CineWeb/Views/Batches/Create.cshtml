@@ -34,28 +34,24 @@
                 <div class="panel panel-default">
                     <div class="panel heading">Salas</div>
                     <div class="panel-body">
-                        <ul class="list-group">
-                            @foreach (var cinema in ViewBag.Cinemas)
-                            {
-                                <li class="list-group-item">
-                                    <label><input type="radio" name="cinemaId" value="@cinema.Id" />Sala @cinema.Id</label>
-                                </li>
-                            }
-                        </ul>
+                            <select name="cinemaId" data-field="país(es)" class="list-group form-control">
+                                @foreach (var cinema in ViewBag.Cinemas)
+                                {
+                                    <option value="@cinema.Id">@cinema.Id - @cinema.Capacity butacas </option>
+                                }
+                            </select>
                     </div>
                 </div>
 
                 <div class="panel panel-default">
                     <div class="panel heading">Películas</div>
                     <div class="panel-body">
-                        <ul class="list-group">
-                            @foreach (var movie in ViewBag.Movies)
-                            {
-                                <li class="list-group-item">
-                                    <label><input type="radio" name="movieId" value="@movie.Id" />@movie.Title</label>
-                                </li>
-                            }
-                        </ul>
+                            <select name="movieId" data-field="país(es)" class="list-group form-control">
+                                @foreach (var movie in ViewBag.Movies)
+                                {
+                                    <option value="@movie.Id">@movie.Title</option>
+                                }
+                            </select>
                     </div>
                 </div>
 

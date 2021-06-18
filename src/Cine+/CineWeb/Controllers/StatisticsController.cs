@@ -98,5 +98,18 @@ namespace CineWeb.Controllers
             ticket.Filter(movies.country.GetAllCountrys().Where(c => c.Name.ToUpper() == country.ToUpper()).First().Name);
             return View(ticket.TicketsSold);
         }
+
+        public IActionResult TicketGenre()
+        {
+            return View(-1);
+        }
+
+        [HttpPost]
+        public IActionResult TicketGenre(string genre)
+        {
+            var ticket = new TicketSalesStatisticsMovieGenre(dbcontext);
+            ticket.Filter(movies.genres.GetAllGenres().Where(c => c.Name.ToUpper() == genre.ToUpper()).First().Name);
+            return View(ticket.TicketsSold);
+        }
     }
 }

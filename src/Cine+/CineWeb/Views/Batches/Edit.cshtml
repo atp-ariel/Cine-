@@ -25,21 +25,20 @@
                 <div class="panel panel-default">
                     <div class="panel heading">Películas</div>
                     <div class="panel-body">
-                        <ul class="list-group">
+                        <select name="movieId" data-field="país(es)" class="list-group form-control">
                             @foreach (var movie in ViewBag.Movies)
                             {
-                                <li class="list-group-item">
-                                    @if (movie.Id == Model.MovieId)
-                                    {
-                                        <label><input type="radio" name="movieId" checked="checked" value="@movie.Id" />@movie.Title</label>
-                                    }
-                                    else
-                                    {
-                                        <label><input type="radio" name="movieId" value="@movie.Id" />@movie.Title</label>
-                                    }
-                                </li>
+                                @if (movie.Id == Model.MovieId)
+                                {
+                                    <option selected value="@movie.Id">@movie.Title</option>
+
+                                }
+                                else
+                                {
+                                    <option value="@movie.Id">@movie.Title</option>
+                                }
                             }
-                        </ul>
+                        </select>
                     </div>
                 </div>
 
