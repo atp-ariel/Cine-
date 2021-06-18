@@ -22,66 +22,39 @@
                 <input type="hidden" asp-for="ScheduleEndTime" />
                 <input type="hidden" asp-for="CinemaId" />
 
+                <div class="d-flex mb-1">
+                    <p class="font-weight-bold mr-5">Fecha de Inicio:</p>
+                    <p>@Model.ScheduleStartTime</p>
+                </div>
+                <div class="d-flex mb-1">
+                    <p class="font-weight-bold mr-5">Fecha de Finalización:</p>
+                    <p>@Model.ScheduleEndTime</p>
+                </div>
+                <div class="d-flex mb-1">
+                    <p class="font-weight-bold mr-5">Sala:</p>
+                    <p>@Model.CinemaId</p>
+                </div>
+                <div class="d-flex mb-1">
+                    <p class="font-weight-bold mr-5">Película:</p>
+                    @foreach (var movie in ViewBag.Movies)
+                    {
+                        @if (movie.Id == Model.MovieId)
+                        {
+                            <p>@movie.Title</p>
+                        }
+                    }
+                </div>
+                <div class="d-flex mb-1">
+                    <p class="font-weight-bold mr-5">Precio de la entrada:</p>
+                    <p>@Model.TicketPrice.ToString()</p>
+                </div>
+
+                <div class="d-flex mb-1">
+                    <p class="font-weight-bold mr-5">Precio de la entrada en puntos:</p>
+                    <p>@Model.TicketPoints.ToString()</p>
+                </div>
+
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="ScheduleStartTime" class="control-label"></label>
-                    <input asp-for="ScheduleStartTime" class="form-control" disabled />
-                    <span asp-validation-form="ScheduleStartTime" class="text-danger">@Html.ValidationMessage("ScheduleStartTime")</span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="ScheduleEndTime" class="control-label"></label>
-                    <input asp-for="ScheduleEndTime" class="form-control" disabled />
-                    <span asp-validation-form="ScheduleEndTime" class="text-danger">@Html.ValidationMessage("ScheduleEndTime")</span>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel heading">Salas</div>
-                    <div class="panel-body">
-                        <ul class="list-group">
-                            @foreach (var cinema in ViewBag.Cinemas)
-                            {
-                                <li class="list-group-item">
-                                    @if (cinema.Id == Model.CinemaId)
-                                    {
-                                        <label><input type="radio" name="cinemaId" checked="checked" value="@cinema.Id" disabled />Sala @cinema.Id</label>
-                                    }
-                                    else
-                                    {
-                                        <label><input type="radio" name="cinemaId" value="@cinema.Id" disabled />Sala @cinema.Id</label>
-                                    }
-                                </li>
-                            }
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel heading">Péliculas</div>
-                    <div class="panel-body">
-                        <ul class="list-group">
-                            @foreach (var movie in ViewBag.Movies)
-                            {
-                                <li class="list-group-item">
-                                    @if (movie.Id == Model.MovieId)
-                                    {
-                                        <label><input type="radio" name="movieId" checked="checked" value="@movie.Id" disabled />@movie.Title</label>
-                                    }
-                                    else
-                                    {
-                                        <label><input type="radio" name="movieId" value="@movie.Id" disabled />@movie.Title</label>
-                                    }
-                                </li>
-                            }
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="TicketPrice" class="control-label"></label>
-                    <input asp-for="TicketPrice" class="form-control" disabled />
-                    <span asp-validation-form="TicketPrice" class="text-danger">@Html.ValidationMessage("TicketPrice")</span>
-                </div>
 
                 <div class="form-group">
                     <input type="submit" value="Eliminar función" class="btn btn-primary" />

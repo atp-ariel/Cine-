@@ -27,29 +27,43 @@
                     <div class="panel panel-default">
                         <div class="panel heading">Escoja las sillas de su preferencia</div>
                         <div class="panel-body">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    @{ int k = 0; }
+                                    @for(int i = 0; i < (Model.Count() / 10) + 1; i++)
+                                    {
+                                    <tr>
+                                        @for (int j = 0; j < 10; j++)
+                                        {
+                                            @if (k < Model.Count())
+                                            {
+                                                var seat = Model.ToList()[k]; 
+                                                <td>
+                                                    @if (ViewBag.Reserved[k])
+                                                    {
+                                                        <label><input type="checkbox" name="seats" value="@seat.Id" disabled />@seat.Id</label>
+                                                    }
+                                                    else
+                                                    {
+                                                        if (ViewBag.Marked[k])
+                                                        {
+                                                            <label><input type="checkbox" checked="checked" name="seats" value="@seat.Id" />@seat.Id</label>
+                                                        }
+                                                        else
+                                                        {
+                                                            <label><input type="checkbox" name="seats" value="@seat.Id" />@seat.Id</label>
+                                                        }
+                                                    }
+                                                </td>
+                                            }
+                                            k++;
+                                        }
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
                             <ul class="list-group">
-                                @{ int i = 0;}
-                                @foreach (var seat in Model)
-                                {
-                                    <li class="list-group-item">
-                                        @if (ViewBag.Reserved[i])
-                                        {
-                                            <label><input type="checkbox" name="seats" value="@seat.Id" disabled />@seat.Id</label>
-                                        }
-                                        else
-                                        {
-                                            if (ViewBag.Marked[i])
-                                            {
-                                                <label><input type="checkbox" checked="checked" name="seats" value="@seat.Id" />@seat.Id</label>
-                                            }
-                                            else 
-                                            {
-                                                <label><input type="checkbox" name="seats" value="@seat.Id" />@seat.Id</label>
-                                            }
-                                        }
-                                    </li>
-                                    i++;
-                                }
+                               
                             </ul>
                         </div>
                         <div class="form-group">

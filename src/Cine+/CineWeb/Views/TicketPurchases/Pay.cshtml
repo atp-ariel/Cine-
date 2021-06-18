@@ -18,29 +18,31 @@
                     <input type="hidden" name="buyForm" value="@TempData["buyForm"]" />
                     @if (TempData["code"] != null)
                     {
-                        <input type="hidden" name="partnerCode" class="form-control" value="@TempData["code"].ToString()" />
+                        <div class="form-group mb-3">
+                            <input type="hidden" name="partnerCode" class="form-control" value="@TempData["code"].ToString()" />
+                        </div>
                     }
 
-                    <div>
-                        <label>Total a pagar: @TempData["totalPrice"]</label>
+                    <div class="form-group mb-3">
+                        <p class="font-weight-bold">Total a pagar: @TempData["totalPrice"]</p>
                         @if ((int)TempData["buyForm"] == 1)
                         {
                             <label>Tarjeta de Crédito<input type="text" class="form-control" name="creditCard" /></label>
                         }
                     </div>
 
-                    <div>
+                    <div class="form-group mb-3">
                         @if (TempData["code"] != null)
                         {
                             <label>Pago en puntos: @TempData["totalPoints"]</label>
                         }
                     </div>
 
-                    <div>
-                        <label><input type="radio" name="payForm" class="form-control" value="0" />Pagar con dinero</label>
+                    <div class="form-group mb-3">
+                        <label><input type="radio" name="payForm" value="0" />Pagar con dinero</label>
                         @if (TempData["code"] != null && ViewBag.UserPoints > float.Parse((string)TempData["totalPoints"]))
                         {
-                            <label><input type="radio" class="form-control" name="payForm" value="1" />Pagar con puntos</label>
+                            <label><input type="radio"  name="payForm" value="1" />Pagar con puntos</label>
                         }
                     </div>
 
