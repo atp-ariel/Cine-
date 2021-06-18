@@ -18,7 +18,7 @@ namespace ServiceLayer.Criteria
         public MoreViewsCriterion(IRepository<Movie> movies) : this(new ApplicationDbContext())
         {
         }
-        public string Name { get => "More Views"; }
+        public string Name { get => "Películas Más Vistas"; }
 
         public DataTable ApplyCriterion(int n)
         {
@@ -45,8 +45,8 @@ namespace ServiceLayer.Criteria
             _movies.ForEach(i => { _views[j] = dictMovie[i]; j++; });
 
             DataTable _table = new DataTable();
-            _table.Columns.Add("Movies", typeof(Movie));
-            _table.Columns.Add("Views", typeof(int));
+            _table.Columns.Add("Películas", typeof(Movie));
+            _table.Columns.Add("Vistas", typeof(int));
 
             for (int i = 0; i < _movies.Count; i++)
                 _table.Rows.Add(_movies[i], _views[i]);

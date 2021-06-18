@@ -42,7 +42,7 @@
                             <tr>
                                 @foreach (DataColumn column in Model.Item1.Columns)
                                 {
-                                    @if (column.ColumnName == "Movies")
+                                    @if (column.ColumnName == "Películas")
                                     {
                                         <td>@(((Movie)item[Model.Item1.Columns.IndexOf(column.ColumnName)]).Title)</td>
                                     }

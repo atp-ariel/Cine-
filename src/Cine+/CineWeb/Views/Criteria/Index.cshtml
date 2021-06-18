@@ -14,12 +14,15 @@
             <h1>Seleccionar el criterio de sugeridas</h1>
             <form asp-controller="Criteria" asp-action="SelectCriteria" method="POST">
                 <div class="form-group mb-3">
-                    @foreach (var criterio in Model)
-                    {
-                        <label>
-                            <input type="radio" name="selection" value="@criterio.Item1" />@criterio.Item1
-                        </label>
-                    }
+                    <ul class="text-decoration-none">
+                        @foreach (var criterio in Model)
+                        {
+                            <li >
+                                <input type="radio" name="selection" value="@criterio.Item1" />@criterio.Item1
+                            </li>
+                        }
+                    </ul> 
+                    
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">

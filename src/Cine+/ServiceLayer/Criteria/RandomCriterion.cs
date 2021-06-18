@@ -10,7 +10,7 @@ namespace ServiceLayer.Criteria
     class RandomCriterion : ICriterion
     {
         IRepository<Movie> movieRepository;
-        public string Name => "Random";
+        public string Name => "Películas en orden aleatorio";
 
         public RandomCriterion(IRepository<Movie> movies)
         {
@@ -24,7 +24,7 @@ namespace ServiceLayer.Criteria
             var _movies = this.movieRepository.GetAll().OrderBy(x => rnd.Next()).Take(n);
          
             DataTable _table = new DataTable();
-            _table.Columns.Add("Movies", typeof(Movie));
+            _table.Columns.Add("Películas", typeof(Movie));
 
             foreach (var movie in _movies)
                 _table.Rows.Add(movie);
