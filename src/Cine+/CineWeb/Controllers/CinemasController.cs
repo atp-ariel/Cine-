@@ -2,13 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer;
-using System.Collections.Generic;
-<<<<<<< Updated upstream
-=======
-using System.Linq;
-using System.Threading.Tasks;
 using ServiceLayer;
->>>>>>> Stashed changes
+
 
 namespace CineWeb.Controllers
 {

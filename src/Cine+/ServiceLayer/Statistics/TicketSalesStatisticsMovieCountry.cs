@@ -32,7 +32,7 @@ namespace ServiceLayer.Statistics
                     DateTime startTime = batch.ScheduleStartTime;
                     DateTime endTime = batch.ScheduleEndTime;
 
-                    count += context.TicketPurchase.Count(x => (x.SeatId == cinemaId && x.BatchScheduleStartTime.CompareTo(startTime) == 0 &&
+                    count += context.TicketPurchase.Count(x => (x.CinemaId == cinemaId && x.BatchScheduleStartTime.CompareTo(startTime) == 0 &&
                    x.BatchScheduleEndTime.CompareTo(endTime) == 0));
                 }
             }
