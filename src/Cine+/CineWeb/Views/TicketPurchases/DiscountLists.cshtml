@@ -18,11 +18,13 @@
 
         @foreach (var item in (IEnumerable<int>)TempData["seats"])
         {
-            ViewData["seat"] = item;
-            ViewData["seats"] = TempData["seats"];
-            await Html.RenderPartialAsync("_TicketPurchaseCreate", Model, ViewData);
+            if (!ViewBag.Reserved[item - 1])
+            {
+                ViewData["seat"] = item;
+                ViewData["seats"] = TempData["seats"];
+                await Html.RenderPartialAsync("_TicketPurchaseCreate", Model, ViewData);
+            }
         }
-
         <a class="btn btn-primary" asp-controller="TicketPurchases" asp-action="Pay">Pagar</a>
 
     </div>

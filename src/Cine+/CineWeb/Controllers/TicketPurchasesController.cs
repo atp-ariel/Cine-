@@ -81,7 +81,7 @@ namespace CineWeb.Controllers
                 string seatscode = "";
                 foreach (var item in seats)
                 {
-                    seatscode += "-"+item.ToString();
+                    seatscode += "-" + item.ToString();
                 }
                 TempData["codeSeats"] = ((DateTime)TempData["start"]).ToString() + "-" + ((DateTime)TempData["end"]).ToString() + "-" + ((int)TempData["cinema"]).ToString() + seatscode;
 
@@ -89,6 +89,19 @@ namespace CineWeb.Controllers
                 TempData["totalPrice"] = tp.ToString();
                 TempData["totalPoints"] = tp.ToString();
             }
+
+            var spots = _context.Seat.Where(x => x.CinemaId == (int)TempData["cinema"]).ToList();
+            bool[] reserved = new bool[spots.Count];
+
+            int i = 0;
+            foreach (var item in spots)
+            {
+                if (_context.TicketPurchase.Find((int)TempData["cinema"], (DateTime)TempData["start"], (DateTime)TempData["end"], item.Id) != null)
+                    reserved[i] = true;
+                i++;
+            }
+
+            ViewBag.Reserved = reserved;
             IEnumerable<Discount> discounts = _context.Discount;
             return View(discounts);
         }
@@ -108,7 +121,7 @@ namespace CineWeb.Controllers
                     CinemaId = (int)TempData["cinema"],
                     SeatId = seat,
                     Code = (string)TempData["codeSeats"],
-                    TimeReserve=DateTime.Now
+                    TimeReserve = DateTime.Now
                 };
             }
             else
@@ -120,7 +133,7 @@ namespace CineWeb.Controllers
                     CinemaId = (int)TempData["cinema"],
                     SeatId = seat,
                     Code = (string)TempData["codeSeats"],
-                    TimeReserve=DateTime.Now
+                    TimeReserve = DateTime.Now
                 };
             }
 
@@ -205,7 +218,7 @@ namespace CineWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Pay(int buyForm,int payForm,string creditCard, string partnerCode)
+        public async Task<IActionResult> Pay(int buyForm, int payForm, string creditCard, string partnerCode)
         {
             if (buyForm == 1 && payForm == 0)
             {
@@ -237,7 +250,7 @@ namespace CineWeb.Controllers
                 }
                 else
                 {
-                    
+
                     var batch = _context.Batch.Find((int)TempData["cinema"], (DateTime)TempData["start"], (DateTime)TempData["end"]);
                     points -= batch.TicketPoints * ((int[])TempData["seats"]).Length;
                     var seats = _context.TicketPurchase.Where(m => m.Code == (string)TempData["codeSeats"]);
@@ -249,7 +262,7 @@ namespace CineWeb.Controllers
                 await _cineUserManager.SetClaim(user.UserName, "Points", points);
             }
 
-            var spots= _context.TicketPurchase.Where(m => m.Code == (string)TempData["codeSeats"]);
+            var spots = _context.TicketPurchase.Where(m => m.Code == (string)TempData["codeSeats"]);
             foreach (var item in spots)
             {
                 item.Paid = true;
@@ -259,12 +272,12 @@ namespace CineWeb.Controllers
             return RedirectToAction("ShowCode", "TicketPurchases");
         }
 
-        public IActionResult ShowCode() 
+        public IActionResult ShowCode()
         {
             return View();
         }
 
-        public IActionResult CancelBuy() 
+        public IActionResult CancelBuy()
         {
             return View();
         }
@@ -276,7 +289,7 @@ namespace CineWeb.Controllers
             var buys = _context.TicketPurchase.Where(m => m.Code == codeBuy);
             foreach (var item in buys)
             {
-                if (item.PointsSpent > 0) 
+                if (item.PointsSpent > 0)
                 {
                     var user = (await _cineUserManager.GetAllUsersBy("Member")).Where(c => c.Id == codeCard).First();
                     float points = float.Parse(await _cineUserManager.GetClaim(user.UserName, "Points"));
@@ -287,10 +300,10 @@ namespace CineWeb.Controllers
             }
             _context.SaveChanges();
             TempData["message"] = "Compra cancelada con éxito";
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult PayError() 
+        public IActionResult PayError()
         {
             return View();
         }
