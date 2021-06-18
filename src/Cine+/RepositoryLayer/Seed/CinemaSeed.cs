@@ -24,7 +24,7 @@ namespace RepositoryLayer.Seed
             foreach(var cinema in cinemas)
             {
                 cinema.Seats = new List<Seat>();
-                for (int i = 0; i < cinema.Capacity; i++)
+                for (int i = 1; i <= cinema.Capacity; i++)
                     cinema.Seats.Add(new Seat() { Id = i, Cinema = cinema, CinemaId = cinema.Id });
             }
             foreach (var cinema in cinemas)
