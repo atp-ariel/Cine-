@@ -89,7 +89,7 @@ namespace CineWeb.Controllers
                 TempData["totalPrice"] = tp.ToString();
                 TempData["totalPoints"] = tp.ToString();
             }
-
+            TempData["seats"] = TempData["seats"];
             var spots = _context.Seat.Where(x => x.CinemaId == (int)TempData["cinema"]).ToList();
             bool[] reserved = new bool[spots.Count];
 
@@ -246,13 +246,13 @@ namespace CineWeb.Controllers
                 float points = float.Parse(await _cineUserManager.GetClaim(user.UserName, "Points"));
                 if (payForm == 0)
                 {
-                    points += 5 * ((int[])TempData["seats"]).Length;
+                    points += 5 * (int)TempData["len"];
                 }
                 else
                 {
 
                     var batch = _context.Batch.Find((int)TempData["cinema"], (DateTime)TempData["start"], (DateTime)TempData["end"]);
-                    points -= batch.TicketPoints * ((int[])TempData["seats"]).Length;
+                    points -= batch.TicketPoints * (int)TempData["len"];
                     var seats = _context.TicketPurchase.Where(m => m.Code == (string)TempData["codeSeats"]);
                     foreach (var item in seats)
                     {
