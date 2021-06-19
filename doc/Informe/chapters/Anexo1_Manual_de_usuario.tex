@@ -140,7 +140,7 @@ Las opciones referentes a la gesti\'on de socios son accesibles desde la pesta\~
 	
 \end{figure}
 
-La opci\'on \verb*|Ver| \verb*|Socios| direcciona a una p\'agina donde se visualiza el listado de socios registrados y la informaci\'on asociada a estos. De igual manera la opci\'on \verb*|Agregar| \verb*|Socio| permite que los gerentes del cine pueden registrar los socios especificando la informaci\'on asociada a estos en los campos en la p\'agina a la que direcciona como se muestra en la siguiente imagen.
+La opci\'on \verb*|Ver| \verb*|Socios| direcciona a una p\'agina donde se visualiza el listado de socios registrados y la informaci\'on asociada a estos. De igual manera la opci\'on \verb*|Agregar| \verb*|Socio| permite que los gerentes y taquilleros del cine pueden registrar los socios especificando la informaci\'on asociada a estos en los campos en la p\'agina a la que direcciona como se muestra en la siguiente imagen.
 
 \begin{figure}[h!]
 	\centering
@@ -249,7 +249,7 @@ En este paso se muestra la lista de descuentos disponibles a aplicar para cada s
 \end{figure}
 
 \subsubsection{Paso 4}
-En este paso se muestra el total a pagar con dinero y con puntos, este \'ultimo aparece en caso de que sea especificado el c\'odigo de socio en el paso 1, el campo tarjeta de cr\'edito y la opci\'on de pagar con dinero. En caso que se desee pagar con dinero se deber\'a especificar el n\'umero de tarjeta de cr\'edito en el campo correspondiente, en otro caso, se podr\'a pagar con puntos, para esta opci\'on no se debe activar la opci\'on  Pagar con dinero. Para avanzar al pr\'oximo paso se hacer click en el bot\'on \verb*|Pagar|.
+En este paso se muestra el total a pagar con dinero y con puntos, este \'ultimo aparece en caso de que sea especificado el c\'odigo de socio en el paso 1. Adem\'as aparecen el campo tarjeta de cr\'edito y la opci\'on de pagar con dinero. En caso que se desee pagar con dinero se deber\'a especificar el n\'umero de tarjeta de cr\'edito solo en compras online en el campo correspondiente, en otro caso, se podr\'a pagar con puntos en caso de tener los puntos suficientes para la compra, para esta opci\'on no se debe activar la opci\'on  Pagar con Puntos. Para avanzar al pr\'oximo paso se hacer click en el bot\'on \verb*|Pagar|.
 
 \begin{figure}[h!]
 	\centering
@@ -273,6 +273,17 @@ En este paso se muestra el c\'odigo de compra. El cliente debe guardarlo en caso
 	
 \end{figure}
 
+\subsection{Cancelaci\'on de compras}
+Esta opci\'on se muestra junto a la opci\'on de compra en cada regl\'on de funciones, mediante un bot\'on que direcciona a una p\'agina donde se muestra el campo de c\'odigo de socio o tarjeta de cr\'edito y el c\'odigo de compra. EL primero de estos debe ser especificado en el caso de que el pago haya sido realizado por medio de una tarjeta de cr\'edito, especificar esta; o si se realiz\'o por los puntos de socio, especificar el c\'odigo del socio, el \'ultimo campo se debe rellenar con el c\'odigo mostrado en el ticket al efectuar la compra
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.35]{./chapters/img/cancel.png}
+	
+	\label{fig:cancel}
+	\caption{Cancelar compra}
+	
+\end{figure}
 \subsection{Informaci\'on Personal}
 El usuario puede visualizar su informaci\'on personal accediendo desde la pesta\~na con el \'icono de usuario, al hacer click en esta aparece la opci\'on Informaci\'on Personal, la que direcciona a una p\'agina donde se muestran los datos introducidos por el usuario en el registro de su cuenta adem\'as del c\'odigo de socio generado por el sistema.
 
