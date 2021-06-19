@@ -13,9 +13,12 @@ namespace CineWeb.Controllers
     {
         private MoviesManager movies;
         private ApplicationDbContext dbcontext;
+        private GenreManager genres_;
+
         public StatisticsController(ApplicationDbContext context, IRepository<Movie> moviesRepo, IRepository<Country> country, IRepository<Actor> actor, IRepository<Genre> genres, IRepository<Rating> rating)
         {
             movies = new MoviesManager(moviesRepo, country, actor, genres, rating);
+            genres_ = new GenreManager(genres);
             dbcontext = context;
         }
         public IActionResult Index()
@@ -109,6 +112,17 @@ namespace CineWeb.Controllers
         {
             var ticket = new TicketSalesStatisticsMovieGenre(dbcontext);
             ticket.Filter(movies.genres.GetAllGenres().Where(c => c.Name.ToUpper() == genre.ToUpper()).First().Name);
+            return View(ticket.TicketsSold);
+        }
+        public IActionResult TicketRating()
+        {
+            return View(-1);
+        }
+        [HttpPost]
+        public IActionResult TicketRating(string rating)
+        {
+            var ticket = new TicketSalesStatisticsMovieRating(dbcontext);
+            ticket.Filter(dbcontext.Rating.Where(c => c.Name.ToUpper() == rating.ToUpper()).First().Name);
             return View(ticket.TicketsSold);
         }
     }
