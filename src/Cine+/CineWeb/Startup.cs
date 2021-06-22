@@ -56,8 +56,8 @@ namespace CineWeb
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
-
+            } 
+            
             // * Handle error 404
             app.UseStatusCodePagesWithReExecute("/Home/Error404");
 
