@@ -1,6 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+
+
 
 namespace DomainLayer
 {
@@ -13,6 +17,11 @@ namespace DomainLayer
         [Required(ErrorMessage = "Este campo es obligatorio")]
         [Display(Name = "Título")]
         public string Title { get; set; }
+
+        [Required(ErrorMessage = "Este campo es obligatorio")]
+        [Display(Name ="Duración")]
+        [BindProperty, DataType(DataType.Time)]
+        public DateTime RunningTime { get; set; }
 
         [Required(ErrorMessage = "Este campo es obligatorio")]
         [Display(Name = "Clasificación")]

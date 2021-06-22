@@ -14,7 +14,7 @@ namespace RepositoryLayer.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.6");
+                .HasAnnotation("ProductVersion", "5.0.7");
 
             modelBuilder.Entity("ActorMovie", b =>
                 {
@@ -204,6 +204,9 @@ namespace RepositoryLayer.Migrations
 
                     b.Property<int>("RatingId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("RunningTime")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
                         .IsRequired()
