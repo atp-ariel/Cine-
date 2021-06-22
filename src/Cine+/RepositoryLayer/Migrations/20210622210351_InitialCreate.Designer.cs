@@ -9,14 +9,14 @@ using RepositoryLayer;
 namespace RepositoryLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210617030230_Initial")]
-    partial class Initial
+    [Migration("20210622210351_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.6");
+                .HasAnnotation("ProductVersion", "5.0.7");
 
             modelBuilder.Entity("ActorMovie", b =>
                 {
@@ -206,6 +206,9 @@ namespace RepositoryLayer.Migrations
 
                     b.Property<int>("RatingId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("RunningTime")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
                         .IsRequired()
