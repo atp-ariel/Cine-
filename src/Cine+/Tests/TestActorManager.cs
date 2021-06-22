@@ -3,6 +3,7 @@ using ServiceLayer;
 using RepositoryLayer;
 using DomainLayer;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Tests
 {
@@ -11,22 +12,20 @@ namespace Tests
         [Fact]
         public void AddActorToDB()
         {
+            // Arrange
             Actor aniston = new Actor() { Id = 1, Name = "Jennifer Aniston" };
 
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlite("Data Source=Cine+.db").Options;
-            using (var context = new ApplicationDbContext(options)) 
-            {
-                ActorManager actorManager = new ActorManager(new ActorRepository(context));
-                actorManager.AddActor(aniston);
+            var context = new AppContext();
+            if (context.Database.GetPendingMigrations().Any())
+                context.Database.Migrate();
+            ActorRepository repo = new ActorRepository(context);
+            ActorManager manager = new ActorManager(repo);
 
-            }
+            // Act
+            manager.AddActor(aniston);
 
-            using (var dbcontext = new ApplicationDbContext(options))
-            {
-                ActorManager actorManager = new ActorManager(new ActorRepository(new ApplicationDbContext()));
-                Actor testAniston = actorManager.FindById(1);
-                Assert.Equal(aniston, testAniston, new ActorComparer());
-            }
+            // Assert
+            Assert.Single(manager.GetAllActors());
 
         }
     }

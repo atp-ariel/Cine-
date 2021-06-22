@@ -69,7 +69,7 @@ namespace Tests
 
             var facade = new CinemaUserFacade(new CinemaAuthorization(signInManager), new CinemaUsersStore(userManager));
             var result = await facade.SignUpUser(model, "Member");
-            Assert.NotEqual(true, result.Succeeded);
+            Assert.True(result.Succeeded);
         }*/
     }
 }
