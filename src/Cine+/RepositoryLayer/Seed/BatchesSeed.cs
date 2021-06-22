@@ -26,6 +26,7 @@ namespace RepositoryLayer.Seed
                     Title = "Titanic",
                     RatingId = 4,
                     Rating = new Rating(){Id= 4, Name="D"},
+                    DurationTime = new TimeSpan(1, 59, 00),
                     Actors = new[]
                     {
                         new Actor(){Id=5, Name="Leonardo DiCaprio"},
@@ -61,6 +62,7 @@ namespace RepositoryLayer.Seed
                         new Actor(){Id=9, Name="Will Smith"},
                         new Actor(){Id=10, Name="Martin Lawrence"},
                     },
+                    DurationTime = new TimeSpan(1, 20, 00)
                 },
                 Schedule = new Schedule()
                 {

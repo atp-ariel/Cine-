@@ -22,9 +22,15 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="Title" class="control-label"></label>
-                        <input asp-for="Title" class="form-control roundede-pill" required />
+                        <input asp-for="Title" class="form-control rounded-pill" required />
                         <span asp-validation-form="Name" class="text-danger">@Html.ValidationMessage("Title")</span>
                     </div>
+
+                    <div class="form-group mb-3">
+                        <label class="control-label">Duración</label>
+                        <input type="time" name="duration" value="01:00" class="form-control rounded-pill" required/>
+                    </div>
+
 
                     <div class="form-group mb-3">
                         <label class="control-label">Países</label>

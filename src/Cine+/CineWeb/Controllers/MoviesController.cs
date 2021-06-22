@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer;
 using Microsoft.AspNetCore.Authorization;
 using ServiceLayer;
+using System;
 
 namespace CineWeb.Controllers
 {
@@ -28,12 +29,12 @@ namespace CineWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Movie movie, int rating, int[] countries = null, int[] genres = null, int[] actors = null)
+        public IActionResult Create(Movie movie, int rating, TimeSpan duration, int[] countries = null, int[] genres = null, int[] actors = null)
         {
             if (ModelState.IsValid)
             {
 
-                movies.UpdateRelations(movie, rating, countries, genres, actors);
+                movies.UpdateRelations(movie, rating, duration, countries, genres, actors);
 
                 movies.AddMovie(movie);
 

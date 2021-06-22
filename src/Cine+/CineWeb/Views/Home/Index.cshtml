@@ -81,6 +81,7 @@
                     <thead>
                         <tr>
                             <th>Título</th>
+                            <th>Duración</th>
                             <th>Géneros</th>
                             <th>Países</th>
                             <th>Actores</th>
@@ -93,6 +94,7 @@
                         {
                             <tr>
                                 <td>@item.Title</td>
+                                <td>@item.DurationTime</td>
                                 <td>
                                     @if (item.Genres != null && item.Genres.Count() > 0)
                                     {

@@ -1,5 +1,6 @@
 ﻿using DomainLayer;
 using RepositoryLayer;
+using System;
 using System.Collections.Generic;
 
 namespace ServiceLayer
@@ -65,7 +66,7 @@ namespace ServiceLayer
             this.MovieRepository.Delete(MovieRepository.Get(MovieID));
         }
 
-        public void UpdateRelations(Movie movie, int rating, int[] countries = null, int[] genres = null, int[] actors = null)
+        public void UpdateRelations(Movie movie, int rating, TimeSpan duration, int[] countries = null, int[] genres = null, int[] actors = null)
         {
             if (rating != 0)
             {
@@ -98,6 +99,8 @@ namespace ServiceLayer
                     movie.Actors.Add(_actor);
                     _actor.Movies.Add(movie);
                 }
+
+            movie.DurationTime = duration;
         }
 
         public void AddBatchMovie(Movie movie)

@@ -35,6 +35,7 @@
                     <thead>
                         <tr>
                             <th>@Html.DisplayNameFor(m => m.Title)</th>
+                            <th>Duración</th>
                             <th>@Html.DisplayNameFor(m => m.Genres)</th>
                             <th>@Html.DisplayNameFor(m => m.Countries)</th>
                             <th>@Html.DisplayNameFor(m => m.Actors)</th>
@@ -47,6 +48,7 @@
                         {
                             <tr>
                                 <td>@item.Title</td>
+                                <td>@item.DurationTime</td>
                                 <td>
                                     @if (item.Genres != null && item.Genres.Count() > 0)
                                     {

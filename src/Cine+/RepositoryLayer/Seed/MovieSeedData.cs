@@ -18,6 +18,7 @@ namespace RepositoryLayer.Seed
                 Title="War",
                 RatingId = 2,
                 Rating =  new Rating(){Id=2, Name="B"},
+                DurationTime = new TimeSpan(1, 50, 00),
                 Countries = new[] {new Country() { Id = 9, Name = "India" } },
                 Actors = new []{ new Actor() { Id = 1, Name = "Hrithik Roshan" } },
                 Genres = new [] { new Genre() { Id = 1, Name = "Acción" } }
@@ -27,6 +28,7 @@ namespace RepositoryLayer.Seed
                 Id=2,
                 Title="Parasite",
                 RatingId = 1,
+                DurationTime = new TimeSpan(1, 30, 00),
                 Rating =  new Rating(){Id=1, Name="A"},
                 Countries = new[] { new Country() { Id = 7, Name = "Corea del Sur" } },
                 Actors = new[] { new Actor() { Id = 4, Name = "Cho Yeo-jeong" } },

@@ -28,5 +28,7 @@ namespace Tests
             Assert.Single(manager.GetAllActors());
 
         }
+
     }
+
 }
