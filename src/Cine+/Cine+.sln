@@ -11,6 +11,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryLayer", "Reposito
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceLayer", "ServiceLayer\ServiceLayer.csproj", "{2D2F7B00-2119-406B-AA2D-F6FD94B20008}"
 EndProject
+<<<<<<< Updated upstream
+=======
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{C81CDDB2-0848-486D-A444-0285775056CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject5", "TestProject5\TestProject5.csproj", "{57FCDD7E-7EED-4533-A5B4-ACFBB9FE70B6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unit_Testing_Project", "Unit_Testing_Project\Unit_Testing_Project.csproj", "{415B5816-E3BC-4504-9DD4-2D0B115F195D}"
+EndProject
+>>>>>>> Stashed changes
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +78,45 @@ Global
 		{2D2F7B00-2119-406B-AA2D-F6FD94B20008}.Release|x64.Build.0 = Release|Any CPU
 		{2D2F7B00-2119-406B-AA2D-F6FD94B20008}.Release|x86.ActiveCfg = Release|Any CPU
 		{2D2F7B00-2119-406B-AA2D-F6FD94B20008}.Release|x86.Build.0 = Release|Any CPU
+<<<<<<< Updated upstream
+=======
+		{C81CDDB2-0848-486D-A444-0285775056CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C81CDDB2-0848-486D-A444-0285775056CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C81CDDB2-0848-486D-A444-0285775056CD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C81CDDB2-0848-486D-A444-0285775056CD}.Debug|x64.Build.0 = Debug|Any CPU
+		{C81CDDB2-0848-486D-A444-0285775056CD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C81CDDB2-0848-486D-A444-0285775056CD}.Debug|x86.Build.0 = Debug|Any CPU
+		{C81CDDB2-0848-486D-A444-0285775056CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C81CDDB2-0848-486D-A444-0285775056CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C81CDDB2-0848-486D-A444-0285775056CD}.Release|x64.ActiveCfg = Release|Any CPU
+		{C81CDDB2-0848-486D-A444-0285775056CD}.Release|x64.Build.0 = Release|Any CPU
+		{C81CDDB2-0848-486D-A444-0285775056CD}.Release|x86.ActiveCfg = Release|Any CPU
+		{C81CDDB2-0848-486D-A444-0285775056CD}.Release|x86.Build.0 = Release|Any CPU
+		{57FCDD7E-7EED-4533-A5B4-ACFBB9FE70B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57FCDD7E-7EED-4533-A5B4-ACFBB9FE70B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57FCDD7E-7EED-4533-A5B4-ACFBB9FE70B6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{57FCDD7E-7EED-4533-A5B4-ACFBB9FE70B6}.Debug|x64.Build.0 = Debug|Any CPU
+		{57FCDD7E-7EED-4533-A5B4-ACFBB9FE70B6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{57FCDD7E-7EED-4533-A5B4-ACFBB9FE70B6}.Debug|x86.Build.0 = Debug|Any CPU
+		{57FCDD7E-7EED-4533-A5B4-ACFBB9FE70B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57FCDD7E-7EED-4533-A5B4-ACFBB9FE70B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57FCDD7E-7EED-4533-A5B4-ACFBB9FE70B6}.Release|x64.ActiveCfg = Release|Any CPU
+		{57FCDD7E-7EED-4533-A5B4-ACFBB9FE70B6}.Release|x64.Build.0 = Release|Any CPU
+		{57FCDD7E-7EED-4533-A5B4-ACFBB9FE70B6}.Release|x86.ActiveCfg = Release|Any CPU
+		{57FCDD7E-7EED-4533-A5B4-ACFBB9FE70B6}.Release|x86.Build.0 = Release|Any CPU
+		{415B5816-E3BC-4504-9DD4-2D0B115F195D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{415B5816-E3BC-4504-9DD4-2D0B115F195D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{415B5816-E3BC-4504-9DD4-2D0B115F195D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{415B5816-E3BC-4504-9DD4-2D0B115F195D}.Debug|x64.Build.0 = Debug|Any CPU
+		{415B5816-E3BC-4504-9DD4-2D0B115F195D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{415B5816-E3BC-4504-9DD4-2D0B115F195D}.Debug|x86.Build.0 = Debug|Any CPU
+		{415B5816-E3BC-4504-9DD4-2D0B115F195D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{415B5816-E3BC-4504-9DD4-2D0B115F195D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{415B5816-E3BC-4504-9DD4-2D0B115F195D}.Release|x64.ActiveCfg = Release|Any CPU
+		{415B5816-E3BC-4504-9DD4-2D0B115F195D}.Release|x64.Build.0 = Release|Any CPU
+		{415B5816-E3BC-4504-9DD4-2D0B115F195D}.Release|x86.ActiveCfg = Release|Any CPU
+		{415B5816-E3BC-4504-9DD4-2D0B115F195D}.Release|x86.Build.0 = Release|Any CPU
+>>>>>>> Stashed changes
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

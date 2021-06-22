@@ -17,8 +17,7 @@ namespace RepositoryLayer.Seed
         {
             new Actor(){Id=2, Name="Adam Sandler"},
             new Actor(){Id=3, Name="Julia Fox"},
-            new Actor(){Id=5, Name="Leonardo DiCaprio"},
-            new Actor(){Id=6, Name="Kate Winslet"}
+            
         };
         #endregion
 
@@ -31,7 +30,7 @@ namespace RepositoryLayer.Seed
 
             foreach (var actor in _actors)
                 if (!context.Actor.Contains(actor))
-                    context.Add(actor);
+                    context.Actor.Add(actor);
             context.SaveChanges();
         }
         #endregion

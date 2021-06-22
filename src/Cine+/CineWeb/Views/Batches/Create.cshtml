@@ -34,7 +34,7 @@
                 <div class="panel panel-default">
                     <div class="panel heading">Salas</div>
                     <div class="panel-body">
-                            <select name="cinemaId" data-field="país(es)" class="list-group form-control">
+                            <select name="cinemaId" data-names="cinemaId" data-field="sala(as)" class="list-group form-control ms">
                                 @foreach (var cinema in ViewBag.Cinemas)
                                 {
                                     <option value="@cinema.Id">@cinema.Id - @cinema.Capacity butacas </option>
@@ -46,7 +46,7 @@
                 <div class="panel panel-default">
                     <div class="panel heading">Películas</div>
                     <div class="panel-body">
-                            <select name="movieId" data-field="país(es)" class="list-group form-control">
+                            <select name="movieId" data-names="movieId" data-field="país(es)" class="list-group form-control ms">
                                 @foreach (var movie in ViewBag.Movies)
                                 {
                                     <option value="@movie.Id">@movie.Title</option>

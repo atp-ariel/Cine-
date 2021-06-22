@@ -20,7 +20,7 @@ namespace RepositoryLayer.Seed
 
             foreach (var config in _configurations)
                 if (!context.Configurations.Contains(config))
-                    context.Add(config);
+                    context.Configurations.Add(config);
             context.SaveChanges();
         }
     }

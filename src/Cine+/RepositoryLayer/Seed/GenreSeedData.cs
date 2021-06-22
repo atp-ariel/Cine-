@@ -25,9 +25,7 @@ namespace RepositoryLayer.Seed
             new Genre(){Id=11, Name="Documental"},
             new Genre(){Id=12, Name="Cine bélico"},
             new Genre(){Id=13, Name="Cine biográfico"},
-            new Genre(){Id=14, Name="Cine catastrófico"},
             new Genre(){Id=15, Name="Histórico"},
-            new Genre(){Id=16, Name="Policiaco"},
             new Genre(){Id=17, Name="Cine erótico"},
             new Genre(){Id=18, Name="Western"},
             new Genre(){Id=19, Name="Animados"},
@@ -44,7 +42,7 @@ namespace RepositoryLayer.Seed
 
             foreach (var genre in _genres)
                 if (!context.Genre.Contains(genre))
-                    context.Add(genre);
+                    context.Genre.Add(genre);
             context.SaveChanges();
         }
         #endregion

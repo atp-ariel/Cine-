@@ -30,8 +30,11 @@ namespace RepositoryLayer.Seed
                 Rating =  new Rating(){Id=1, Name="A"},
                 Countries = new[] { new Country() { Id = 7, Name = "Corea del Sur" } },
                 Actors = new[] { new Actor() { Id = 4, Name = "Cho Yeo-jeong" } },
-                Genres = new [] { new Genre() { Id = 3, Name = "Comedia" } , new Genre() { Id = 10, Name = "Terror" } }
-            }
+                Genres = new [] { 
+                    new Genre() { Id = 3, Name = "Comedia" } ,
+                    new Genre() { Id = 10, Name = "Terror" } }
+            },
+           
         };
         public void EnsurePopulated(IApplicationBuilder app)
         {
@@ -41,7 +44,7 @@ namespace RepositoryLayer.Seed
 
             foreach (var movie in _movies)
                 if (!context.Movie.Contains(movie))
-                    context.Add(movie);
+                    context.Movie.Add(movie);
             context.SaveChanges();
         }
     }

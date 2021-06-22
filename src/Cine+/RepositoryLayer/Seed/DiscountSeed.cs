@@ -12,7 +12,8 @@ namespace RepositoryLayer.Seed
         private Discount[] discounts = new[]
         {
             new Discount(){Id = 1, DiscountedMoney=0.20f, Name="FEU" },
-            new Discount(){Id = 2, DiscountedMoney=1f, Name="Tercera Edad"}
+            new Discount(){Id = 2, DiscountedMoney=1f, Name="Tercera Edad"},
+            new Discount(){Id = 3, DiscountedMoney=1.2f, Name="Trabajadores del ICRT"}
         };
         public void EnsurePopulated(IApplicationBuilder app)
         {
@@ -22,7 +23,7 @@ namespace RepositoryLayer.Seed
 
             foreach (var discount in discounts)
                 if (!context.Discount.Contains(discount))
-                    context.Add(discount);
+                    context.Discount.Add(discount);
             context.SaveChanges();
         }
     }

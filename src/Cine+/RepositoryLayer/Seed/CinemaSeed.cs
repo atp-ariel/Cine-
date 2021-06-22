@@ -11,9 +11,8 @@ namespace RepositoryLayer.Seed
     public class CinemaSeed : ISeed
     {
         private Cinema[] cinemas = new[] { 
-            new Cinema(){Id=1, Capacity=100 },
             new Cinema(){Id=2, Capacity=200},
-            new Cinema(){Id=3, Capacity=50}
+            new Cinema(){Id=4, Capacity=50},
         };
         public void EnsurePopulated(IApplicationBuilder app)
         {
@@ -29,7 +28,7 @@ namespace RepositoryLayer.Seed
             }
             foreach (var cinema in cinemas)
                 if (!context.Cinema.Contains(cinema))
-                    context.Add(cinema);
+                    context.Cinema.Add(cinema);
             context.SaveChanges();
         }
     }
