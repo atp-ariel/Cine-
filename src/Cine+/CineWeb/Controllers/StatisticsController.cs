@@ -74,7 +74,7 @@ namespace CineWeb.Controllers
 
         public IActionResult TicketMovie()
         {
-            return View(-1);
+            return View((movies.GetAllMovies(),-1));
         }
 
         [HttpPost]
@@ -82,14 +82,14 @@ namespace CineWeb.Controllers
         {
             var ticket = new TicketSalesStatisticsMovie(dbcontext);
             ticket.Filter(movies.FindById(movies.GetAllMovies().Where(m => m.Title.ToUpper() == title.ToUpper()).First().Id));
-            return View(ticket.TicketsSold);
+            return View((movies.GetAllMovies(),ticket.TicketsSold));
         }
 
         
 
         public IActionResult TicketCountry()
         {
-            return View(-1);
+            return View((movies.country.GetAllCountrys(), -1));
         }
 
         [HttpPost]
@@ -97,12 +97,12 @@ namespace CineWeb.Controllers
         {
             var ticket = new TicketSalesStatisticsMovieCountry(dbcontext);
             ticket.Filter(movies.country.GetAllCountrys().Where(c => c.Name.ToUpper() == country.ToUpper()).First().Name);
-            return View(ticket.TicketsSold);
+            return View((movies.country.GetAllCountrys(), ticket.TicketsSold));
         }
 
         public IActionResult TicketGenre()
         {
-            return View(-1);
+            return View((movies.genres.GetAllGenres(), -1));
         }
 
         [HttpPost]
@@ -110,18 +110,18 @@ namespace CineWeb.Controllers
         {
             var ticket = new TicketSalesStatisticsMovieGenre(dbcontext);
             ticket.Filter(movies.genres.GetAllGenres().Where(c => c.Name.ToUpper() == genre.ToUpper()).First().Name);
-            return View(ticket.TicketsSold);
+            return View((movies.genres.GetAllGenres(), ticket.TicketsSold));
         }
         public IActionResult TicketRating()
         {
-            return View(-1);
+            return View((dbcontext.Rating , - 1));
         }
         [HttpPost]
         public IActionResult TicketRating(string rating)
         {
             var ticket = new TicketSalesStatisticsMovieRating(dbcontext);
             ticket.Filter(dbcontext.Rating.Where(c => c.Name.ToUpper() == rating.ToUpper()).First().Name);
-            return View(ticket.TicketsSold);
+            return View((dbcontext.Rating ,ticket.TicketsSold));
         }
     }
 }

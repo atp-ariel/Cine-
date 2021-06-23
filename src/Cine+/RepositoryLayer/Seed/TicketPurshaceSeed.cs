@@ -32,7 +32,62 @@ namespace RepositoryLayer.Seed
                 Paid = true,
                 Price = 17f,
                 TimeReserve = new DateTime(2021, 06, 27, 8, 30, 59),
-            }
+            },
+            new PhysicalTicketPurchase()
+            {
+                BatchScheduleStartTime =  new DateTime(2021, 06, 21, 16, 20,00),
+                BatchScheduleEndTime = new DateTime(2021, 06, 21, 17, 20,00),
+                DiscountListId =1,
+                CinemaId = 1,
+                SeatId=1,
+                Paid = true,
+                Price = 17f,
+                TimeReserve = new DateTime(2021, 06, 21, 14, 30, 59),
+            },
+            new PhysicalTicketPurchase()
+            {
+                BatchScheduleStartTime =  new DateTime(2021, 06, 21, 16, 20,00),
+                BatchScheduleEndTime = new DateTime(2021, 06, 21, 17, 20,00),
+                DiscountListId =1,
+                CinemaId = 1,
+                SeatId=2,
+                Paid = true,
+                Price = 17f,
+                TimeReserve = new DateTime(2021, 06, 21, 14, 31, 59),
+            },
+             new PhysicalTicketPurchase()
+            {
+                BatchScheduleStartTime =  new DateTime(2021, 06, 21, 16, 20,00),
+                BatchScheduleEndTime = new DateTime(2021, 06, 21, 17, 20,00),
+                DiscountListId =1,
+                CinemaId = 1,
+                SeatId=3,
+                Paid = true,
+                Price = 17f,
+                TimeReserve = new DateTime(2021, 06, 21, 14, 31, 20),
+            },
+             new PhysicalTicketPurchase()
+            {
+                BatchScheduleStartTime =  new DateTime(2021, 06, 30, 16, 20,00),
+                BatchScheduleEndTime = new DateTime(2021, 06, 30, 17, 20,00),
+                DiscountListId =1,
+                CinemaId = 1,
+                SeatId=1,
+                Paid = true,
+                Price = 17f,
+                TimeReserve = new DateTime(2021, 05, 30, 14, 31, 20),
+            },
+             new PhysicalTicketPurchase()
+            {
+                BatchScheduleStartTime =  new DateTime(2021, 06, 21, 16, 20,00),
+                BatchScheduleEndTime = new DateTime(2021, 06, 21, 17, 20,00),
+                DiscountListId =1,
+                CinemaId = 1,
+                SeatId=3,
+                Paid = true,
+                Price = 17f,
+                TimeReserve = new DateTime(2021, 06, 21, 14, 31, 20),
+            },
         };
         public void EnsurePopulated(IApplicationBuilder app)
         {

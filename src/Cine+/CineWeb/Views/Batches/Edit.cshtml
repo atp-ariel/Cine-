@@ -21,31 +21,18 @@
                 <input type="hidden" asp-for="ScheduleStartTime" />
                 <input type="hidden" asp-for="ScheduleEndTime" />
                 <input type="hidden" asp-for="CinemaId" />
-
-                <div class="panel panel-default">
-                    <div class="panel heading">Películas</div>
-                    <div class="panel-body">
-                        <select name="movieId" data-field="país(es)" class="list-group form-control">
-                            @foreach (var movie in ViewBag.Movies)
-                            {
-                                @if (movie.Id == Model.MovieId)
-                                {
-                                    <option selected value="@movie.Id">@movie.Title</option>
-
-                                }
-                                else
-                                {
-                                    <option value="@movie.Id">@movie.Title</option>
-                                }
-                            }
-                        </select>
-                    </div>
-                </div>
+                <input type="hidden" asp-for="MovieId" />
 
                 <div class="form-group">
                     <label asp-for="TicketPrice" class="control-label"></label>
                     <input asp-for="TicketPrice" class="form-control" />
                     <span asp-validation-form="TicketPrice" class="text-danger">@Html.ValidationMessage("TicketPrice")</span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="TicketPoints" class="control-label"></label>
+                    <input asp-for="TicketPoints" class="form-control" />
+                    <span asp-validation-form="TicketPoints" class="text-danger">@Html.ValidationMessage("TicketPoints")</span>
                 </div>
 
                 <div class="form-group">

@@ -122,11 +122,11 @@ namespace RepositoryLayer.Seed
                 MovieId = 3,
                 Schedule = new Schedule()
                 {
-                    StartTime=new DateTime(2021, 06, 29, 16, 20,00),
-                    EndTime=new DateTime(2021, 06, 29, 17, 20,00)
+                    StartTime=new DateTime(2021, 06, 21, 16, 20,00),
+                    EndTime=new DateTime(2021, 06, 21, 17, 20,00)
                 },
-                ScheduleStartTime = new DateTime(2021, 06, 29, 16, 20,00),
-                ScheduleEndTime = new DateTime(2021, 06, 29, 17, 20,00),
+                ScheduleStartTime = new DateTime(2021, 06, 21, 16, 20,00),
+                ScheduleEndTime = new DateTime(2021, 06, 21, 17, 20,00),
                 TicketPoints = 10,
                 TicketPrice = 20
             }

@@ -40,7 +40,7 @@ namespace CineWeb.Controllers
             if (ModelState.IsValid)
             {
                 batch.Movie = _context.Movie.Find(batch.MovieId);
-                batch.ScheduleEndTime = batch.ScheduleStartTime.Add(batch.Movie.DurationTime);
+                batch.ScheduleEndTime = batch.ScheduleStartTime.Add(batch.Movie.DurationTime).AddMinutes(10);
                 Schedule schedule = new Schedule { StartTime = batch.ScheduleStartTime, EndTime = batch.ScheduleEndTime };
                 _context.Schedule.Add(schedule);
                 _context.Batch.Add(batch);

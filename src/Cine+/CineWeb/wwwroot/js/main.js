@@ -77,8 +77,14 @@ $(document).ready(function () {
             event.preventDefault();
             event.stopPropagation();
 
+
+            $(".dropdown-submenu > .dropdown-menu-right").each(function () {
+                $(this).removeClass("show");
+            });
+
             $(this).siblings().toggleClass("show");
 
+            
 
             if (!$(this).next().hasClass('show')) {
                 $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
