@@ -6,6 +6,8 @@ using RepositoryLayer;
 using Microsoft.AspNetCore.Authorization;
 using System.Linq;
 using DomainLayer;
+using System.Collections.Generic;
+
 namespace CineWeb.Controllers
 {
     [Authorize(Roles="Manager")]
@@ -114,14 +116,14 @@ namespace CineWeb.Controllers
         }
         public IActionResult TicketRating()
         {
-            return View((dbcontext.Rating , - 1));
+            return View(((IEnumerable<Rating>)dbcontext.Rating , - 1));
         }
         [HttpPost]
         public IActionResult TicketRating(string rating)
         {
             var ticket = new TicketSalesStatisticsMovieRating(dbcontext);
             ticket.Filter(dbcontext.Rating.Where(c => c.Name.ToUpper() == rating.ToUpper()).First().Name);
-            return View((dbcontext.Rating ,ticket.TicketsSold));
+            return View(((IEnumerable<Rating>)dbcontext.Rating ,ticket.TicketsSold));
         }
     }
 }
