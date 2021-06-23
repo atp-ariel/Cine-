@@ -52,5 +52,11 @@ namespace CineWeb.Controllers
             await this._cineUserManager.SignUpUser(model, "BoxOfficer");
             return RedirectToAction("Index", "Home");
         }
+
+        public async Task<IActionResult> Promote(string username)
+        {
+            await this._cineUserManager.Promote(username, "Manager");
+            return RedirectToAction("GetBoxOfficers", "Staff");
+        }
     }
 }

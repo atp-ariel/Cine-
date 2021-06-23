@@ -40,6 +40,7 @@
                             <th>Correo Electrónico</th>
                             <th>Teléfono</th>
                             <th>Dirección</th>
+                            <th>Promover</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,6 +51,7 @@
                                 <td>@user.Email</td>
                                 <td>@user.PhoneNumber</td>
                                 <td>@user.Address</td>
+                                <td><a asp-controller="Staff" asp-action="Promote" asp-route-username="@user.UserName" class="btn btn-primary option rounded-125"><i class="fa fa-drivers-license-o"></i></a></td>
                             </tr>
                         }
                     </tbody>
@@ -58,8 +60,7 @@
         }
         else
         {
-            <p class="font-weight-bold">No hay taquilleros registrados.</p>
-            <a asp-controller="Staff" asp-action="AddBoxOfficer" class="btn btn-link">Registrar taquillero</a>
+            <p class="font-italic">No hay taquilleros registrados.</p>
         }
     </div>
     <div class="col-1"></div>

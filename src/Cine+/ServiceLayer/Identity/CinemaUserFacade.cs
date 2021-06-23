@@ -40,6 +40,8 @@ namespace ServiceLayer.Identity
         public async Task<SignInResult> Login(SignInModel model) => await this._authorizeUser.Login(model);
 
         public void LogOut() => this._authorizeUser.Logout();
+
+        public async Task<IdentityResult> Promote(string username, string role) => await this._userStore.PromoteAsync(username, role);
         #endregion
     }
 }

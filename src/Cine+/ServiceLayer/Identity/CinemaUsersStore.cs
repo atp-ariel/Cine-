@@ -145,6 +145,17 @@ namespace ServiceLayer.Identity
         {
            return await this._userManager.DeleteAsync(await this.FindByUsername(username));
         }
+
+        public async Task<IdentityResult> PromoteAsync(string username, string role)
+        {
+            var user = await FindByUsername(username);
+
+            var roles = await _userManager.GetRolesAsync(user);
+            foreach (var _role in roles)
+                await _userManager.RemoveFromRoleAsync(user, _role);
+
+            return await _userManager.AddToRoleAsync(user, role);
+        }
         #endregion
     }
 }

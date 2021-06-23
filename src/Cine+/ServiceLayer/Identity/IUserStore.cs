@@ -18,5 +18,7 @@ namespace ServiceLayer.Identity
         Task<string> GetClaimAsync(string username, string claim);
         Task<IdentityResult> SetClaimAsync(string username, string claim, string value);
         Task<IdentityResult> RemoveClaimAsync(string username, string claim);
+        Task<IdentityResult> PromoteAsync(string username, string role);
+
     }
 }

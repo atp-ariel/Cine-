@@ -83,7 +83,7 @@ namespace RepositoryLayer.Seed
                 BatchScheduleEndTime = new DateTime(2021, 06, 21, 17, 20,00),
                 DiscountListId =1,
                 CinemaId = 1,
-                SeatId=3,
+                SeatId=4,
                 Paid = true,
                 Price = 17f,
                 TimeReserve = new DateTime(2021, 06, 21, 14, 31, 20),
